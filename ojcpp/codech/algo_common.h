@@ -115,6 +115,28 @@ namespace CODECH
 
     }
 
+    inline ListNode* FIND_LISTNODE(ListNode* head,int val)
+    {
+        std::unordered_set<ListNode*> sets;
+        while (head)
+        {
+            auto iter = sets.find(head);
+            if (iter==sets.end())
+            {
+                sets.insert(head);
+                if (head->val == val)
+                    return head;
+                head = head->next;
+            }
+            else
+            {
+                // prevent a circle linked list
+                return nullptr;
+            }
+        }
+        return nullptr;
+    }
+
     inline std::string PRINT_LIST(ListNode *head)
     {
         std::unordered_set<ListNode*> sets;
@@ -132,11 +154,10 @@ namespace CODECH
             }
             else
             {
+                // prevent a circle linked list
                 break;
             }
-            //        std::cout << head->val << " ";
         }
-        // std::cout << std::endl;
         return ss.str();
     }
 

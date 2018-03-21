@@ -19,16 +19,51 @@ Supposed the linked list is 1 -> 2 -> 3 -> 4 and you are given the third node wi
  */
 
 #include <codech/codech_def.h>
+#include <codech/algo_common.h>
+
+using namespace CODECH;
 
 class Solution {
 public:
     void deleteNode(ListNode* node) {
+        // copy the rest node
+        ListNode *next = node->next;
+        while (next) {
+            node->val = next->val;
+            if (next->next == nullptr) {
+                node->next = nullptr;
+                break;
+            } else {
+                node = next;
+                next = next->next;
+            }
 
+        }
+
+    }
+
+    void deleteNode1(ListNode* node) {
+        ListNode * prev;
+        ListNode *next = node->next;
+        while (next) {
+            node->val = next->val;
+            prev = node;
+            node = next;
+            next = next->next;
+        }
+        prev->next = nullptr;
     }
 };
 
 DEFINE_CODE_TEST(237_delete_node_linkedlist)
 {
+    Solution obj;
+    {
+        ListNode *head = CREATE_LIST({1,2,3,4});
+        ListNode *p3 = FIND_LISTNODE(head, 3);
+        obj.deleteNode1(p3);
+        VERIFY_CASE(PRINT_LIST(head),"1 2 4");
+    }
 
 }
 
