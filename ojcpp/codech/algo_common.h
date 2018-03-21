@@ -161,6 +161,15 @@ namespace CODECH
         return ss.str();
     }
 
+    inline std::string PRINT_VEC(std::vector<int> &&vec) {
+        std::stringstream ss;
+        for (int i=0; i< vec.size(); i++) {
+            ss << vec[i];
+            if (i != vec.size()-1)
+                ss << " ";
+        }
+        return ss.str();
+    }
 
 }
 #endif
