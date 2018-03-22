@@ -27,7 +27,9 @@ A[i], B[i] are integer values in the range [0, 2000].
  */
 
 #include <codech/codech_def.h>
+#include <vector>
 
+using namespace std;
 
 class Solution {
 public:

@@ -32,21 +32,36 @@ public:
     ListNode *detectCycle(ListNode *head) {
         ListNode* slow = head;
         ListNode* fast = head;
-        while (slow || fast) {
+        bool cycle = false;
+        while (slow && fast) {
             slow = slow->next;
             fast = fast->next?fast->next->next:nullptr;
-            if (slow==fast) {
-                return slow;
+            if (slow!=nullptr && slow==fast) {
+                cycle = true;
+                break;//return slow;
             }
         }
-        return nullptr;
-
+        if (cycle) {
+            ListNode *cur1 = head;
+            ListNode *cur2 = fast;
+            while (cur1 != cur2) {
+                cur1=(cur1!=fast)?cur1->next:fast;
+                cur2=(cur2->next!=fast)?cur2->next:head;
+            }
+            return cur1;
+        } else {
+            return nullptr;
+        }
     }
 };
 
 DEFINE_CODE_TEST(142_linkedlist_cycle2)
 {
     Solution obj;
+    {
+        ListNode*head  = CREATE_LIST(vector<int>{1});
+        VERIFY_CASE(obj.detectCycle(head),nullptr);
+    }
     {
         ListNode*head  = CREATE_LIST({1,2,3,4,5,6,7,8});
         VERIFY_CASE(obj.detectCycle(head),nullptr);
@@ -60,6 +75,8 @@ DEFINE_CODE_TEST(142_linkedlist_cycle2)
 
         VERIFY_CASE(obj.detectCycle(head),p3);
     }
+    //[-1,-7,7,-4,19,6,-9,-5,-2,-5]
+    //tail connects to node index 6
 
 
 }

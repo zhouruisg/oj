@@ -26,6 +26,9 @@ There is only one duplicate number in the array, but it could be repeated more t
  */
 
 #include <codech/codech_def.h>
+#include <vector>
+
+using namespace std;
 
 class Solution {
 public:

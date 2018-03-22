@@ -72,6 +72,10 @@ namespace CODECH
 		TestObj() :cppFunc_(nullptr), pythonFileName_(""), cppFileName_(""), testName_("") {}
 	};
 
+    inline std::ostream & operator<<(std::ostream &s, std::nullptr_t) {
+        return s << static_cast<void *>(nullptr);
+    }
+
     class CodeChMgr
     {
     public:
