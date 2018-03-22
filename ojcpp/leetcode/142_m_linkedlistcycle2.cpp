@@ -44,9 +44,18 @@ public:
         if (cycle) {
             ListNode *cur1 = head;
             ListNode *cur2 = fast;
+            bool flag = true;
             while (cur1 != cur2) {
+//                cur1=(cur1->next!=fast)?cur1->next:fast;
+//                cur2=(cur2->next!=fast)?cur2->next:head;
                 cur1=(cur1!=fast)?cur1->next:fast;
-                cur2=(cur2->next!=fast)?cur2->next:head;
+                if (flag) {
+                    cur2=cur2->next;
+                    flag = false;
+                } else {
+                    cur2=(cur2!=fast)?cur2->next:head;
+                }
+
             }
             return cur1;
         } else {
@@ -58,23 +67,33 @@ public:
 DEFINE_CODE_TEST(142_linkedlist_cycle2)
 {
     Solution obj;
-    {
-        ListNode*head  = CREATE_LIST(vector<int>{1});
-        VERIFY_CASE(obj.detectCycle(head),nullptr);
-    }
-    {
-        ListNode*head  = CREATE_LIST({1,2,3,4,5,6,7,8});
-        VERIFY_CASE(obj.detectCycle(head),nullptr);
-    }
+//    {
+//        ListNode*head  = CREATE_LIST(vector<int>{1});
+//        VERIFY_CASE(obj.detectCycle(head),nullptr);
+//    }
+//    {
+//        ListNode*head  = CREATE_LIST({1,2,3,4,5,6,7,8});
+//        VERIFY_CASE(obj.detectCycle(head),nullptr);
+//    }
+//
+//    {
+//        ListNode*head  = CREATE_LIST({1,2,3,4,5,6,7,8});
+//        ListNode* p8 = FIND_LISTNODE(head, 8);
+//        ListNode* p3 = FIND_LISTNODE(head, 3);
+//        p8->next = p3;
+//
+//        VERIFY_CASE(obj.detectCycle(head),p3);
+//    }
 
     {
-        ListNode*head  = CREATE_LIST({1,2,3,4,5,6,7,8});
-        ListNode* p8 = FIND_LISTNODE(head, 8);
-        ListNode* p3 = FIND_LISTNODE(head, 3);
-        p8->next = p3;
+        ListNode*head  = CREATE_LIST({-1,-7,7,-4,19,6,-9,-5,-2});
+        ListNode* p2 = FIND_LISTNODE(head, -2);
+        ListNode* p5 = FIND_LISTNODE(head, -5);
+        p2->next = p5;
 
-        VERIFY_CASE(obj.detectCycle(head),p3);
+        VERIFY_CASE(obj.detectCycle(head),p5);
     }
+
     //[-1,-7,7,-4,19,6,-9,-5,-2,-5]
     //tail connects to node index 6
 
