@@ -46,6 +46,6 @@ DEFINE_CODE_TEST(169_majority_elements)
 {
     vector<int> nums{3,3,2,3,1,3,2,3};
     Solution obj;
-    RUN_CASE(obj.majorityElement(nums),3);
+    VERIFY_CASE(obj.majorityElement(nums),3);
 }
 

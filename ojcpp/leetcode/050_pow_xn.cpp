@@ -42,9 +42,9 @@ public:
 DEFINE_CODE_TEST(pow_xn)
 {
     Solution obj;
-    RUN_CASE(obj.myPow(2.00000,10),1024);
-    RUN_CASE(obj.myPow(2.10,3),9.261);
+    VERIFY_CASE(obj.myPow(2.00000,10),1024);
+    VERIFY_CASE(obj.myPow(2.10,3),9.261);
     //cout<< obj.myPow(34.00515,-3);
     //cout<< obj.myPow(0.44528,0);*/
-    RUN_CASE(obj.myPow(1, -2147483648),1);
+    VERIFY_CASE(obj.myPow(1, -2147483648),1);
 }

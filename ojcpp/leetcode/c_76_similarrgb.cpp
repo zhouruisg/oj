@@ -30,6 +30,7 @@ All inputs and outputs should use lowercase letters.
  */
 #include <codech/codech_def.h>
 #include <iostream>
+#include <sstream>
 //#include <cstdlib>
 //#include <stdlib.h>
 

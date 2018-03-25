@@ -40,7 +40,7 @@ public:
         TreeNode *root = create(0,nums.size()-1, nums);
         return root;
     }
-    TreeNode* create(int start, int end, vector<int>& nums) {
+    TreeNode* create(int start, size_t end, vector<int>& nums) {
         if (start>end) {
             return nullptr;
         } else if (start==end) {

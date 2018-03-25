@@ -111,7 +111,7 @@ DEFINE_CODE_TEST(sqrtx)
     RUN_CASE(obj.mySqrt(9), 3);
     RUN_CASE(obj.mySqrt(100), 10);
     */
-    RUN_CASE(obj.mySqrt(2147395599), 46339);
+    VERIFY_CASE(obj.mySqrt(2147395599), 46339);
 
 
 }

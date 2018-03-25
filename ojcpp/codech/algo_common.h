@@ -21,7 +21,7 @@ namespace CODECH
     // create tree per layer
     inline TreeNode* CREATE_TREENODE(int idx, const std::vector<int> &list)
     {
-        int len = list.size();
+        size_t len = list.size();
         if (idx < len)
         {
             int val = list[idx];

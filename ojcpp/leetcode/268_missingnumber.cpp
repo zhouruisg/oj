@@ -50,6 +50,6 @@ DEFINE_CODE_TEST(268_missingnumber)
 {
     Solution obj;
     vector<int> nums{3,0,1};
-    RUN_CASE(obj.missingNumber(nums),2);
+    VERIFY_CASE(obj.missingNumber(nums),2);
 
 }
