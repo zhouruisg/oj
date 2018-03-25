@@ -92,17 +92,17 @@ DEFINE_CODE_TEST(101_symmetric)
     TreeNode *root = CODECH::CREATE_TREENODE(0, {1, 2, 2, 3, 4, 4, 3});
     TREE_PREORDER(root);
     Solution obj;
-    RUN_CASE(obj.isSymmetric(root),true);
+    VERIFY_CASE(obj.isSymmetric(root),true);
 
     TreeNode *root2 = CODECH::CREATE_TREENODE(0, {1, 2, 2, 3, 4, 4, 5});
-    RUN_CASE(obj.isSymmetric(root2),false);
+    VERIFY_CASE(obj.isSymmetric(root2),false);
 
     TreeNode *root3 = CODECH::CREATE_TREENODE(0, {1, 2, 2, 0, 3, 0, 3});
 
-    RUN_CASE(obj.isSymmetric(root3),false);
+    VERIFY_CASE(obj.isSymmetric(root3),false);
 
     TreeNode *root4 = CODECH::CREATE_TREENODE(0, {9, -42, -42, 0, 76, 76, 0, 0, 0, 0, 13, 0, 13, 0, 0});
     TREE_PREORDER(root4);
-    RUN_CASE(obj.isSymmetric(root4),false);
+    VERIFY_CASE(obj.isSymmetric(root4),false);
 
 }

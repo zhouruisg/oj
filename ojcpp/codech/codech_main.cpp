@@ -1,8 +1,9 @@
 #include <iostream>
 #include <iomanip>  // hex,dec
-#include <boost/filesystem.hpp>
 #include "codech_def.h"
-#include <boost/lexical_cast.hpp>
+
+//#include <boost/lexical_cast.hpp>
+//#include <boost/filesystem.hpp>
 
 using namespace std;
 
@@ -45,34 +46,31 @@ namespace CODECH
     {}
 
 
-	void CodeChMgr::runCase(std::string desc, boost::any actual, boost::any exp)
-	{
-		/*std::cout << desc << ":" << (ret ? "PASSED" : "FAILED") << std::endl;
-		*/
-		string strRet;
-		string strExp;
-		bool flag = false;
-		if (actual.type() == typeid(string)) {
-			strRet = boost::lexical_cast<string>(boost::any_cast<string>(actual));
-			strExp = boost::lexical_cast<string>(boost::any_cast<string>(exp));			
-		}	
-		else if (actual.type() == typeid(int)) {
-			strRet = boost::lexical_cast<string>(boost::any_cast<int>(actual));
-			strExp = boost::lexical_cast<string>(boost::any_cast<int>(exp));
-		}
-		flag = (strRet == strExp);
+	//void CodeChMgr::runCase(std::string desc, boost::any actual, boost::any exp)
+	//{
+	//	/*std::cout << desc << ":" << (ret ? "PASSED" : "FAILED") << std::endl;
+	//	*/
+	//	string strRet;
+	//	string strExp;
+	//	bool flag = false;
+	//	if (actual.type() == typeid(string)) {
+	//		strRet = boost::lexical_cast<string>(boost::any_cast<string>(actual));
+	//		strExp = boost::lexical_cast<string>(boost::any_cast<string>(exp));			
+	//	}	
+	//	else if (actual.type() == typeid(int)) {
+	//		strRet = boost::lexical_cast<string>(boost::any_cast<int>(actual));
+	//		strExp = boost::lexical_cast<string>(boost::any_cast<int>(exp));
+	//	}
+	//	flag = (strRet == strExp);
 
-		cout << desc << ":" << (flag?"PASSED":"FAILED") << endl;
-		if (!flag)
-		{
-			cout << "EXP:" << strExp << ",ACTUAL:" << strRet << endl;
-		}
-	}
+	//	cout << desc << ":" << (flag?"PASSED":"FAILED") << endl;
+	//	if (!flag)
+	//	{
+	//		cout << "EXP:" << strExp << ",ACTUAL:" << strRet << endl;
+	//	}
+	//}
 
-//    void CodeChMgr::runCase2(std::string desc)
-//    {
-//
-//    }
+
 
     void CodeChMgr::registerTest(std::string fileName, std::string testName, TYPE_CODETEST_FUNC func)
     {   
@@ -84,28 +82,28 @@ namespace CODECH
 
         // allTests_[testName] = func;
         // allTestIds_[curIdx_++] = testName;
-        __registerPythonTest(fileName);
+        //__registerPythonTest(fileName);
     }
 
-    void CodeChMgr::__registerPythonTest(std::string fileName)
-    {
-        // replace ".cpp" with ".py"		
-        size_t pos = fileName.find_last_of(".");
-        if (pos!=std::string::npos)
-        {
-            //pos1;
-			fileName.replace(pos, 4, ".py");
-            if (boost::filesystem::exists(fileName))
-            {
-                // add to python test suite.
-				TestObj t;
-				t.pythonFileName_ = fileName;
-				allTests_.push_back(t);
-                // allTests_[testName] = nullptr;
-                // allTestIds_[curIdx_++] = testName;
-            }            
-        }
-    }
+   // void CodeChMgr::__registerPythonTest(std::string fileName)
+   // {
+   //     // replace ".cpp" with ".py"		
+   //     size_t pos = fileName.find_last_of(".");
+   //     if (pos!=std::string::npos)
+   //     {
+   //         //pos1;
+			//fileName.replace(pos, 4, ".py");
+   //         if (boost::filesystem::exists(fileName))
+   //         {
+   //             // add to python test suite.
+			//	TestObj t;
+			//	t.pythonFileName_ = fileName;
+			//	allTests_.push_back(t);
+   //             // allTests_[testName] = nullptr;
+   //             // allTestIds_[curIdx_++] = testName;
+   //         }            
+   //     }
+   // }
 
     void CodeChMgr::listTest()
     {        

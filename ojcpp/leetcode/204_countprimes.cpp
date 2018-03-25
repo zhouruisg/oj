@@ -17,10 +17,10 @@ Special thanks to @mithmatt for adding this problem and creating all test cases.
 
  https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
 
- */
+*/
 
 #include <codech/codech_def.h>
-#include <unordered_set>
+
 
 using namespace std;
 
@@ -100,14 +100,13 @@ public:
 
     int countPrimes(int n) {
         if (n <= 2) return 0;
-        vector<int> flag(n,1);    //将标识初始化为true
+        vector<int> flag(n,1);    //true
         //int count = 0;
-        flag[0]=0;            //0不是素数
-        flag[1]=0;            //1不是素数
+        flag[0]=0;            //0 not prime
+        flag[1]=0;            //1 not prime
         int upper = sqrt(n);
         for(int i=2;i<n;++i)
-        {
-            /*当i为素数时，i的所有倍数都不是素数*/
+        {          
             if(flag[i])
             {
                 //count++;
@@ -123,14 +122,12 @@ public:
         int count = count_if(flag.begin(), flag.end(),[](int r){return r==1;});
         return count;
     }
-
-
 };
 
 DEFINE_CODE_TEST(204_countprimes)
 {
     Solution obj;
-    RUN_CASE(obj.countPrimes(3),1);
-    RUN_CASE(obj.countPrimes(1500000),114155);
-    RUN_CASE(obj.countPrimes(499979),41537);
+    VERIFY_CASE(obj.countPrimes(3),1);
+    VERIFY_CASE(obj.countPrimes(1500000),114155);
+    VERIFY_CASE(obj.countPrimes(499979),41537);
 }

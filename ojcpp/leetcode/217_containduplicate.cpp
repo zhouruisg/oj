@@ -28,5 +28,5 @@ DEFINE_CODE_TEST(217_containduplicate)
 {
     vector<int> nums{1,2,3,4,5,5,4};
     Solution obj;
-    RUN_CASE(obj.containsDuplicate(nums), true);
+    VERIFY_CASE(obj.containsDuplicate(nums), true);
 }
