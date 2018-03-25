@@ -21,7 +21,9 @@ A[i] will be in the range of [0, 10000].
  */
 
 #include <codech/codech_def.h>
+#include <vector>
 
+using namespace std;
 
 class Solution {
 public:
