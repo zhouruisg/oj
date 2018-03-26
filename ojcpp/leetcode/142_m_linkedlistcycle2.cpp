@@ -12,6 +12,8 @@ Follow up:
 Can you solve it without using extra space? O(1)
 
 
+
+
  */
 
 #include <codech/codech_def.h>
@@ -43,7 +45,7 @@ public:
         }
         if (cycle) {
             ListNode *cur1 = head;
-            ListNode *cur2 = fast;
+            ListNode *cur2 = fast;  ////worng
             bool flag = true;
             while (cur1 != cur2) {
 //                cur1=(cur1->next!=fast)?cur1->next:fast;
