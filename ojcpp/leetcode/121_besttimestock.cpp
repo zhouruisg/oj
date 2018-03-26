@@ -44,8 +44,8 @@ DEFINE_CODE_TEST(121_besttime_sellstock)
 {
     Solution obj;
     vector<int> px{7,1,5,3,6,4};
-    RUN_CASE(obj.maxProfit(px),5);
+    VERIFY_CASE(obj.maxProfit(px),5);
 
     vector<int> px2={7,6,4,3,1};
-    RUN_CASE(obj.maxProfit(px2),0);
+    VERIFY_CASE(obj.maxProfit(px2),0);
 }

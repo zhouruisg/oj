@@ -50,7 +50,7 @@ DEFINE_CODE_TEST(104_maxdepthtree)
     TreeNode *root = CODECH::CREATE_TREENODE(0, {3, 9, 20, 0, 0, 15, 7});
     TREE_PREORDER(root);
     Solution obj;
-    RUN_CASE(obj.maxDepth(root),3);
+    VERIFY_CASE(obj.maxDepth(root),3);
 
 
 }

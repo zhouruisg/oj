@@ -9,8 +9,8 @@
 #include <chrono>
 #include <iomanip>
 #include <iostream>
-#include <boost/any.hpp>
-#include <type_traits>
+//#include <boost/any.hpp>
+#include <type_traits>  // result _of?
 #include "codech_util.h"
 
 #define DECL_CODE_TEST(x) \
@@ -33,11 +33,11 @@
 #define COUT \
     CODECH::CodeChMgr::stream()
 
-#define RUN_CASE(x,exp) \
-	CODECH::CodeChMgr::runCase(#x, boost::any(x), boost::any(exp));
+//#define RUN_CASE(x,exp) \
+//	CODECH::CodeChMgr::runCase(#x, boost::any(x), boost::any(exp));
 
 #define VERIFY_CASE(x,exp) \
-	CODECH::CodeChMgr::runCase2(#x, x, exp);
+	CODECH::CodeChMgr::runCase(#x, x, exp);
 
 #define RUN_CASE_PRINT(x) \
     CODECH::CodeChMgr::runPrintCase(#x, x);
@@ -87,10 +87,10 @@ namespace CODECH
 
         static std::ostream & stream() { return std::cout; }
 
-		static void runCase(std::string desc, boost::any actual, boost::any exp);
+		//static void runCase(std::string desc, boost::any actual, boost::any exp);
 
         template<typename F, typename E>
-        static void runCase2(std::string desc, F actual, E e){
+        static void runCase(std::string desc, F actual, E e){
             //std::result_of<F()>::type actual;// = f();
 
             bool ret = (actual == e);

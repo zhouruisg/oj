@@ -32,7 +32,7 @@ public:
         sort(nums1.begin(), nums1.end());
         sort(nums2.begin(), nums2.end());
         vector<int> ret;
-        int l = min(nums1.size(), nums2.size());
+        size_t l = min(nums1.size(), nums2.size());
 
         int cur1 = 0, cur2 = 0;
         while (cur1!=nums1.size() && cur2!=nums2.size()) {

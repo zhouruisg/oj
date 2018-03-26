@@ -22,7 +22,7 @@ public:
 DEFINE_CODE_TEST(371_twosum)
 {
     Solution obj;
-    RUN_CASE(obj.getSum(1,2),3);
+    VERIFY_CASE(obj.getSum(1,2),3);
 }
 
 
