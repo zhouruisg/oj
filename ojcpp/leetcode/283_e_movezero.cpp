@@ -15,6 +15,9 @@ Credits:
  */
 
 #include <codech/codech_def.h>
+#include <vector>
+
+using namespace std;
 
 class Solution {
 public:
