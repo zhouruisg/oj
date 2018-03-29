@@ -43,6 +43,15 @@ public:
 
         return maxDepth;
     }
+    // ===============================
+    int maxDepth1(TreeNode* root) {
+        if (!root)
+            return 0;
+        int maxDepth = 0;
+        maxDepth = max(maxDepth, 1 + maxDepth1(root->left));
+        maxDepth = max(maxDepth, 1 + maxDepth1(root->right));
+        return maxDepth;
+    }
 };
 
 DEFINE_CODE_TEST(104_maxdepthtree)

@@ -10,6 +10,7 @@
 
 namespace CODECH
 {
+    const int null = INT_MAX;
     struct TreeNode {        
         int data;
         int val;
@@ -25,7 +26,7 @@ namespace CODECH
         if (idx < len)
         {
             int val = list[idx];
-            if (val != 0)
+            if (val != null)
             {
                 TreeNode*node = new TreeNode(list[idx]);
                 node->left = CREATE_TREENODE(idx * 2 + 1, list);
@@ -38,6 +39,32 @@ namespace CODECH
         {
             return nullptr;
         }
+    }
+
+    inline TreeNode* LCREATE_TREENODE(const std::vector<int> &list)
+    {
+        TreeNode *root = new TreeNode(list[0]);
+        std::deque<TreeNode*> toDo{root};
+
+        for (int i=1; i < list.size()-1; i+=2) {
+            TreeNode *parent = toDo.front();
+            toDo.pop_front();
+            int v1 = list[i], v2 = list[i + 1];
+            if (v1 != null) {
+                parent->left = new TreeNode(v1);
+                toDo.push_back(parent->left);
+            } else {
+                parent->left = nullptr;
+            }
+
+            if (v2 != null) {
+                parent->right = new TreeNode(v2);
+                toDo.push_back(parent->right);
+            } else {
+                parent->right = nullptr;
+            }
+        }
+        return root;
     }
 
     // node data first
@@ -53,6 +80,22 @@ namespace CODECH
         }
     }
 
+    inline std::string TREE_BYLEVEL(TreeNode*root) {
+        std::deque<TreeNode*> toDo{root};
+        std::stringstream ss;
+        while (!toDo.empty()) {
+            TreeNode *node = toDo.front();
+            toDo.pop_front();
+            if (node) {
+                ss << node->val <<",";
+                toDo.push_back(node->left);
+                toDo.push_back(node->right);
+            } else {
+                ss << "null,";
+            }
+        }
+        return ss.str();
+    }
     inline TreeNode* FIND_NODE(TreeNode *root, int val) {
         std::deque<TreeNode*> toDo{root};
         while (!toDo.empty()) {
