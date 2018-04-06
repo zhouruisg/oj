@@ -27,7 +27,7 @@ public:
     }
 
     // still slow
-    int majorityElement(vector<int>& nums) {
+    int majorityElement1(vector<int>& nums) {
         unordered_map<int, int> counts;  // O(N)
         for (auto &&iter : nums) {
             if (++counts[iter] > nums.size()/2) {
@@ -38,14 +38,38 @@ public:
     }
     //Boyer-Moore Majority Vote Algorithm
     //http://www.cs.utexas.edu/~moore/best-ideas/mjrty/
+    int majorityElement(vector<int>& nums) {
+        int count = 1;
+        int prev = nums[0];
+        for (int i=1; i < nums.size(); i++) {
+            if (nums[i]==prev) {
+                count++;
+            } else {
+                if (--count == 0) {
+                    prev = nums[i];
+                    count = 1;
+                }
+            }
+        }
+        return prev;
+    }
 
 };
 
 
 DEFINE_CODE_TEST(169_majority_elements)
 {
-    vector<int> nums{3,3,2,3,1,3,2,3};
     Solution obj;
-    VERIFY_CASE(obj.majorityElement(nums),3);
+
+    {
+        vector<int> nums{3,3,2,3,1,3,2,3};
+        VERIFY_CASE(obj.majorityElement(nums),3);
+    }
+
+    {
+        vector<int> nums{3,2,3};
+        VERIFY_CASE(obj.majorityElement(nums),3);
+    }
+
 }
 

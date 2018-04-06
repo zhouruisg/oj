@@ -41,6 +41,7 @@ namespace CODECH
         }
     }
 
+    //
     inline TreeNode* LCREATE_TREENODE(const std::vector<int> &list)
     {
         TreeNode *root = new TreeNode(list[0]);
@@ -214,6 +215,16 @@ namespace CODECH
         return ss.str();
     }
 
+    inline std::string PRINT_VVEC(std::vector<std::vector<int>> &&m) {
+        std::stringstream ss;
+        for (auto &row : m){
+            for (auto &v : row) {
+                ss << v << " ";
+            }
+            ss << std::endl;
+        }
+        return ss.str();
+    }
 
 
 }
