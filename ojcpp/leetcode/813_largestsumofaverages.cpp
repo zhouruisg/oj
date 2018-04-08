@@ -25,6 +25,10 @@ Note:
 1 <= A[i] <= 10000.
 1 <= K <= A.length.
 Answers within 10^-6 of the correct answer will be accepted as correct.
+ 9 1 2 3 9
+
+ dp state,
+
  */
 
 /*
