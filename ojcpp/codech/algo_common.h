@@ -226,6 +226,16 @@ namespace CODECH
         return ss.str();
     }
 
+    inline std::string PRINT_STRVEC(std::vector<std::string>  &&m) {
+        std::stringstream ss;
+        for (auto &v : m) {
+            ss << v << " ";
+        }
+
+
+        return ss.str();
+    }
+
 
 }
 #endif

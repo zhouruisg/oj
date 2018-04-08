@@ -23,6 +23,7 @@ Note: Recursive solution is trivial, could you do it iteratively?
 #include <codech/algo_common.h>
 
 using namespace CODECH;
+using namespace std;
 
 /**
  * Definition for a binary tree node.
@@ -36,7 +37,7 @@ using namespace CODECH;
 class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
-
+        return {};
     }
 };
 
