@@ -4,10 +4,13 @@
 #include <string>
 #include <functional>
 #include <unordered_map>
+#include <unordered_set>
+#include <map>
 #include <vector>
 #include <iostream>
 #include <chrono>
 #include <iomanip>
+#include <queue>
 #include <iostream>
 //#include <boost/any.hpp>
 #include <type_traits>  // result _of?
@@ -30,8 +33,8 @@
         REG_CODE_TEST(x);\
         void CC_##x()          
 
-#define COUT \
-    CODECH::CodeChMgr::stream()
+//#define COUT \
+//    CODECH::CodeChMgr::stream()
 
 //#define RUN_CASE(x,exp) \
 //	CODECH::CodeChMgr::runCase(#x, boost::any(x), boost::any(exp));
@@ -50,6 +53,13 @@
         auto t_end = std::chrono::high_resolution_clock::now();\
         std::cout << std::fixed << std::setprecision(2) << "Wall clock time passed: " << std::chrono::duration<double, std::milli>(t_end - t_start).count() << " ms\n";\
     }
+
+#define COMP_TIMER(x,y) \
+    { \
+        TIMER(x,1); \
+        TIMER(y,1); \
+    }
+
 
 namespace CODECH
 {   

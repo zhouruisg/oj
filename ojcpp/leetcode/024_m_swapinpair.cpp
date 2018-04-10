@@ -10,6 +10,7 @@ Given 1->2->3->4, you should return the list as 2->1->4->3.
 
 Your algorithm should use only constant space. You may not modify the values in the list, only nodes itself can be changed.
 
+ 自己想出来的思路，对于每个需要SWAP 的NODE, 递归调用SWAPPAIR函数。
  */
 
 /**
