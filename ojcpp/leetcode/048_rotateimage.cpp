@@ -93,9 +93,9 @@ public:
         int start = 0, end = n;
         while (start<end) {
             for (int i=start;i<end;i++) {
-                swap(matrix[start][i], matrix[i][n-start]);
-                swap(matrix[start][i], matrix[end][n-i]);
-                swap(matrix[start][i], matrix[n-i][start]);
+                swap(matrix[start][i], matrix[i][n-start]); // A->B
+                swap(matrix[start][i], matrix[end][n-i]);  // B->C
+                swap(matrix[start][i], matrix[n-i][start]);  //C(A)->D
             }
             start++;end--;
         }
