@@ -42,6 +42,7 @@ G is a subset of all values in the linked list.
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+/*
 #include <codech/codech_def.h>
 #include <codech/algo_common.h>
 
@@ -100,3 +101,4 @@ DEFINE_CODE_TEST(817_linkedlistcomponent)
         VERIFY_CASE(obj.numComponents(head,g),);
     }
 }
+*/
