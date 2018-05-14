@@ -46,9 +46,6 @@ using namespace std;
 
 class Solution {
 public:
-    //int m[]={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26};
-    //vector<int> dp(s.length(),1);
-
     // recursive
     int numDecodings1(string s) {
         int ret = decode(s,0);

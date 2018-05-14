@@ -4,7 +4,7 @@
 
 
 /*
- *
+ * remove leaf which is 0
  */
 
 
