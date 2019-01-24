@@ -69,7 +69,7 @@ public:
                 cout << *ni << " ";
             }
 
-            int count = std::max(long(0),std::distance(iter, ui) -1);
+            int count = std::max(long(0),long(std::distance(iter, ui) -1));
             total += count;
             cout<<","<< a1 <<","<<count <<"," << total <<endl;
         }

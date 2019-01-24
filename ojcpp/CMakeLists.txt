@@ -15,6 +15,13 @@ elseif(APPLE)
     set(CXX_FLAGS
         -std=c++1y
         )
+    set(CMAKE_CXX_FLAGS_RELEASE "-O2 -finline-limit=1000 -DNDEBUG")
+    set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
+elseif(WIN32 )
+    # good with clion and visual c++ 2015
+    add_definitions(
+            -D_WIN32_WINNT=0x0502
+    )
 endif()
 
 
@@ -34,8 +41,7 @@ endif()
 #    message("use boost lib" ${BOOST_LIBRARY_DIRS}, ${BOOST_INCLUDE_DIRS})
 #endif (Boost_NO_SYSTEM_PATHS)
 
-set(CMAKE_CXX_FLAGS_RELEASE "-O2 -finline-limit=1000 -DNDEBUG")
-set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
+
 
 include_directories(${PROJECT_SOURCE_DIR})
 message("project path:" ${PROJECT_SOURCE_DIR})
@@ -47,7 +53,7 @@ file(GLOB_RECURSE MAIN "codech/*.cpp")
 set(SOURCE_FILES
         ${LEETCODE}
         ${MAIN}
-        )
+        leetcode/202_e_happynumber.cpp leetcode/326_powerofthree.cpp)
 
 add_executable(ojcpp ${SOURCE_FILES})
 

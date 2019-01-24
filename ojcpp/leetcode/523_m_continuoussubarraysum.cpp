@@ -43,6 +43,7 @@ using namespace std;
 
 class Solution {
 public:
+    /*
     bool checkSubarraySum0(vector<int>& nums, int k) {
         int count = 0;
         for (int i = 0;i < nums.size();i++) {
@@ -85,8 +86,9 @@ public:
         }
         return false;
     }
+    */
     bool checkSubarraySum(vector<int>& nums, int k) {
-        /*那就是，若数字a和b分别除以数字c，若得到的余数相同，那么(a-b)必定能够整除c。*/
+        /*那就是，若数字a和b分别除以数字c，若得到的余数相同，那么(a-b)必定能够整除c*/
         int n = nums.size(), sum = 0;
         unordered_map<int, int> m{{0,-1}};
         for (int i = 0; i < n; ++i) {
@@ -104,6 +106,10 @@ public:
 DEFINE_CODE_TEST(523_continuous_subarray)
 {
     Solution obj;
+    {
+        vector<int> nums{23,2,6,4,7};
+        VERIFY_CASE(obj.checkSubarraySum(nums,6),true);
+    }
     {
         vector<int> nums{23,2,6,4,7};
         VERIFY_CASE(obj.checkSubarraySum(nums,0),false);
@@ -126,37 +132,4 @@ DEFINE_CODE_TEST(523_continuous_subarray)
         vector<int> nums{23,0,0};
         VERIFY_CASE(obj.checkSubarraySum(nums,6),true);
     }
-
-
-//    {
-//        vector<int> nums{3, 6, 7, 1, 2, 7};
-//        VERIFY_CASE(yt::Count(nums),3);
-//    }
-//
-//    {
-//        vector<int> nums{7};
-//        VERIFY_CASE(yt::Count(nums),1);
-//    }
-//    {
-//        vector<int> nums{1,2,4};
-//        VERIFY_CASE(yt::Count(nums),1);
-//    }
-//
-//    {
-//        vector<int> nums{0,0,0};
-//        VERIFY_CASE(yt::Count(nums),0);
-//    }
-//
-//    {
-//        vector<int> nums{7,7,7};
-//        VERIFY_CASE(yt::Count(nums),6);
-//    }
-//
-//    {
-//        vector<int> nums{1,1,1,1,1,1,1};
-//        VERIFY_CASE(yt::Count(nums),1);
-//    }
-
-
-
 }

@@ -117,6 +117,23 @@ public:
         return ret;
     }
 
+    // a trivial solution
+    void loop(TreeNode* root, vector<int> &v) {
+        if (root==nullptr)
+            return;
+        if (root->left)
+            loop(root->left, v);
+        v.push_back(root->val);
+        if (root->right)
+            loop(root->right, v);
+    }
+
+    vector<int> inorderTraversal1(TreeNode* root) {
+        vector<int> v;
+        loop(root,v);
+        return v;
+    }
+
 };
 
 
@@ -125,7 +142,7 @@ DEFINE_CODE_TEST(094_binarytreeinorder)
     Solution obj;
     {
         TreeNode *root = LCREATE_TREENODE({1,null,2,3,null,null,null});
-        VERIFY_CASE(PRINT_VEC(obj.inorderTraversal(root)),"1 3 2");
+        VERIFY_CASE(PRINT_VEC(obj.inorderTraversal1(root)),"1 3 2");
 
     }
 }

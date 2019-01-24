@@ -32,6 +32,7 @@ public:
             merge(newHead, head);
             head = head->next;
         }
+        return newHead;
     }
 
     ListNode* merge(ListNode *a, ListNode *b) {

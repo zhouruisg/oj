@@ -114,7 +114,8 @@ public:
 
     double largestSumOfAverages1(vector<int>& a, int k) {
         int n = a.size();
-        double mem[n][k + 1];
+        //double mem[n][k + 1]; // not working in vc++
+        double **mem =(double**)malloc(sizeof(double)*n*(k+1));
         for (int i = 0; i < n; ++i) for (int j = 0; j <= k; ++j) mem[i][j] = -1.0;
         mem[0][1] = a[0] / 1.0;
         for (int i = 1; i < n; ++i) {
