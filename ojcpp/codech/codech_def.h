@@ -15,7 +15,8 @@
 #include <iterator>
 #include <climits>
 #include <type_traits>  // result _of?
-#include "codech_util.h"
+//#include "codech_util.h"
+#include "algo_common.h"
 
 #define DECL_CODE_TEST(x) \
         using namespace std; \

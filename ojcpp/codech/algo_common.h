@@ -8,6 +8,7 @@
 #include <sstream>
 #include <deque>
 #include <climits>
+#include "codech_util.h"
 
 namespace CODECH
 {
@@ -237,6 +238,14 @@ namespace CODECH
         return ss.str();
     }
 
-
+    inline std::string PRINT_MATRIX(std::vector<std::vector<int>> &m) {
+            std::stringstream ss;
+            for (auto &row : m){
+                for (auto &v : row) {
+                    ss << v << " ";
+                }
+            }
+            return trim(ss.str());
+    }
 }
 #endif
