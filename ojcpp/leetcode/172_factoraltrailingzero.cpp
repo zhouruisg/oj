@@ -24,6 +24,25 @@ using namespace std;
 class Solution {
 public:
     int trailingZeroes(int n) {
-
+        int count = 0;
+        while (n>0) {
+            count+=n/5;
+            n/=5;
+        }
+        return count;
     }
 };
+
+DEFINE_CODE_TEST(172_factorial_trailing)
+{
+    Solution obj;
+    {
+        VERIFY_CASE(obj.trailingZeroes(3),0);
+    }
+    {
+        VERIFY_CASE(obj.trailingZeroes(5),1);
+    }
+    {
+        VERIFY_CASE(obj.trailingZeroes(6),1);
+    }
+}
