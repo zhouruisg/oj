@@ -49,11 +49,11 @@ Therefore, you can't travel around the circuit once no matter where you start.
  */
 
 #include <codech/codech_def.h>
-
+using namespace std;
 class Solution {
 public:
     int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
-        int length = gas.size();
+        /*int length = gas.size();
         for (int i=0;i<length;i++) {
             int balance = gas[i];
             int step = 0;
@@ -61,7 +61,8 @@ public:
                 step++;
                 balance += 
             }
-        }
+        }*/
+        return 0;
 
     }
 };

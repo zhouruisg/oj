@@ -46,6 +46,7 @@ Explanation: 13 = 4 + 9.
  */
 
 #include <codech/codech_def.h>
+using namespace std;
 
 class Solution {
 public:
@@ -55,11 +56,12 @@ public:
         for(int num = 1; num*num <= n; num++){
             for(int j = num*num; j <= n; j++){
                 dp[j] = min(dp[j], 1 + dp[j - num*num]);
+                cout << j << ":" << dp[j] <<std::endl;
             }
         }
         return dp[n];
     }
-    int numSquares(int n) {
+    int numSquares1(int n) {
         vector<int> dp(n+1,INT_MAX);
         dp[1] = 1;
 
@@ -67,6 +69,7 @@ public:
             int sq = (int)sqrt(i);
             if(sq*sq == i) {
                 dp[i] = 1;
+                cout << i << ":" << dp[i]<<std::endl;;
             }
             else{
                 int sq = (int)sqrt(i);
@@ -74,18 +77,41 @@ public:
                 dp[i] = i;  // use '1'
                 while(j <= sq){
                     dp[i] = min(dp[i], 1 + dp[i - j*j]);;
+                    cout << i << ":" << dp[i]<<std::endl;;
                     j++;
                 }
             }
         }
         return dp[n];
     }
+
+    int numSquares(int n) {
+        vector<int> dp(n+1,INT_MAX);
+        dp[1] = 1;
+        dp[0] = 0;
+
+        for(int i = 1; i <= n; i++){
+            int sq = (int)sqrt(i);
+            if(sq*sq == i) {
+                dp[i] = 1;
+                cout << i << ":" << dp[i] <<std::endl;
+            } else{
+                for (int j=sq*sq;j<=i;j++) {
+                    dp[j] = min(dp[j], 1 + dp[j-sq*sq]);
+                    cout << j << ":" << dp[j]<<std::endl;;
+                }
+            }
+        }
+        return dp[n];
+    }
+
 };
 
-DEFINE_CODE_TEST(073_setmatrixzero)
+DEFINE_CODE_TEST(279_perfectsquare)
 {
     Solution obj;
     {
+        obj.numSquares1(12);
         //VERIFY_CASE(PRINT_MATRIX(m),"1 0 1 0 0 0 1 0 1");
     }
 }
