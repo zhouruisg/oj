@@ -27,7 +27,7 @@ class Solution0 {
 public:
     vector<int> numbers;
     vector<vector<int>> permutations;
-    Solution(vector<int> nums) {
+    Solution0(vector<int> nums) {
         numbers = nums;
         do {
             permutations.push_back(nums);

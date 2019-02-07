@@ -17,7 +17,7 @@ k = 8,
 
 return 13.
 Note:
-You may assume k is always valid, 1 ≤ k ≤ n2.
+You may assume k is always valid, 1 ≤ k ≤ n^2.
  矩阵的行和列都是有序的，因此左上角最小，右下角最大
  */
 
@@ -44,21 +44,51 @@ public:
     }
 
     // 思路 利用优先级队列，从左上角开始push进队列，
-
+    // K*logM
     int kthSmallest(vector<vector<int>>& matrix, int k) {
-        std::priority_queue<tuple<int,int,int>> q;
+        using mytuple=tuple<int,int,int>;
+        auto comp = [](mytuple &lhs,mytuple&rhs){
+            return std::get<0>(lhs) > std::get<0>(rhs);
+        };
+
+        std::priority_queue<mytuple,std::vector<mytuple>,decltype(comp) >q(comp);
+
+        //class Compare = std::less<typename Container::value_type>> q;
         int n=matrix.size();
+        // push first column
         for (int row=0;row<n;row++) {
             auto el = std::make_tuple(matrix[row][0],row,0);
             q.push(el);
         }
-        for (int j=0;j<k;j++) {
-            int v,row,col;
+        int v,row,col;
+        for (int j=1;j<k;j++) {
             std::tie(v, row, col) = q.top();
             q.pop();
+            if (col+1==n) {
+                continue;
+            } else {
+                q.push(std::make_tuple(matrix[row][col+1],row,col+1));
+            }
 
         }
-        return q.top();
+
+        std::tie(v, row, col) = q.top();
+        return v;
     }
 };
+
+
+DEFINE_CODE_TEST(378_kthsmallestmatrix)
+{
+    Solution obj;
+    {
+        vector<vector<int>> nums{{1,5,9},{10,11,13},{12,13,15}};
+        VERIFY_CASE(obj.kthSmallest(nums,8),13);
+        VERIFY_CASE(obj.kthSmallest(nums,7),13);
+        VERIFY_CASE(obj.kthSmallest(nums,1),1);
+        VERIFY_CASE(obj.kthSmallest(nums,9),15);
+        VERIFY_CASE(obj.kthSmallest(nums,2),5);
+    }
+
+}
 
