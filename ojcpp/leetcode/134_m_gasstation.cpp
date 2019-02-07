@@ -53,17 +53,33 @@ using namespace std;
 class Solution {
 public:
     int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
-        /*int length = gas.size();
+        int balance=0;
+
+        int length = gas.size();
         for (int i=0;i<length;i++) {
             int balance = gas[i];
             int step = 0;
-            while (step<length && balance>=cost[i]) {
+            int j=i;
+            while (step<length && balance>=cost[j]) {
                 step++;
-                balance += 
+                balance -= cost[j];
+                j=(i+step)%length;
+                balance+=gas[j];
             }
-        }*/
-        return 0;
-
+            if (step>=length)
+                return i;
+        }
+        return -1;
     }
 };
+
+DEFINE_CODE_TEST(134_gasstation)
+{
+    Solution obj;
+    {
+        vector<int> gas{1,2,3,4,5}, cost{3,4,5,1,2};
+        VERIFY_CASE(obj.canCompleteCircuit(gas,cost),3);
+    }
+
+}
 

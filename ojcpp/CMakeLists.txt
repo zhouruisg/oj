@@ -53,7 +53,7 @@ file(GLOB_RECURSE MAIN "codech/*.cpp")
 set(SOURCE_FILES
         ${LEETCODE}
         ${MAIN}
-        )
+        leetcode/454_m_4sum2.cpp leetcode/200_m_numberofisland.cpp leetcode/380_m_insertdeleteo1.cpp leetcode/230_m_kthsmallestbst.cpp leetcode/041_h_firstmissingpositive.cpp leetcode/207_m_courseschedule.cpp leetcode/384_m_shufflearray.cpp leetcode/378_m_kthsmallestinmatrix.cpp)
 
 add_executable(ojcpp ${SOURCE_FILES})
 
