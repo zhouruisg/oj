@@ -63,6 +63,7 @@ public:
     //https://leetcode.com/problems/median-of-two-sorted-arrays/discuss/231213/Java-Solution-99-Percentile
     //https://www.youtube.com/watch?v=LPFhl65R7ww
     // 对两个数组进行切分，保证左右两侧加起来的个数相等
+    // 太精巧了，需要细细体会
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
         int m = nums1.size();
         int n = nums2.size();
@@ -71,13 +72,17 @@ public:
         }
         int low=0,high=m;
         double result = 0;
+
         while (low<=high) {
-            int partx = (high+low)/2;  //(high-low)/2+low
-            int party = (m+n+1)/2-partx;  // n/2
+            int partx = (high+low)/2;
+            int party = (m+n+1)/2-partx;  // partx+party = (m+n+1)/2
+
             int leftxmax = (partx>0?nums1[partx-1]:INT_MIN);
-            int rightxmin = (partx<(m-1)?nums1[partx]:INT_MAX);
+            int rightxmin = (partx<m?nums1[partx]:INT_MAX);
+
             int leftymax = (party>0?nums2[party-1]:INT_MIN);
-            int rightymin = (party<(n-1)?nums2[party]:INT_MAX);
+            int rightymin = (party<n?nums2[party]:INT_MAX);
+
             if (leftxmax <= rightymin && leftymax <= rightxmin) {
                 if ((n+m)%2==0) {
                     result = (double)(max(leftxmax,leftymax) + min(rightxmin,rightymin))/2.0;
@@ -85,10 +90,10 @@ public:
                     result = (double)max(leftxmax,leftymax);
                 }
                 break;
-            } else if (leftxmax>rightymin){
-                high = partx+1;
+            } else if (leftymax>rightxmin){
+                low = partx+1;
             } else {
-                low = partx-1;
+                high = partx-1;
             }
         }
         return result;
