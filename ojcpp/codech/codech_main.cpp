@@ -113,7 +113,7 @@ namespace CODECH
 		{
 			if (iter.cppFileName_!="")
 				//std::cout << setw(5) << left << idx++ << "\t" << iter.testName_  << "\t" << iter.cppFileName_ << std::endl;
-                std::cout << setw(5) << left << idx++ << "\t" << std::setw(20) << iter.testName_ << "\t" << iter.cppFileName_ << std::endl;
+                std::cout << setw(5) << left << idx++ << "\t" << std::setw(35) << iter.testName_ << "\t" << iter.cppFileName_ << std::endl;
 			else if (iter.pythonFileName_ != "")
 				std::cout << setw(5) << left << idx++ << "\t" << std::setw(20) << "python" << "\t"  << iter.pythonFileName_ << std::endl;
 		}		

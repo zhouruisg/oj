@@ -96,7 +96,7 @@ void printResult(const vector<int>& ret)
     std::cout << std::endl;
 }
 
-DEFINE_CODE_TEST(twosum)
+DEFINE_CODE_TEST(001_twosum)
 {
 //    vector<int> ret;
 //    vector<int> test1 = { 2, 7, 11, 15 };

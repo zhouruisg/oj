@@ -12,7 +12,10 @@
 
 namespace CODECH
 {
-    const int null = INT_MAX;
+    //const long null = LONG_MAX;
+    const int null = INT_MIN;
+    //const double null = std::numeric_limits<double>::infinity();
+
     struct TreeNode {        
         int data;
         int val;

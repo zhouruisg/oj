@@ -1,35 +1,62 @@
 //
 // Created by rui zhou on 30/01/19.
 //
-
+/*
+ * https://github.com/zhedahht/CodingInterviewChinese2
+ */
 #include <codech/codech_def.h>
 
 //mystring impl
 //添加赋值运算符
-//当一个异常被抛出，异常安全的函数应该：
-//没有资源泄露。上面的代码没有通过这个测试，因为如果 "new Image(imgSrc)" 表达式产生一个异常，
-// 对 unlock 的调用就永远不会执行，而那个互斥体也将被永远挂起。
-//不允许数据结构恶化。如果 "new Image(imgSrc)" 抛出异常，bgImage 被遗留下来指向一个被删除对象。
-// 另外，尽管并没有将一张新的图像设置到位，imageChanges 也已经被增加。（在另一方面，旧的图像被明确地删除，所以我料想你会争辩说图像已经被“改变”了。）
+//001 实现operator==()，需要考虑异常安全性,使用一个临时变量来swap ,临时变量可以随后释放空间
+//
+//参考实现一个字符串,
+//一个空字符串至少长度为1,内容为\0,否则很多函数上实现不方便。具体参看CCI
+//Std中如果传入一个nullptr作为字符串，会抛出异常。
+//
+
+#include <cstring>
+#include <codech/codech_def.h>
+#include <cassert>
+
+using namespace std;
 
 namespace HHT
 {
     class CMyString
     {
     public:
-        CMyString(char*pData=NULL){
-            m_pData = new char[strlen(pData)+1];
-            strcpy(m_pData, pData);
+//        CMyString():m_pData(new char[1]) {
+//            m_pData[0]='\0';
+//        }
+        CMyString(char*pData=NULL):m_pData(nullptr){
+            if (pData) {
+                m_pData = new char[strlen(pData)+1];
+                strcpy(m_pData, pData);
+            } else { // std string not allow nullptr either
+                throw string("nullptr string");// TODO new or value?
+            }
         }
 
-        // TODO
         CMyString(const CMyString &str) {
-
+            int length = strlen(str.m_pData);
+            m_pData = new char[length + 1];
+            strcpy(m_pData, str.m_pData);
         }
 
         ~CMyString(){
             if (m_pData)
                 delete m_pData;
+        }
+
+        void swap(CMyString &rhs)
+        {
+            std::swap(m_pData, rhs.m_pData);
+        }
+
+        const char* c_str() const
+        {
+            return m_pData;
         }
     private:
         char *m_pData;
@@ -50,7 +77,7 @@ namespace HHT
         CMyString&operator=(const CMyString&rhs) {
             if (this!=&rhs) {
                 CMyString tmp(rhs);
-                swap(*this, tmp);
+               this->swap(tmp);
             }
 
             return *this;
@@ -60,7 +87,11 @@ namespace HHT
 
 DEFINE_CODE_TEST(hht_string_impl)
 {
-    HHT::CMyString str1,str2;
-    str2=str1;
+    {
+        HHT::CMyString str1((char*)"abc"),str2((char*)"def");
+        str2=str1;
+        VERIFY_CASE(strcmp(str2.c_str(),"abc"),0);
+    }
+
 
 }
