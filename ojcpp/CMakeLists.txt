@@ -50,11 +50,13 @@ message("project path:" ${PROJECT_SOURCE_DIR})
 file(GLOB_RECURSE LEETCODE "leetcode/*.cpp")
 file(GLOB_RECURSE HHT "hht/*.cpp")
 file(GLOB_RECURSE MAIN "codech/*.cpp")
+file(GLOB_RECURSE CPP11 "cpp11/*.cpp")
 
 set(SOURCE_FILES
         ${LEETCODE}
         ${MAIN}
         ${HHT}
+        ${CPP11}
         hht/025_bstsum.cpp leetcode/004_h_medianofsortedarray.cpp leetcode/023_mergeksortedlist.cpp)
 
 add_executable(ojcpp ${SOURCE_FILES})

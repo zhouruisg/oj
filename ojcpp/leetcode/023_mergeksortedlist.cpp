@@ -14,6 +14,7 @@ Input:
   2->6
 ]
 Output: 1->1->2->3->4->4->5->6
+ 这题并不难.套路
  */
 
 /**
@@ -46,10 +47,41 @@ public:
         };
         priority_queue<vt,vector<vt>,decltype(comp)> queue(comp);
         for (auto el:lists) {
-            queue.push(el);
+            if (el)
+                queue.push(el);
         }
-
-
-
+        ListNode *root=nullptr;
+        ListNode*prev=nullptr;
+        while (!queue.empty()) {
+            ListNode* pNode = queue.top();
+            queue.pop();
+            if (prev) {
+                prev->next = pNode;
+            } else {
+                root = pNode;
+            }
+            prev = pNode;
+            if (pNode->next) {
+                queue.push(pNode->next);
+            }
+        }
+        return root;
     }
 };
+
+DEFINE_CODE_TEST(023_mergesortedlist) {
+    Solution obj;
+    {
+        vector<int> l1{1,4,5};
+        vector<int> l2{1,3,4};
+        vector<int> l3{2,6};
+        ListNode*n1=CREATE_LIST(std::move(l1));
+        ListNode*n2=CREATE_LIST(std::move(l2));
+        ListNode*n3=CREATE_LIST(std::move(l3));
+        vector<ListNode*> lists;
+        lists.emplace_back(n1);
+        lists.emplace_back(n2);
+        lists.emplace_back(n3);
+        VERIFY_CASE(PRINT_LIST(obj.mergeKLists(lists)),"1 1 2 3 4 4 5 6");
+    }
+}
