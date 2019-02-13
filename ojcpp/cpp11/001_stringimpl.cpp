@@ -1,4 +1,5 @@
 #include <codech/codech_def.h>
+#include <cstring>
 
 namespace CPP11
 {

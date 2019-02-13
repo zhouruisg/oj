@@ -5,15 +5,16 @@
  Because nums[0] + nums[1] = 2 + 7 = 9,
  return [0, 1].
 
-
+思路
+ 在one pass中，每个element-target=value,看看value是否已存在于hash map中
  */
 
 #include "codech/codech_def.h"
-#include <vector>
-#include <unordered_map>
-#include <algorithm>
-#include <iterator>
-#include <iostream>
+//#include <vector>
+//#include <unordered_map>
+//#include <algorithm>
+//#include <iterator>
+//#include <iostream>
 
 using namespace std;
 

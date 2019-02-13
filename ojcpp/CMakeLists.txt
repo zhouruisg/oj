@@ -57,7 +57,7 @@ set(SOURCE_FILES
         ${MAIN}
         ${HHT}
         ${CPP11}
-        hht/025_bstsum.cpp leetcode/004_h_medianofsortedarray.cpp leetcode/023_mergeksortedlist.cpp)
+        hht/025_bstsum.cpp leetcode/004_h_medianofsortedarray.cpp leetcode/023_mergeksortedlist.cpp leetcode/124_bstmaxsum.cpp leetcode/076_h_minwinsubstr.cpp leetcode/003_m_longestsubstrwithoutrepeat.cpp)
 
 add_executable(ojcpp ${SOURCE_FILES})
 
