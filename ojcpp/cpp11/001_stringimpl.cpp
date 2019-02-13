@@ -23,7 +23,7 @@ namespace CPP11
 
         ~String()
         {
-            delete m_data;
+            delete []m_data;
         }
 
         // why not copy rhs.data to this?

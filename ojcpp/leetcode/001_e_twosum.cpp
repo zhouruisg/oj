@@ -9,13 +9,9 @@
  在one pass中，每个element-target=value,看看value是否已存在于hash map中
  */
 
-#include "codech/codech_def.h"
-//#include <vector>
-//#include <unordered_map>
-//#include <algorithm>
-//#include <iterator>
-//#include <iostream>
+#include <codech/codech_def.h>
 
+using namespace CODECH;
 using namespace std;
 
 /*
@@ -62,7 +58,7 @@ public:
     }
 };
 
-/* */
+/*
 vector<int> twoSum(vector<int>& nums, int target) {
     std::unordered_map<int,int> maps;
     vector<int> ret;
@@ -96,6 +92,7 @@ void printResult(const vector<int>& ret)
     );
     std::cout << std::endl;
 }
+*/
 
 DEFINE_CODE_TEST(001_twosum)
 {
@@ -107,7 +104,7 @@ DEFINE_CODE_TEST(001_twosum)
 
     vector<int> test1 = { 2, 7, 11, 15 };
     Solution obj;
-    printResult(obj.twoSum(test1, 9));
+    VERIFY_CASE(PRINT_VEC(obj.twoSum(test1, 9)),"0 1");
 
 
 }
