@@ -47,7 +47,7 @@ namespace CODECH
     }
 
     //TreeNode *root = LCREATE_TREENODE({1,null,2,3,null,null,null});
-    // °´Ã¿Ò»²ã´Ó×óµ½ÓÒÌîÂú.
+    // ï¿½ï¿½Ã¿Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.
 //    inline TreeNode* LCREATE_TREENODE(const std::vector<int> &list)
 //    {
 //        TreeNode *root = new TreeNode(list[0]);
@@ -263,7 +263,7 @@ namespace CODECH
             for (auto &v : row) {
                 ss << v << " ";
             }
-            ss << std::endl;
+            //ss << std::endl;
         }
         return ss.str();
     }
