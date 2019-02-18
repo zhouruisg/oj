@@ -28,7 +28,7 @@ namespace CODECH
     inline TreeNode* CREATE_TREENODE(int idx, const std::vector<int> &list)
     {
         size_t len = list.size();
-        if (idx < len)
+        if (idx <(int) len)
         {
             int val = list[idx];
             if (val != null)
@@ -47,7 +47,7 @@ namespace CODECH
     }
 
     //TreeNode *root = LCREATE_TREENODE({1,null,2,3,null,null,null});
-    // æŒ‰æ¯ä¸€å±‚ä»Žå·¦åˆ°å³å¡«æ»¡.
+    // °´Ã¿Ò»²ã´Ó×óµ½ÓÒÌîÂú.
 //    inline TreeNode* LCREATE_TREENODE(const std::vector<int> &list)
 //    {
 //        TreeNode *root = new TreeNode(list[0]);
@@ -83,11 +83,11 @@ namespace CODECH
         TreeNode *root = new TreeNode(list[0]);
         std::deque<TreeNode*> toDo{root};
 
-        for (int i=0; i < list.size(); i++) {
+        for (size_t i=0; i < list.size(); i++) {
             TreeNode *parent = toDo.front();
             toDo.pop_front();
             int idx = i * 2 + 1;
-            if (idx<list.size()) {
+            if (idx<(int)list.size()) {
                 int v1 = list[idx];
                 if (v1 != null) {
                     parent->left = new TreeNode(v1);
@@ -98,7 +98,7 @@ namespace CODECH
             }
 
             idx++;
-            if (idx < list.size()) {
+            if (idx < (int)list.size()) {
                 int v2 = list[idx];
                 if (v2 != null) {
                     parent->right = new TreeNode(v2);
@@ -249,7 +249,7 @@ namespace CODECH
 
     inline std::string PRINT_VEC(std::vector<int> &&vec) {
         std::stringstream ss;
-        for (int i=0; i< vec.size(); i++) {
+        for (size_t i=0; i< vec.size(); i++) {
             ss << vec[i];
             if (i != vec.size()-1)
                 ss << " ";

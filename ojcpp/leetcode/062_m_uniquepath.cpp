@@ -10,17 +10,18 @@ The robot can only move either down or right at any point in time. The robot is 
 
 How many possible unique paths are there?
 
-
 Above is a 3 x 7 grid. How many possible unique paths are there?
-
 Note: m and n will be at most 100.
+ 只能往右和下走，有多少种方法到达右下角
+ 递归或者DP的做法，其中递归TLE
+
  */
 
 #include <codech/codech_def.h>
 #include <unordered_set>
 
 using namespace std;
-
+/*
 namespace std {
     template<>
     struct hash<std::pair<int, int>> {
@@ -31,11 +32,9 @@ namespace std {
     };
 }
 void printset(unordered_set<pair<int,int>>&pos) {
-
 }
-class Solution {
-public:
-    /*int uniquePaths0(int m, int n) {
+
+int uniquePaths0(int m, int n) {
         unordered_set<pair<int,int>> pos;
         return move(pos, m,n,1,1);
     }
@@ -59,19 +58,22 @@ public:
         int down = move(pos,m,n,x,y+1);
         pos.erase(make_pair(x,y));
         return right+down;  //left+up+
-    }*/
-
-    // TLE
-    int uniquePaths1(int m, int n) {
-        return move(m,n,1,1);
     }
-    int move(int m, int n, int x, int y) {
-        if (x>n || y>m || x ==0 || y==0) {
-            return 0;
-        }
-        if (x==n && y==m) {
+*/
 
-            return 1;
+
+class Solution0 {
+public:
+    // TLE
+    int uniquePaths(int m, int n) {
+        return move(m,n,0,0);
+    }
+    // m,n 棋盘dimension
+    int move(int m, int n, int x, int y) {
+        if (x==n || y==m) {
+            return 0;
+        } else if (x==n-1 && y==m-1) {
+            return 1; //最终退出条件
         }
 
         int right = move(m,n,x+1,y);
@@ -79,7 +81,12 @@ public:
 
         return right+down;  //left+up
     }
+};
 
+class Solution {
+public:
+    // DP 用一个table表示每一个位置到终点有多少种走法，倒推过来就是
+    // 最优解dp[n][m]=dp[n+1][m]+dp[n][m+1]
     int uniquePaths(int m, int n) {
         vector<vector<int>> dp(m+1,vector<int>(n+1,1));
         for (int i=n-1; i >0; i--) {
@@ -95,6 +102,9 @@ public:
 DEFINE_CODE_TEST(062_uniquepath)
 {
     Solution obj;
+    {
+        VERIFY_CASE(obj.uniquePaths(1,1),1);
+    }
     {
         VERIFY_CASE(obj.uniquePaths(2,2),2);
     }

@@ -17,7 +17,8 @@ Note: You may not slant the container and n is at least 2.
  2 8 4 6 2 -> 8 4 6 is the container have most water.
 
  assume the widest is the most water one, then iterate and find
- ->
+ 思路
+ TODO
  */
 
 #include <codech/codech_def.h>
@@ -28,7 +29,8 @@ using namespace std;
 
 class Solution {
 public:
-    /*int maxArea(vector<int>& height) {
+    /*bruteforce
+     * int maxArea(vector<int>& height) {
         int maxArea = 0;
         int l = height.size();
         for (int i =0 ; i < l - 1; i++) {

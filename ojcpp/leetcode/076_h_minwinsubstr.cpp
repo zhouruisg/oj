@@ -29,7 +29,7 @@ If there is such window, you are guaranteed that there will always be only one u
 1.使用hash, key=t中每个char的个数，value=该字符在t中的个数, t的长度为n，用value来表示当前的搜索substr中还差几个该字符
 2.然后从头开始遍历，每看到一个T中的字符，hashmap中value如果大于0，n--， 然后value-1, (把value--,n--，注意不能减过头:value<=0)
 3,当所有的T中字符都找到，n=0，此时指向为窗口的右侧，
-
+4.
   unordered_map<char, int> hash;
         int num = t.size(), len=INT_MAX, start =0, left = 0;
         for(auto val: t) hash[val]++;
