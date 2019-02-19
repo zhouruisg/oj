@@ -8,13 +8,12 @@
 
 A mapping of digit to letters (just like on the telephone buttons) is given below.
 
-
-
 Input:Digit string "23"
 Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
 Note:
 Although the above answer is in lexicographical order, your answer could be in any order you want.
-
+给出一个电话9宫格拨号键盘，1->"",2->"abc",3->"def"...9->"wxyz"
+ 当输入23的时候，可能有什么样的字母组合
 
  * */
 

@@ -22,7 +22,7 @@ elseif(WIN32 )
     add_definitions(
             -D_WIN32_WINNT=0x0502
     )
-    add_compile_options(/wd4819)
+    #add_compile_options(/wd4819)
 endif()
 
 
@@ -58,7 +58,7 @@ set(SOURCE_FILES
         ${MAIN}
         ${HHT}
         ${CPP11}
-        hht/025_bstsum.cpp leetcode/004_h_medianofsortedarray.cpp leetcode/023_mergeksortedlist.cpp leetcode/124_bstmaxsum.cpp leetcode/076_h_minwinsubstr.cpp leetcode/003_m_longestsubstrwithoutrepeat.cpp leetcode/005_m_longestpalindromicsubstr.cpp leetcode/006_m_zigzagconversion.cpp leetcode/010_h_regularexpmatching.cpp leetcode/007_e_reverseint.cpp leetcode/009_e_palindromenumber.cpp leetcode/012_m_integertoroman.cpp leetcode/042_h_traprainwater.cpp leetcode/013_e_roman2integer.cpp)
+        hht/025_bstsum.cpp leetcode/004_h_medianofsortedarray.cpp leetcode/023_mergeksortedlist.cpp leetcode/124_bstmaxsum.cpp leetcode/076_h_minwinsubstr.cpp leetcode/003_m_longestsubstrwithoutrepeat.cpp leetcode/005_m_longestpalindromicsubstr.cpp leetcode/006_m_zigzagconversion.cpp leetcode/010_h_regularexpmatching.cpp leetcode/007_e_reverseint.cpp leetcode/009_e_palindromenumber.cpp leetcode/012_m_integertoroman.cpp leetcode/042_h_traprainwater.cpp leetcode/013_e_roman2integer.cpp leetcode/018_m_4sum.cpp leetcode/019_m_removenthnode.cpp)
 
 add_executable(ojcpp ${SOURCE_FILES})
 
