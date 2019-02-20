@@ -12,6 +12,7 @@
 #include <chrono>
 #include <iomanip>
 #include <queue>
+#include <stack>
 #include <iostream>
 #include <iterator>
 #include <climits>

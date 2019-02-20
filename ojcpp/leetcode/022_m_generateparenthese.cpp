@@ -25,7 +25,7 @@ For example, given n = 3, a solution set is:
 using namespace std;
 using namespace CODECH;
 
-class Solution {
+class Solution0 {
 public:
     /* can not handle this:  "(()())",
     vector<string> generateParenthesis(int n) {
@@ -132,23 +132,38 @@ public:
 
 };
 
+// 代码更简洁
+class Solution {
+public:
+    vector<string> res;
+    int total;
+    vector<string> generateParenthesis(int n) {
+        total = n;
+        dfs("", 0,0);
+        return res;
+    }
+
+    void dfs(string comb, int left, int right) {
+        if (left==total && right==total) {
+            res.emplace_back(comb);
+        }
+
+        if (left<total) {
+            dfs(comb+"(",left+1,right);
+        }
+
+        if (right<left) {
+            dfs(comb+")",left,right+1);
+        }
+
+    }
+
+};
+
 
 DEFINE_CODE_TEST(022_generateparenthese)
 {
     Solution obj;
-//    {
-//        vector<vector<int>> res;
-//        vector<int> comb;
-//        obj.dfs(res, comb, 5,3);
-//        cout << PRINT_VVEC(std::move(res));
-//
-//    }
-
-//    ((()))
-//    (()())
-//    ()(())  ->
-//    ()()()
-
     {
         vector<string> v = obj.generateParenthesis(3);
         for (auto &iter:v) {

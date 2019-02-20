@@ -27,6 +27,7 @@ Could you do this in one pass?
  *     ListNode(int x) : val(x), next(NULL) {}
  * };
  */
+//corner case例如 首个，最后一个，
 #include <codech/codech_def.h>
 using namespace std;
 using namespace CODECH;
