@@ -34,7 +34,23 @@ using namespace CODECH;
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-
+        ListNode*slow=head,*fast=head;
+        int k=n;
+        while (k-->0) {
+            fast=fast->next;
+        }
+        if (fast== nullptr)
+            return head->next;
+        while (fast->next) {
+            slow=slow->next;
+            fast=fast->next;
+        }
+        if (slow->next==fast)
+            slow->next = nullptr;
+        else
+            slow->next = slow->next->next;
+        // remove node?
+        return head;
     }
 };
 
@@ -42,6 +58,23 @@ DEFINE_CODE_TEST(019_rmeoventhnode)
 {
     Solution obj;
     {
-
+        vector<int> nums{1,2,3,4,5};
+        ListNode *head = CREATE_LIST(std::move(nums));
+        VERIFY_CASE(PRINT_LIST(obj.removeNthFromEnd(head,2)),"1 2 3 5");
+    }
+    {
+        vector<int> nums{1,2,3,4,5};
+        ListNode *head = CREATE_LIST(std::move(nums));
+        VERIFY_CASE(PRINT_LIST(obj.removeNthFromEnd(head,1)),"1 2 3 4");
+    }
+    {
+        vector<int> nums{1,2,3,4,5};
+        ListNode *head = CREATE_LIST(std::move(nums));
+        VERIFY_CASE(PRINT_LIST(obj.removeNthFromEnd(head,5)),"2 3 4 5");
+    }
+    {
+        vector<int> nums{1,2,3,4,5,6,7,8,9,10};
+        ListNode *head = CREATE_LIST(std::move(nums));
+        VERIFY_CASE(PRINT_LIST(obj.removeNthFromEnd(head,7)),"1 2 3 5 6 7 8 9 10");
     }
 }
