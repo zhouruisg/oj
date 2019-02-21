@@ -1,7 +1,7 @@
 #include <codech/codech_def.h>
 #include <cstring>
 
-namespace CPP11
+namespace c11
 {
     class String
     {
