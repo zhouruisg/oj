@@ -42,10 +42,11 @@ for (int i = 0; i < len; i++) {
     print(nums[i]);
 }
  */
-
+#include <codech/codech_def.h>
+using namespace std;
 class Solution {
 public:
     int removeElement(vector<int>& nums, int val) {
-
+        return 0;
     }
 };
