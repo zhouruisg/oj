@@ -19,7 +19,7 @@ For example, the lowest common ancestor (LCA) of nodes 5 and 1 is 3. Another exa
 
  it is not search bintree
  convert to linkedlist
-
+思路， 并非BST，将其转化为链表，然后求链表的公共点
  */
 
 /**

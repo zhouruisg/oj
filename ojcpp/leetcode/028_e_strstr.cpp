@@ -59,16 +59,20 @@ public:
         if (lenn==0) return 0;
         if (lenn>lenh) return -1;
 
-        int in=0;
-        for (int i =0;i<lenh;i++) {
-            if (needle[in]==haystack[i]) {
-                if (in==lenn-1)
-                    return i-lenn+1;
-                else
-                    in++;
-            } else {
-                in=0;
+        auto cmp = [&](int i){
+            int idx = 0;
+            while (idx<lenn && haystack[i]==needle[idx]) {
+                i++;idx++;
             }
+            if (idx==lenn)
+                return true;
+            else
+                return false;
+        };
+
+        for (int i =0;i<lenh-lenn+1;i++) {
+            if (cmp(i))
+                return i;
         }
         return -1;
     }
@@ -78,9 +82,9 @@ DEFINE_CODE_TEST(028_strstr)
 {
     Solution obj;
     {
+        VERIFY_CASE(obj.strStr("abc","a"),0);
         VERIFY_CASE(obj.strStr("",""),0);
         VERIFY_CASE(obj.strStr("abc",""),0);
-        VERIFY_CASE(obj.strStr("abc","a"),0);
         VERIFY_CASE(obj.strStr("abc","b"),1);
         VERIFY_CASE(obj.strStr("abc","d"),-1);
         VERIFY_CASE(obj.strStr("abc","abcde"),-1);

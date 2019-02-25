@@ -40,9 +40,10 @@ Although the above answer is in lexicographical order, your answer could be in a
         }
  */
 #include <codech/codech_def.h>
-#include <codech/algo_common.h>
+//#include <codech/algo_common.h>
 using namespace std;
 using namespace CODECH;
+
 class Solution {
 public:
     vector<string> letterCombinations(string digits) {
@@ -67,13 +68,42 @@ public:
                 next(m, digits, ret, comb+ms[i], mi+1);
             }
         }
+    }
+};
 
+//abc，def，ghi各选一个，有多少种组合方法
+//abc分别写入一个vector<string>,此时size=3,然后按照size来依次结合其它的字符
+//TODO
+class Solution1 {
+public:
+    vector<string> letterCombinations(string digits) {
+        unordered_map<char, string> map{{'2',"abc"},{'3',"def"},{'4',"ghi"},{'5',"jkl"},
+                                        {'6',"mno"},{'7',"pqrs"},{'8',"tuv"},{'9',"wxyz"}};
+        vector<string> ret;
+        for (int i=0;i<digits.length();i++) {
+            string &choices = map[digits[i]];
+            if (ret.size()==0) {// do initialization
+                //string &choices = map[digits[i]];
+                for (auto &ch : choices) {
+                    ret.emplace_back(1,ch);
+                }
+                continue;
+            }
+            std::vector<string> tmp_result;
+            for (int j=0;j<ret.size();j++) {
+                for (auto &ch : choices) {
+                    tmp_result.emplace_back(ret[j]+ch);
+                }
+            }
+            ret = tmp_result;
+        }
+        return ret;
     }
 };
 
 DEFINE_CODE_TEST(017_lettercombination_phoneletter)
 {
-    Solution obj;
+    Solution1 obj;
     {
         //ad ae af
         VERIFY_CASE(PRINT_STRVEC(obj.letterCombinations("123")),"ad ae af bd be bf cd ce cf ");
@@ -82,10 +112,10 @@ DEFINE_CODE_TEST(017_lettercombination_phoneletter)
         VERIFY_CASE(PRINT_STRVEC(obj.letterCombinations("23")),"ad ae af bd be bf cd ce cf ");
     }
     {
-        VERIFY_CASE(PRINT_STRVEC(obj.letterCombinations("0"))," ");
+        VERIFY_CASE(PRINT_STRVEC(obj.letterCombinations("0")),"");
     }
     {
-        VERIFY_CASE(PRINT_STRVEC(obj.letterCombinations(""))," ");
+        VERIFY_CASE(PRINT_STRVEC(obj.letterCombinations("")),"");
     }
     {
         VERIFY_CASE(PRINT_STRVEC(obj.letterCombinations("1234567890")),"");

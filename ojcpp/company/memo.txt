@@ -1,0 +1,20 @@
+amazon
+第一题是最常见的找最近的X个地址，用一个堆就能过所有test case。
+第二题稍微不常见，给一个grid，1代表可走，0代表障碍，9代表目的地，
+
+2018-7
+BST 那个先建个树, 然后找LCA,然后算距离. K个不同字母的substring就是sliding window
+我大概总结了一下。 目前从面经来看亚麻的OA有好几套题目。有的人依然是老题，most common word和log排序，但是变一下。这个面经太多了不发link了。
+有的人的新题是算top k个离用户最近的餐厅， 和类似2sum closest的题目。第二题目前我看到两种，一个是说飞机去和回里程的，一种是说前后端程序运行的。本质都是一样的题目：给一个最大数，要求在两个list中找到相加最接近这个数的所有pairs。「面经点这里」softarts，本帖隐藏的内容需要积分高于 188 才可浏览，您当前积分为 0。 
+查看如何攒积分 Click here for more info.%5Bvalue%5D%3D5%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311" target="_blank">面经」
+
+我所有的题目都准备了，结果没有准备自己被OA的题，当时就慌了，脑子全是浆糊根本理不清思路。时候想想其实并不难。做完OA之后还有很长（8页？）的BQ选择题问题。好好答。
+
+lc658 kcloset element
+
+https://1o24bbs.com/t/topic/3152
+无人机送货
+
+https://www.jianshu.com/p/8d4325d9b539
+
+23280666915535

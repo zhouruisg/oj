@@ -17,7 +17,9 @@ A solution set is:
   [7],
   [2, 2, 3]
 ]
-
+思路， 采用DFS，由于不限制每个数的使用次数，因此先排序，然后可以一直取某个数，
+直到超过target时退出。
+ //TODO DP?
  */
 
 #include <codech/codech_def.h>
@@ -50,19 +52,20 @@ public:
     }
 };
 
-void printvv(vector<vector<int>> &&vec) {
-    for (auto &r : vec) {
-        for (auto p: r) {
-            cout << p << " ";
-        }
-    }
-}
+
+//void printvv(vector<vector<int>> &&vec) {
+//    for (auto &r : vec) {
+//        for (auto p: r) {
+//            cout << p << " ";
+//        }
+//    }
+//}
 
 DEFINE_CODE_TEST(039_combinationsum)
 {
     Solution obj;
     {
         vector<int> nums{2,3,6,7};
-        printvv(std::move(obj.combinationSum(nums, 7)));
+        VERIFY_CASE(PRINT_VVEC(obj.combinationSum(nums, 7)),"2 2 3 7");
     }
 }

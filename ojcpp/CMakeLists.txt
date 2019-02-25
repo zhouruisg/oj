@@ -52,13 +52,15 @@ file(GLOB_RECURSE LEETCODE "leetcode/*.cpp")
 file(GLOB_RECURSE HHT "hht/*.cpp")
 file(GLOB_RECURSE MAIN "codech/*.cpp")
 file(GLOB_RECURSE CPP11 "cpp11/*.cpp")
+file(GLOB_RECURSE COMPANY "company/*.cpp")
 
 set(SOURCE_FILES
         ${LEETCODE}
         ${MAIN}
         ${HHT}
         ${CPP11}
-        hht/025_bstsum.cpp leetcode/004_h_medianofsortedarray.cpp leetcode/023_h_mergeksortedlist.cpp leetcode/124_bstmaxsum.cpp leetcode/076_h_minwinsubstr.cpp leetcode/003_m_longestsubstrwithoutrepeat.cpp leetcode/005_m_longestpalindromicsubstr.cpp leetcode/006_m_zigzagconversion.cpp leetcode/010_h_regularexpmatching.cpp leetcode/007_e_reverseint.cpp leetcode/009_e_palindromenumber.cpp leetcode/012_m_integertoroman.cpp leetcode/042_h_traprainwater.cpp leetcode/013_e_roman2integer.cpp leetcode/018_m_4sum.cpp leetcode/019_m_removenthnode.cpp leetcode/026_e_removeduplicatefromsortarray.cpp leetcode/031_m_nextpermutation.cpp leetcode/028_e_strstr.cpp)
+        ${COMPANY}
+        )
 
 add_executable(ojcpp ${SOURCE_FILES})
 

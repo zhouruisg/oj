@@ -42,7 +42,7 @@ Explanation: The input is: [5,1,4,null,null,3,6]. The root node's value
 #include <codech/codech_def.h>
 using namespace std;
 using namespace CODECH;
-class Solution {
+class Solution0 {
 public:
     // BST的定义
     // 左子树小于node,右子树大于node,但是还要保证右子树的最小值必须大于node,左子树的最大值必须小于node
@@ -88,7 +88,11 @@ public:
         }
         return true;
     }
+};
 
+// 将当前的minval和maxval传递到各个子树。
+class Solution {
+public:
     bool isValidBST(TreeNode* root) {
         if (!root)
             return true;
@@ -106,7 +110,6 @@ public:
         );
     }
 };
-
 DEFINE_CODE_TEST(098_validatebst)
 {
     Solution obj;
