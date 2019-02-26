@@ -30,7 +30,32 @@ class Solution {
      * @return the difference between the sum and the target
      */
 public:
-    int twoSumClosest(int[] nums, int target) {
-
+    int twoSumClosest(vector<int> nums, int target) {
+        sort(nums.begin(),nums.end());
+        int l=0;
+        int r=nums.size()-1;
+        int minDist=INT_MAX;
+        while (l<r) {
+            int sum=nums[l]+nums[r];
+            minDist=min(minDist,abs(target-sum));
+            if (sum == target) {
+                return 0;
+            } else if (sum>target) {
+                r--;
+            } else {
+                l++;
+            }
+        }
+        return minDist;
     }
 };
+
+DEFINE_CODE_TEST(lint_533_twosumclosest)
+{
+    Solution obj;
+    {
+        vector<int> nums{-1,2,1,-4};
+        VERIFY_CASE(obj.twoSumClosest(nums,4),1);
+    }
+
+}

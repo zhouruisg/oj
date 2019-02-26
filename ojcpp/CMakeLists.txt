@@ -53,6 +53,7 @@ file(GLOB_RECURSE HHT "hht/*.cpp")
 file(GLOB_RECURSE MAIN "codech/*.cpp")
 file(GLOB_RECURSE CPP11 "cpp11/*.cpp")
 file(GLOB_RECURSE COMPANY "company/*.cpp")
+file(GLOB_RECURSE LINT "lintcode/*.cpp")
 
 set(SOURCE_FILES
         ${LEETCODE}
@@ -60,6 +61,7 @@ set(SOURCE_FILES
         ${HHT}
         ${CPP11}
         ${COMPANY}
+        ${LINT}
         )
 
 add_executable(ojcpp ${SOURCE_FILES})
