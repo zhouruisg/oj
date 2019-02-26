@@ -20,7 +20,7 @@ A solution set is:
   [-1, -1, 2]
 ]
 
- 一种是基于twosum来做，对于每一个element，都去检查剩余的list是否有符合要求的twosum
+ 一种是基于twosum来做，对于每一个element，都去检查剩余的list是否有符合要求的twosum,使用hashmap
 另一种是先sort，然后再one pass,仍然是O(N^2)
  */
 
@@ -45,10 +45,10 @@ public:
             int r=len-1;
             while (l<r) {
                 int sum = nums[i]+nums[l]+nums[r];
-                if (sum>0) {
+                if (sum>0) { // 表明要移动右侧
                     r--;
                 } else if(sum<0) {
-                    l++;
+                    l++;  //移动左侧
                 } else { // equal
                     res.push_back(vector<int>{nums[i],nums[l],nums[r]});
                     while (l< len-1 &&nums[l]==nums[l+1]) l++;
