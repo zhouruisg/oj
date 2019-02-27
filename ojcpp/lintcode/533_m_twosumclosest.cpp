@@ -4,7 +4,7 @@
 
 /*
  * amazon
- * [LintCode] 533 Two Sum - Closest to target
+ * [LintCode] 533 Two Sum - Closest to target locked
 Description
 Given an array nums of n integers, find two integers in nums such that the sum is closest to a given number, target.
 
