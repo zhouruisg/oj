@@ -13,7 +13,7 @@ if (LINUX)
         )
 elseif(APPLE)
     set(CXX_FLAGS
-        -std=c++1y
+        -std=c++1x
         )
     set(CMAKE_CXX_FLAGS_RELEASE "-O2 -finline-limit=1000 -DNDEBUG")
     set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g")
