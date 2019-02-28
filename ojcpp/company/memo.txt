@@ -3,12 +3,15 @@ LC973 第一题是最常见的找最近的X个地址，用一个堆就能过所有test case。
 LC490 maze 类似 第二题稍微不常见，给一个grid，1代表可走，0代表障碍，9代表目的地
 lc572 easy subtree
 LC?? Longest palindrome
-LINT1369 LC819 Most common word 
 
-LINT533 Two sum closest
+LC340 LINT386 Substring with distinct k hard (20minutes)
+LINT1369 LC819 Most common word easy TBD
+LINT533 Two sum closest 
 LINT613 High five
-Subtree with Maximum Average 597
+LINT596 Subtree with Maximum Average easy
+LINT1377 Find substring
 
+lc064 min path sum
 
 
 2018-7
@@ -34,7 +37,7 @@ https://www.jianshu.com/p/8d4325d9b539
 Close two sum 533
 Subtree with Maximum Average 597
 High 5 613,
-Find substring 137
+Find substring 1377
 K closest point 612,
 Cut off trees for golf event  1092
 Substring with distinct k 386
@@ -48,11 +51,11 @@ Max sum pair，输入是两个List<List<Integer>>，第一个数是ID，第二个是Value，还有一
 第二题做完15个test cases有3个没过，然后想了下，应该是有重复值的时候没考虑到，改了代码，再跑，还是显示只过12个。到最后还剩18分钟，放弃了，准备返回第一题加点注释，结果显示连接失败，2分钟后再登录。等重新登录回来，第二题考虑重复值的代码不见了，时间变成还剩48分钟，这时候想之前一直不过是不是连接问题。马上加上刚才的代码，再跑，果然15个全过了。
 
 
-K nearest points
-Two sum closest
-K distinct substring(有各种变形，比如k-1个distinct characters，比如不限制substring长度)
-Highest five
-Longest palindrome
-Maximum average subtree
-Maze(给一个2D matrix，0代表路，1代表墙，终点是9，问可不可以到达终点。另一个变形是到达终点的最短路径)
+K nearest points ok
+Two sum closest ok
+K distinct substring(有各种变形，比如k-1个distinct characters，比如不限制substring长度) ok
+Highest five ok
+Longest palindrome ??
+Maximum average subtree ok
+Maze(给一个2D matrix，0代表路，1代表墙，终点是9，问可不可以到达终点。另一个变形是到达终点的最短路径) ok
 Most common words(给一个String，一个blacklist，返回不在blacklist里面并且出现频率最高的词)

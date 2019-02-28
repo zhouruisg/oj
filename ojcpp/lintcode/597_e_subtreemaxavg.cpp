@@ -69,7 +69,7 @@ public:
 
 };
 
-DEFINE_CODE_TEST(597_subtreemaxavg)
+DEFINE_CODE_TEST(lint_597_subtreemaxavg)
 {
     Solution obj;
     {

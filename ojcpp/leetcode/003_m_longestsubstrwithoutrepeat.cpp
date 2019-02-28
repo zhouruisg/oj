@@ -22,8 +22,12 @@ Output: 3
 Explanation: The answer is "wke", with the length of 3.
              Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
 
-陷阱，当遇到重复字符后，有几种情况
- 
+找出最长不含重复字符的字串
+ 用hashmap记录每一个字符的所在位置，如果碰到一个字符在map中已存在，那么以前一个字符作为终点更新长度，
+新的起点移到重复字符之后的下一个字符。当更新起点后，在起点之前的map中的字符在比较长度时可以忽略掉
+
+
+ 陷阱，当遇到重复字符后，有几种情况
  要从上一次重复字符所在的位置开始计算，而不是当前位置
 
  */
