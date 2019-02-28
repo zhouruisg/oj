@@ -11,7 +11,7 @@ LINT613 High five
 LINT596 Subtree with Maximum Average easy
 LINT1377 Find substring
 
-lc064 min path sum
+lc064 min path sum medium
 
 
 2018-7
