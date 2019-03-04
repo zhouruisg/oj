@@ -47,14 +47,92 @@ Input:
 s = "acdcb"
 p = "a*c?b"
 Output: false
+
+ 注意，本地没有010那种需要和前面的字母结合起来的关系
+ a*   b*，完全可以分开 e.g. 匹配abbbbb
  */
 
 #include <codech/codech_def.h>
 using namespace std;
 
-class Solution {
+class Solution0 {
 public:
-    bool isMatch(string s, string p) {
+    string s0,p0;
+    bool doMatch(int si, int pj) {
+        if (pj==p0.length()) {
+            if (si==s0.length())
+                return true;
+            else
+                return false;
+        }
 
+        if (p0[pj]=='?') {
+            return doMatch(si+1,pj+1);
+        } else if (p0[pj]=='*') {
+            if (doMatch(si+1,pj))
+                return true;
+            else if (doMatch(si+1,pj+1))
+                return true;
+            else return doMatch(si,pj+1);
+        } else if (s0[si]==p0[pj]) {
+            return doMatch(si+1,pj+1);
+        }
+        return false;
+    }
+
+    bool isMatch(string s, string p) {
+        s0=s;p0=p;
+        return doMatch(0,0);
     }
 };
+
+
+class Solution {
+public:
+    string s0,p0;
+    static const int FRONT=-1;
+    bool doMatch(int si, int pj) {
+        if (pj==FRONT) {
+            if (si==FRONT)
+                return true;
+            else
+                return false;
+        }
+
+
+        if (p0[pj]=='?') {
+            return doMatch(si-1,pj-1);
+        } else if (p0[pj]=='*') {
+            if (doMatch(si-1,pj))
+                return true;
+            else if (doMatch(si-1,pj-1))
+                return true;
+            else return doMatch(si,pj-1);
+        } else if (s0[si]==p0[pj]) {
+            return doMatch(si-1,pj-1);
+        }
+        return false;
+    }
+
+    bool isMatch(string s, string p) {
+        s0=s;p0=p;
+        return doMatch(s.length()-1,p.length()-1);
+    }
+};
+
+
+
+DEFINE_CODE_TEST(044_wildcard)
+{
+    Solution obj;
+    {
+        VERIFY_CASE(obj.isMatch("aa","a"),false);
+        VERIFY_CASE(obj.isMatch("aa","*"),true);
+        VERIFY_CASE(obj.isMatch("cb","?a"),false);
+        VERIFY_CASE(obj.isMatch("adceb","*a*b"),true);
+        VERIFY_CASE(obj.isMatch("acdcb","a*c?b"),false);
+        VERIFY_CASE(obj.isMatch("","*"),true);  // 必须要考corner case
+
+    }
+}
+

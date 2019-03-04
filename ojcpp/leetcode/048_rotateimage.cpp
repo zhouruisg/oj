@@ -63,31 +63,30 @@ rotate the input matrix in-place such that it becomes:
 using namespace std;
 using namespace CODECH;
 
-void printmatrix(vector<vector<int>> &m) {
-    for (auto &row : m){
-        for (auto &v : row) {
-            cout << v << " ";
-        }
-        cout << endl;
-    }
-}
+//void printmatrix(vector<vector<int>> &m) {
+//    for (auto &row : m){
+//        for (auto &v : row) {
+//            cout << v << " ";
+//        }
+//        cout << endl;
+//    }
+//}
+//
+//string verifymatrix(vector<vector<int>> &m) {
+//    stringstream ss;
+//    for (auto &row : m){
+//        for (auto &v : row) {
+//            ss << v << " ";
+//        }
+//    }
+//    return trim(ss.str());
+//}
 
-string verifymatrix(vector<vector<int>> &m) {
-    stringstream ss;
-    for (auto &row : m){
-        for (auto &v : row) {
-            ss << v << " ";
-        }
-    }
-    return trim(ss.str());
-}
-
-class Solution {
+// 思路， 从左到右，先外后内，
+//采用swap的方法，固定用top edge来保存swap后的结果.
+//适用于奇偶数
+class Solution0 {
 public:
-    void ms(int &x, int &y) {
-        // cout << "swap " << x << " -> " << y << endl;
-    }
-
     void rotate(vector<vector<int>>& matrix) {
         int n = matrix.size()-1;
         int start = 0, end = n;
@@ -102,7 +101,24 @@ public:
     }
 };
 
+//重写，把对应的连线画出来
+//
+class Solution {
+public:
+    void rotate(vector<vector<int>>& matrix) {
+        int n = matrix.size()-1;
+        int start = 0, end = n;
+        while (start<end) {
+            for (int i=start;i<end;i++) {
+                swap(matrix[start][i],matrix[i][end]);
+                swap(matrix[start][i],matrix[end][n-i]);
+                swap(matrix[start][i],matrix[n-i][start]);
+            }
+            start++;end--;
+        }
 
+    }
+};
 
 DEFINE_CODE_TEST(048_rotateimage)
 {
@@ -110,18 +126,18 @@ DEFINE_CODE_TEST(048_rotateimage)
     {
         vector<vector<int>> i1 = {{ 4,8},{3,6}};
         obj.rotate(i1);
-        VERIFY_CASE(verifymatrix(i1),"3 4 6 8 ");
+        VERIFY_CASE(PRINT_VVEC(std::move(i1)),"3 4 6 8");
     }
 
     {
         vector<vector<int>> i1 = {{1,2,3},{4,5,6},{7,8,9}};
         obj.rotate(i1);
-        VERIFY_CASE(verifymatrix(i1),"7 4 1 8 5 2 9 6 3");
+        VERIFY_CASE(PRINT_VVEC(std::move(i1)),"7 4 1 8 5 2 9 6 3");
     }
 
     {
         vector<vector<int>> i1 = {{ 5, 1, 9,11},{2, 4, 8,10},{13, 3, 6, 7},{15,14,12,16}};
         obj.rotate(i1);
-        VERIFY_CASE(verifymatrix(i1),"15 13 2 5 14 3 4 1 12 6 8 9 16 7 10 11");
+        VERIFY_CASE(PRINT_VVEC(std::move(i1)),"15 13 2 5 14 3 4 1 12 6 8 9 16 7 10 11");
     }
 }
