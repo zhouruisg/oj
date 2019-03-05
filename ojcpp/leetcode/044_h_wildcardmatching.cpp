@@ -55,84 +55,171 @@ Output: false
 #include <codech/codech_def.h>
 using namespace std;
 
-class Solution0 {
-public:
-    string s0,p0;
-    bool doMatch(int si, int pj) {
-        if (pj==p0.length()) {
-            if (si==s0.length())
-                return true;
-            else
-                return false;
+namespace wildcard {
+
+
+//需要考虑 "" 和 "*"匹配这种情况
+//good but TLE
+    class Solution1 {
+    public:
+        string s0, p0;
+        bool doMatch(int si, int pj) {
+            if (si == s0.length() && pj == p0.length()) return true;
+            if (si > s0.length() && pj < p0.length()) return false;
+            if (pj < p0.length() && p0[pj] == '?') {
+                return doMatch(si + 1, pj + 1);
+            } else if (pj < p0.length() && p0[pj] == '*') {
+                if (doMatch(si + 1, pj))   //a:*(n)
+                    return true;
+                else if (doMatch(si + 1, pj + 1))  // a : * (1)
+                    return true;
+                else return doMatch(si, pj + 1); // a:*(0)  "" "*"归类到这里
+            } else if (si < s0.length() && pj < p0.length() && s0[si] == p0[pj]) {
+                return doMatch(si + 1, pj + 1);
+            }
+            return false;
         }
 
-        if (p0[pj]=='?') {
-            return doMatch(si+1,pj+1);
-        } else if (p0[pj]=='*') {
-            if (doMatch(si+1,pj))
-                return true;
-            else if (doMatch(si+1,pj+1))
-                return true;
-            else return doMatch(si,pj+1);
-        } else if (s0[si]==p0[pj]) {
-            return doMatch(si+1,pj+1);
+        bool isMatch(string s, string p) {
+            s0 = s;
+            p0 = p;
+            return doMatch(0, 0);
         }
-        return false;
-    }
+    };
 
-    bool isMatch(string s, string p) {
-        s0=s;p0=p;
-        return doMatch(0,0);
-    }
-};
-
-
-class Solution {
-public:
-    string s0,p0;
-    static const int FRONT=-1;
-    bool doMatch(int si, int pj) {
-        if (pj==FRONT) {
-            if (si==FRONT)
-                return true;
-            else
-                return false;
+    // 精妙
+    class Solution {
+    public:
+        bool isMatch(string s, string p) {
+            int m=s.length(),n=p.length();
+            vector<vector<bool>> dp(m+1,vector<bool>(n+1,false));
+            dp[0][0]=true;  // empty string match empty string
+            for (int i=0;i<n;i++) {
+                if (p[i]=='*') {
+                    dp[0][i+1] = dp[0][i]; //主要是处理连续*,另一层意思是当p 为*是,dp[0][pj]的match情况等于dp[0][pj-1]
+                }
+            }
+            for (int i=1;i<=m;i++) {
+                for (int j=1;j<=n;j++) {
+                    if (p[j-1]=='*') {
+                        dp[i][j]= dp[i][j-1] or dp[i-1][j];
+                    } else {
+                        dp[i][j]= dp[i-1][j-1] and (s[i-1]==p[j-1] or p[j-1]=='?');
+                    }
+                }
+            }
+            return dp[m][n];
         }
+    };
 
+    class Solution2 {
+    public:
 
-        if (p0[pj]=='?') {
-            return doMatch(si-1,pj-1);
-        } else if (p0[pj]=='*') {
-            if (doMatch(si-1,pj))
-                return true;
-            else if (doMatch(si-1,pj-1))
-                return true;
-            else return doMatch(si,pj-1);
-        } else if (s0[si]==p0[pj]) {
-            return doMatch(si-1,pj-1);
+        bool isMatch(string s, string p)
+        {
+            return dfs(s, p, 0, 0) == 2;
         }
-        return false;
-    }
+    private:
+        int dfs(string& s, string& p, int si, int pi)
+        {
+            if (si == s.size() and pi == p.size()) return 2;    // matched
+            if (si == s.size() and p[pi] != '*') return 0;      // unmatched: reached the end of s
+            if (pi == p.size()) return 1;                       // unmatched: not reached the end of s
+            if (p[pi] == '?' or s[si] == p[pi])
+                return dfs(s, p, si+1, pi+1);
+            if (p[pi] == '*') {                                 // calculate the shortest length p[pi] need to cover
+                if (pi+1 < p.size() and p[pi+1] == '*')
+                    return dfs(s, p, si, pi+1);                 // skip duplicate '*'
+                for(int i = 0; i <= s.size()-si; ++i)
+                {
+                    int ret = dfs(s, p, si+i, pi+1);
+                    if (ret == 0 or ret == 2)                   // reached the end of s, so return immediately
+                        return ret;
+                }
+            }
+            return 1;
+        }
+    };
 
-    bool isMatch(string s, string p) {
-        s0=s;p0=p;
-        return doMatch(s.length()-1,p.length()-1);
-    }
-};
+    //https://blog.csdn.net/magicbean2/article/details/53990077  不明白DFS快速
+//    class Solution0 {
+//    public:
+//        string s0, p0;
+//
+//        bool doMatch(int si, int pj) {
+//            if (si == s0.length() && pj == p0.length()) return true;
+//            if (si == s0.length() && p0[pj] != '*') return false;
+//            if (pj==p0.length()) return false;
+//
+//            //if (si > s0.length() && pj < p0.length()) return false;
+//
+//            if (p0[pj] == '?' || s0[si] == p0[pj]) {
+//                return doMatch(si + 1, pj + 1);
+//            } else if (p0[pj] == '*') {
+//                if (pj + 1 < p0.length() and p0[pj + 1] == '*')
+//                    return doMatch(si, pj + 1);   //a:*(n)
+//                return doMatch(si + 1, pj + 1);
+//            }
+//
+//            return false;
+//        }
+//
+//        bool isMatch(string s, string p) {
+//            s0 = s;
+//            p0 = p;
+//            return doMatch(0, 0);
+//        }
+//    };
 
+
+//    class Solution {
+//    public:
+//        string s0, p0;
+//        static const int FRONT = -1;
+//
+//        bool doMatch(int si, int pj) {
+//            if (pj == FRONT) {
+//                if (si == FRONT)
+//                    return true;
+//                else
+//                    return false;
+//            }
+//
+//
+//            if (p0[pj] == '?') {
+//                return doMatch(si - 1, pj - 1);
+//            } else if (p0[pj] == '*') {
+//                if (doMatch(si - 1, pj))
+//                    return true;
+//                else if (doMatch(si - 1, pj - 1))
+//                    return true;
+//                else return doMatch(si, pj - 1);
+//            } else if (s0[si] == p0[pj]) {
+//                return doMatch(si - 1, pj - 1);
+//            }
+//            return false;
+//        }
+//
+//        bool isMatch(string s, string p) {
+//            s0 = s;
+//            p0 = p;
+//            return doMatch(s.length() - 1, p.length() - 1);
+//        }
+//    };
+}
 
 
 DEFINE_CODE_TEST(044_wildcard)
 {
-    Solution obj;
+    wildcard::Solution obj;
     {
+        VERIFY_CASE(obj.isMatch("","*"),true);  // 必须要考corner case
         VERIFY_CASE(obj.isMatch("aa","a"),false);
         VERIFY_CASE(obj.isMatch("aa","*"),true);
         VERIFY_CASE(obj.isMatch("cb","?a"),false);
         VERIFY_CASE(obj.isMatch("adceb","*a*b"),true);
         VERIFY_CASE(obj.isMatch("acdcb","a*c?b"),false);
-        VERIFY_CASE(obj.isMatch("","*"),true);  // 必须要考corner case
-
+        VERIFY_CASE(obj.isMatch("aaaabaaaabbbbaabbbaabbaababbabbaaaababaaabbbbbbaabbbabababbaaabaabaaaaaabbaabbbbaababbababaabbbaababbbba","*****b*aba***babaa*bbaba***a*aaba*b*aa**a*b**ba***a*a*"),true);
     }
 }
 

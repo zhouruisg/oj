@@ -17,7 +17,7 @@ using namespace std;
 
 class Solution {
 public:
-    // TLE
+    // TLE 减法不行
     int divide0(int dividend, int divisor) {
         if (divisor == 0)
             return INT_MAX;

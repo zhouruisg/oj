@@ -18,6 +18,7 @@ Given str = "abc", k = 2, output 2.  ->ab ,bc
 Explanation:
 Characters are not repeated, and substrings of length k have "ab", "bc".
 与lc003很接近，只不过这里要求正好是K的输出个数，前者是最大长度
+ https://zhuanlan.zhihu.com/p/36736810
 */
 
 #include <codech/codech_def.h>

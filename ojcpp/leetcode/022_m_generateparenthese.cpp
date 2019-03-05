@@ -132,7 +132,7 @@ public:
 
 };
 
-// 代码更简洁
+// 代码更简洁,仍然是使用DFS的做法
 class Solution {
 public:
     vector<string> res;

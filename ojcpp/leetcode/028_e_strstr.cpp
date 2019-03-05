@@ -20,36 +20,125 @@ Clarification:
 What should we return when needle is an empty string? This is a great question to ask during an interview.
 
 For the purpose of this problem, we will return 0 when needle is an empty string. This is consistent to C's strstr() and Java's indexOf().
+
+KMP 解法？
  */
 #include <codech/codech_def.h>
 using namespace std;
+using namespace CODECH;
 
-class Solution0 {
+
+// KMP 解法
+//https://blog.csdn.net/yutianzuijin/article/details/11954939/
+//算法导论32.4
+//阮一峰 http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html
+//ABCDABD ->最大公共长度，必须从前到后连续排列
+//首先，要了解两个概念："前缀"和"后缀"。
+//"前缀"指除了最后一个字符以外，一个字符串的全部头部组合；
+//"后缀"指除了第一个字符以外，一个字符串的全部尾部组合。
+//目的是找出公共的头部和尾部组合,例如ABCDABD，D处为0
+//ABCDAB, B处为2，因为AB为公共组合。
+//构建next table,找出pattern 每一个字符处对应的公共长度，
+//如果是ABCDABA，最后一个A的值怎么设置?
+
+// ABCDAB -> AB[2]
+// kmp search
+
+//my kmp
+class Solution {
 public:
-    // too ugly and with problem!
-    //一旦找到第一个char一样，就去比较下一个char,但这个时候必须记住第一个char的haystack的位置不能移动！
-    int strStr(string haystack, string needle) {
-        int lenh = haystack.length();
-        int lenn = needle.length();
-        if (lenn==0) return 0;
-        if (lenn>lenh) return -1;
+    int strStr(string h, string n) {
+        if (h.length() <= n.length()) { return h == n ? 0 : -1; }
+        // next table
+//        const int hl = h.length();
+//        int j = 0;
+//        int k = -1;
+//        vector<int> next(hl, 0);
+//        while (j < hl - 1) {
+//            if (k == -1 || h[j] == h[k])
+//                next[++j] = ++k;
+//            else
+//                k = next[k];
+//        }
 
-        int in=0;
-        for (int i =0;i<lenh;i++) {
-            if (needle[in]==haystack[i]) {
-                if (in==lenn-1)
-                    return i-lenn+1;
-                else
-                    in++;
+        //
+        const int nl = n.length();
+        vector<int> next(nl, 0);
+        int i=0,j=-1;
+        //跳表，状态机的概念
+        //1. 第一个和最后一个必定是0,所以用最后一个位置来保存前一个next 值
+        //2.对于每个needle[i],取出next[i-1]处的idx(此处使j=i-1),如果相等，累加idx
+        //如果第2步不相等，需要回退到上一层,取idx=next[idx]
+        while (i<nl-1) {
+            if (j==-1 || n[j]==n[i]) {
+                next[++i]=++j;  //第一个和最后一个必定是0,所以用最后一个位置来保存前一个next 值:因此先++i, next[++i]
             } else {
-                in=0;
+                j=next[j];i++;
             }
+        }
+        cout << PRINT_VEC(std::move(next)) <<endl;
+        int hl = h.length();
+        for (int i = 0, j = 0; i < hl; i++){
+            if (j < nl and h[i] == n[j]) {
+                j++;
+            } else {
+                while (j > 0){
+                    j = next[j];
+                    if (h[i] == n[j]){
+                        j++;
+                        break;
+                    }
+                }
+            }
+            if (j == nl) return i - nl + 1;
+        }
+        return 0;
+    }
+};
+
+
+// KMP
+class Solution1 {
+public:
+    int strStr(string haystack, string needle) {
+        int m = needle.length();
+        if (m == 0) return 0;
+        // build next table, size=m+1
+        vector<int> next(m+1, 0);
+        for (int i = 0; i < m; i++){
+            int j = i;
+            while (j > 0) {
+                //取出上一个next[]的值，如果为1，表示有匹配到一个字符
+                //需要继续比较下一个字符,取next[]的值为needle的新idx来比较
+                j = next[j];
+                if (needle[i] == needle[j]){
+                    next[i+1] = j + 1; // 等于前一个J值+1,即递增
+                    break;
+                }
+                //退出条件
+                // next table的一个作用是，value为需要比较的idx位置，0表示要从0处起比较
+
+            }
+        }
+
+        int n = haystack.length();
+        for (int i = 0, j = 0; i < n; i++){
+            if (j < m and haystack[i] == needle[j]) j++;
+            else while (j > 0){
+                    j = next[j];
+                    if (haystack[i] == needle[j]){
+                        j++;
+                        break;
+                    }
+                }
+            if (j == m) return i - m + 1;
         }
         return -1;
     }
 };
 
-class Solution {
+// brute force
+class Solution0 {
 public:
     // too ugly and with problem!
     //一旦找到第一个char一样，就去比较下一个char,但这个时候必须记住第一个char的haystack的位置不能移动！
@@ -82,6 +171,8 @@ DEFINE_CODE_TEST(028_strstr)
 {
     Solution obj;
     {
+        VERIFY_CASE(obj.strStr("BBC ABCDAB ABCDABCDABDE","ABCDABD"),0);
+        VERIFY_CASE(obj.strStr("ABABDABACDABABCABAB","ABABCABAB"),0);
         VERIFY_CASE(obj.strStr("abc","a"),0);
         VERIFY_CASE(obj.strStr("",""),0);
         VERIFY_CASE(obj.strStr("abc",""),0);

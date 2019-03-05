@@ -71,7 +71,7 @@ public:
     }
 };
 
-//abc，def，ghi各选一个，有多少种组合方法
+//abc，def，ghi各选一个，有多少种组合方法,不适合于排列
 //abc分别写入一个vector<string>,此时size=3,然后按照size来依次结合其它的字符
 //TODO
 class Solution1 {
