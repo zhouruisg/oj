@@ -42,9 +42,7 @@ public:
         if (start==end) {
             return nullptr;
         }
-//        if (pi<0) {
-//            return nullptr;
-//        }
+
         TreeNode *root = new TreeNode(post[pi]);
         int inidx = map[post[pi]];
         root->right = dfs(post,in,pi-1,inidx+1,end);
