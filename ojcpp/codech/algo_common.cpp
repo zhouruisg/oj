@@ -62,17 +62,28 @@ namespace CODECH {
         return root;
     }
     // node data first
-    void TREE_PREORDER(TreeNode*root)
+
+
+    void DO_TREE_PREORDER(TreeNode*root,std::stringstream &ss)
     {
         if (root)
         {
-            std::cout << root->data << " ";
-            TREE_PREORDER(root->left);
-            TREE_PREORDER(root->right);
+            ss  << root->data << " ";
+            DO_TREE_PREORDER(root->left,ss);
+            DO_TREE_PREORDER(root->right,ss);
         } else {
-            std::cout << " null ";
+            //std::cout << " null ";
         }
     }
+
+    std::string TREE_PREORDER(TreeNode*root)
+    {
+        std::stringstream ss;
+        DO_TREE_PREORDER(root,ss);
+        return trim(ss.str());
+
+    }
+
 
     std::string TREE_BYLEVEL(TreeNode*root) {
         std::deque<TreeNode*> toDo{root};

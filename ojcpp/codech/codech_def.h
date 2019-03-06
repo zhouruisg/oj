@@ -16,6 +16,7 @@
 #include <iostream>
 #include <iterator>
 #include <climits>
+#include <memory>
 #include <type_traits>  // result _of?
 //#include "codech_util.h"
 #include "algo_common.h"

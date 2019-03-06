@@ -102,9 +102,9 @@ namespace wildcard {
             for (int i=1;i<=m;i++) {
                 for (int j=1;j<=n;j++) {
                     if (p[j-1]=='*') {
-                        dp[i][j]= dp[i][j-1] or dp[i-1][j];
+                        dp[i][j]= dp[i][j-1] || dp[i-1][j];
                     } else {
-                        dp[i][j]= dp[i-1][j-1] and (s[i-1]==p[j-1] or p[j-1]=='?');
+                        dp[i][j]= dp[i-1][j-1] && (s[i-1]==p[j-1] || p[j-1]=='?');
                     }
                 }
             }
@@ -122,18 +122,18 @@ namespace wildcard {
     private:
         int dfs(string& s, string& p, int si, int pi)
         {
-            if (si == s.size() and pi == p.size()) return 2;    // matched
-            if (si == s.size() and p[pi] != '*') return 0;      // unmatched: reached the end of s
+            if (si == s.size() && pi == p.size()) return 2;    // matched
+            if (si == s.size() && p[pi] != '*') return 0;      // unmatched: reached the end of s
             if (pi == p.size()) return 1;                       // unmatched: not reached the end of s
-            if (p[pi] == '?' or s[si] == p[pi])
+            if (p[pi] == '?' || s[si] == p[pi])
                 return dfs(s, p, si+1, pi+1);
             if (p[pi] == '*') {                                 // calculate the shortest length p[pi] need to cover
-                if (pi+1 < p.size() and p[pi+1] == '*')
+                if (pi+1 < p.size() && p[pi+1] == '*')
                     return dfs(s, p, si, pi+1);                 // skip duplicate '*'
                 for(int i = 0; i <= s.size()-si; ++i)
                 {
                     int ret = dfs(s, p, si+i, pi+1);
-                    if (ret == 0 or ret == 2)                   // reached the end of s, so return immediately
+                    if (ret == 0 || ret == 2)                   // reached the end of s, so return immediately
                         return ret;
                 }
             }

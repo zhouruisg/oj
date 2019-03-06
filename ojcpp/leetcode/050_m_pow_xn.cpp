@@ -17,6 +17,11 @@ Example 2:
 Input: 2.10000, 3
 Output: 9.26100
 
+corner case,n=0
+区分 n>0,n<0
+ n%2=0,可以加速
+退出条件 n==2
+ n=3 ->转化为x*(pow(x),2)
 */
 
 #include <codech/codech_def.h>
@@ -30,7 +35,7 @@ public:
         if (n<0) {
             return 1/x * myPow(1/x, -(n+1));
         }
-        if (n%2==0) {
+        if (n%2==0) { 
             return myPow(x*x, n/2);
         } else {
             return x*myPow(x*x, n/2);
@@ -39,9 +44,10 @@ public:
 };
 
 
-DEFINE_CODE_TEST(pow_xn)
+DEFINE_CODE_TEST(050_pow_xn)
 {
     Solution obj;
+    cout<< INT_MAX << " " <<INT_MIN <<endl;
     VERIFY_CASE(obj.myPow(2.00000,10),1024);
     VERIFY_CASE(obj.myPow(2.10,3),9.261);
     //cout<< obj.myPow(34.00515,-3);

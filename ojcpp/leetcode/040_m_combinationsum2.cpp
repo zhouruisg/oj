@@ -29,7 +29,7 @@ A solution set is:
   [1,2,2],
   [5]
 ]
-
+和040区别在于每个数字只能用一次
  */
 #include <codech/codech_def.h>
 using namespace std;
@@ -52,7 +52,7 @@ public:
         }
 
         for (int i=begin;i<nums.size()&&target>=nums[i];i++) {
-            if (i!=begin && nums[i]==nums[i-1]) {
+            if (i!=begin && nums[i]==nums[i-1]) {  //条件，本次循环中不允许重复使用
                 continue;
             }
             comb.emplace_back(nums[i]);

@@ -79,7 +79,7 @@ public:
         cout << PRINT_VEC(std::move(next)) <<endl;
         int hl = h.length();
         for (int i = 0, j = 0; i < hl; i++){
-            if (j < nl and h[i] == n[j]) {
+            if (j < nl && h[i] == n[j]) {
                 j++;
             } else {
                 while (j > 0){
@@ -123,7 +123,7 @@ public:
 
         int n = haystack.length();
         for (int i = 0, j = 0; i < n; i++){
-            if (j < m and haystack[i] == needle[j]) j++;
+            if (j < m && haystack[i] == needle[j]) j++;
             else while (j > 0){
                     j = next[j];
                     if (haystack[i] == needle[j]){

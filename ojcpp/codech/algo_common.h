@@ -63,7 +63,7 @@ namespace CODECH
     TreeNode* LCREATE_TREENODE(const std::vector<int> &list);
 
     // node data first
-    void TREE_PREORDER(TreeNode*root);
+    std::string TREE_PREORDER(TreeNode*root);
 
     std::string TREE_BYLEVEL(TreeNode*root);
 
