@@ -39,48 +39,17 @@ using namespace std;
 using namespace CODECH;
 
 namespace lc089 {
-    class Solution {
-    public:
-        vector<vector<int>> ret;
-        void dfs(int pos, vector<int> &nums) {
-            for (int i=pos;i<nums.size();i++) {
-                //int tmp=nums[i];
-                nums[i]=nums[i]^1;
-                ret.emplace_back(nums);
-                dfs(i+1,nums);
-                //nums[i]=tmp;
-            }
-        }
-        vector<int> grayCode(int n) {
-            ret.clear();
-            vector<int> nums;
-            for (int i=0;i<n;i++) {
-                nums.emplace_back(0);
-            }
-            ret.emplace_back(nums);
-            dfs(0,nums);
-
-            vector<int> ret2;
-            for (auto &vec : ret) {
-                int k=0;
-                for (int i=0;i<vec.size();i++) {
-                    k=k*2+vec[i];
-                }
-                ret2.emplace_back(k);
-            }
-            return ret2;
-        }
-    };
+    // 方法完全不对，无法保证只变动一个bit，需要找规律。
 //    class Solution {
 //    public:
 //        vector<vector<int>> ret;
 //        void dfs(int pos, vector<int> &nums) {
-//            for (int i=pos;i>=0;i--) {
-//                int tmp=nums[i];
+//            for (int i=pos;i<nums.size();i++) {
+//                //int tmp=nums[i];
 //                nums[i]=nums[i]^1;
 //                ret.emplace_back(nums);
-//                dfs(i-1,nums);
-//                nums[i]=tmp;
+//                dfs(i+1,nums);
+//                //nums[i]=tmp;
 //            }
 //        }
 //        vector<int> grayCode(int n) {
@@ -90,7 +59,8 @@ namespace lc089 {
 //                nums.emplace_back(0);
 //            }
 //            ret.emplace_back(nums);
-//            dfs(nums.size()-1,nums);
+//            dfs(0,nums);
+//
 //            vector<int> ret2;
 //            for (auto &vec : ret) {
 //                int k=0;
@@ -102,6 +72,23 @@ namespace lc089 {
 //            return ret2;
 //        }
 //    };
+
+    // 思路， 00 01 | 11 10， 看出每个循环里对之前的数字，逆序+ 1(0循环次数），第一次是1，10，100。。
+    class Solution {
+    public:
+        vector<int> grayCode(int n) {
+            vector<int> ret{0};
+            for (int i=0;i<n;i++) {
+                int shift=1<<i;
+                int sz=ret.size();
+                for (int j=sz-1;j>=0;j--) {
+                    ret.emplace_back(ret[j]+shift);
+                }
+            }
+            return ret;
+        }
+    };
+
 }
 
 
@@ -112,7 +99,7 @@ DEFINE_CODE_TEST(089_graycode)
         // good for left->right
 //        VERIFY_CASE(PRINT_VEC(obj.grayCode(2)),"0 2 3 1");
 //        VERIFY_CASE(PRINT_VEC(obj.grayCode(0)),"0");
-        VERIFY_CASE(PRINT_VEC(obj.grayCode(2)),"0 2 3 1");
+        VERIFY_CASE(PRINT_VEC(obj.grayCode(2)),"0 1 3 2");
         VERIFY_CASE(PRINT_VEC(obj.grayCode(0)),"0");
         VERIFY_CASE(PRINT_VEC(obj.grayCode(3)),"0 1 3 2 6 7 5 4");
 
