@@ -227,6 +227,23 @@ namespace CODECH {
         return trim(ss.str());
     }
 
+    bool VERIFY_VVEC(std::vector<std::vector<int>> &&m,std::vector<std::vector<int>> &n) {
+        vector<int> a,b;
+        for (auto &row : m){
+            for (auto &v : row) {
+                a.emplace_back(v);
+            }
+        }
+        for (auto &row : n){
+            for (auto &v : row) {
+                b.emplace_back(v);
+            }
+        }
+        sort(a.begin(),a.end());
+        sort(b.begin(),b.end());
+        return a==b;
+    }
+
     std::string PRINT_STRVEC(std::vector<std::string>  &&m) {
         std::stringstream ss;
         for (auto &v : m) {

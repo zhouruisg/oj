@@ -33,6 +33,7 @@ using namespace std;
 namespace subset {
     class Solution {
     public:
+        //还是组合的方式
         vector<vector<int>> subsets(vector<int>& nums) {
             vector<vector<int>> res{{}};
             for (auto num : nums) {
@@ -45,11 +46,26 @@ namespace subset {
             }
             return res;
         }
+        // TODO recursive
+    };
 
-        // faster ===========================================
-        vector<vector<int>> subsets1(vector<int>& nums) {
+//    这种题目都是使用这个套路，就是用一个循环去枚举当前所有情况，然后把元素加入，递归，再把元素移除
+//            按照这个套路来做，可以解决backTracking的问题
+//
+//    list.add(nums[i]); // 第三步 元素加入临时集合
+//    backTracking(res, list, nums, i + 1); // 第四步 回溯
+//    list.remove(list.size() - 1); // 第五步 元素从临时集合移除
+//
+//    这种方法是一种组合的方式//
+//    1.最外层循环逐一从 nums 数组中取出每个元素 num
+//    2.内层循环从原来的结果集中取出每个中间结果集，并向每个中间结果集中添加该 num 元素
+    class Solution0 {
+    public:
+        vector<vector<int>> ret;
+        vector<vector<int>> subsets(vector<int> &nums) {
             vector<vector<int>> subs(1, vector<int>());
-            for (int i = 0; i < nums.size(); i++) {
+            for (int i = 0; i < nums.size(); i++) {  //枚举所有情况
+                // 这是什么套路?
                 int n = subs.size();
                 for (int j = 0; j < n; j++) {
                     subs.push_back(subs[j]);
@@ -58,9 +74,9 @@ namespace subset {
             }
             return subs;
         }
-        // TODO recursive
     };
 
+    //可以选当前这个，也可以不选，然后进入下一层
     class Solution1 {
     public:
         vector<vector<int>> ret;
@@ -82,34 +98,43 @@ namespace subset {
         }
     };
 
-
-}
-
-void printvec(vector<vector<int>> &&nums) {
-    for_each(nums.begin(),nums.end(),[](auto v) {
-        cout << "[";
-        for (auto e : v) {
-            cout << e << ",";
+    // backtracking标准套路
+    class Solution2 {
+    public:
+        vector<vector<int>> ret;
+        void dfs(vector<int>& nums,vector<int> &comb, int start) {
+            ret.emplace_back(comb);
+            for (int i=start;i<nums.size();i++) {
+                comb.emplace_back(nums[i]);
+                dfs(nums,comb,i+1);
+                comb.pop_back();
+            }
         }
-        cout << "],";
-    });
+        vector<vector<int>> subsets(vector<int>& nums) {
+            vector<int> comb;
+            dfs(nums,comb,0);
+            return ret;
+        }
+    };
+
 }
 
+//void printvec(vector<vector<int>> &&nums) {
+//    for_each(nums.begin(),nums.end(),[](auto v) {
+//        cout << "[";
+//        for (auto e : v) {
+//            cout << e << ",";
+//        }
+//        cout << "],";
+//    });
+//}
 
-DEFINE_CODE_TEST(0078_subset)
+
+DEFINE_CODE_TEST(078_subset)
 {
-    subset::Solution1 obj;
+    subset::Solution2 obj;
     {
         vector<int> nums{1,2,3};
         VERIFY_CASE(PRINT_VVEC(obj.subsets(nums)),"1 2 3 1 2 1 3 1 2 3 2 3");
     }
-
-//    vector<int> nums;//{1,2,3};
-//
-//    for (int i=0; i <15; i++) {
-//        nums.push_back(i);
-//    }
-//    TIMER(obj.subsets1(nums),1)
-//    TIMER(obj.subsets(nums),1)
-    //printvec(obj.subsets(nums));
 }

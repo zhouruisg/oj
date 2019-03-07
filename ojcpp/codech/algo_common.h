@@ -69,7 +69,7 @@ namespace CODECH
 
     TreeNode* FIND_NODE(TreeNode *root, int val);
 
-    // ==================================
+    // linkedlist ==================================
     struct ListNode {
         int val;
         ListNode *next;
@@ -83,6 +83,10 @@ namespace CODECH
     ListNode* FIND_LISTNODE(ListNode* head,int val);
 
     std::string PRINT_LIST(ListNode *head);
+
+    // array ========================================
+
+    bool VERIFY_VVEC(std::vector<std::vector<int>> &&m,std::vector<std::vector<int>> &n);
 
     std::string PRINT_VEC(std::vector<int> &&vec);
 
