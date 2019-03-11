@@ -88,7 +88,7 @@ public:
     // DP 用一个table表示每一个位置到终点有多少种走法，倒推过来就是
     // 最优解dp[n][m]=dp[n+1][m]+dp[n][m+1]
     int uniquePaths(int m, int n) {
-        vector<vector<int>> dp(m+1,vector<int>(n+1,1));//每一块初始值都为1，
+        vector<vector<int>> dp(m+1,vector<int>(n+1,1));//每一块初始值都为1，表示1种走法
         for (int i=n-1; i >0; i--) {
             for (int j = m-1; j >0 ; j--) {
                 dp[j][i] = dp[j+1][i]+dp[j][i+1]; //即右下角的4个方块组成的block，左上角那块的走法=右侧(1)+下侧(1)=2种可能

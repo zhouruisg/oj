@@ -86,7 +86,7 @@ namespace CODECH
 
     // array ========================================
 
-    bool VERIFY_VVEC(std::vector<std::vector<int>> &&m,std::vector<std::vector<int>> &n);
+    bool VERIFY_VVECINT(std::vector<std::vector<int>> &&m, std::vector<std::vector<int>> &n);
 
     std::string PRINT_VEC(std::vector<int> &&vec);
 
@@ -95,6 +95,48 @@ namespace CODECH
     std::string PRINT_STRVEC(std::vector<std::string>  &&m);
 
     std::string PRINT_MATRIX(std::vector<std::vector<int>> &m);
+
+    template<typename T>
+    bool VERIFY_VV(std::vector<std::vector<T>> &&m,std::vector<std::vector<T>> &n){
+            std::vector<T> a,b;
+            for (auto &row : m){
+                for (auto &v : row) {
+                    a.emplace_back(v);
+                }
+            }
+            for (auto &row : n){
+                for (auto &v : row) {
+                    b.emplace_back(v);
+                }
+            }
+            sort(a.begin(),a.end());
+            sort(b.begin(),b.end());
+            if (a!=b) {
+                for (auto &row : m){
+                    for (auto &v : row) {
+                        std::cout << v << " ";
+                    }
+                    std::cout<<std::endl;
+                }
+                std::cout<<std::endl;
+                return false;
+            }
+            return true;
+    }
+
+    template<typename T>
+    bool VERIFY_VEC(std::vector<T> &&m,std::vector<T> &n){
+        sort(m.begin(),m.end());
+        sort(n.begin(),n.end());
+        if (m!=n) {
+            for (auto &v : m){
+                std::cout << v << " ";
+            }
+            std::cout<<std::endl;
+            return false;
+        }
+        return true;
+    }
 
     // graph ===========================================================
     struct UndirectedGraphNode {

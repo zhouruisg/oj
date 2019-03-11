@@ -20,6 +20,7 @@
 #include <type_traits>  // result _of?
 //#include "codech_util.h"
 #include "algo_common.h"
+#include <algorithm>
 #include <cstring>
 
 #define DECL_CODE_TEST(x) \

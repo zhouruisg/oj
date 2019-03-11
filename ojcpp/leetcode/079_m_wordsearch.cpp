@@ -28,35 +28,59 @@ Given word = "ABCB", return false.
 using namespace std;
 namespace lc079 {
     class Solution {
+    private:
+        int aaa=10;
+        string search;
+        int m=0;
+        int n=0;
+        int dx[4]={-1,1,0,0};  //x-axis left,right,up,down
+        int dy[4]={0,0,-1,1};
     public:
-        void dfs(int x,int y,int pos) {
+        bool dfs(int row,int col,int pos,vector<vector<char>>& board,vector<vector<bool>> &visited) {
+            if (pos==search.length())
+                return true;
 
+            if (row>=0 && row<m && col>=0 && col<n && !visited[row][col] && board[row][col]==search[pos])
+            {
+                visited[row][col]=true;
+                for (int i=0;i<4;i++) {
+                    int nextRow = dy[i]+row;
+                    int nextCol = dx[i]+col;
+                    if (dfs(nextRow, nextCol, pos + 1,board, visited))
+                        return true;
+                }
+                visited[row][col]=false;
+            }
+            return false;
         }
 
         bool exist(vector<vector<char>>& board, string word) {
             if (board.empty() || word.empty())
                 return false;
-            int m=board.size();
-            int n=board[0].size();
+            m=board.size();
+            n=board[0].size();
+            search=word;
             vector<vector<bool>> visited(m,vector<bool>(n,false));
-            int pos=0;
             for (int i=0;i<m;i++) {
                 for (int j=0;j<n;j++) {
-                    if (board[i][j]==word[pos]) {
-
-                    }
+                    if (dfs(i,j,0,board,visited))
+                        return true;
                 }
             }
+            return false;
         }
     };
 }
 
-DEFINE_CODE_TEST(106_buildbt_inpostorder)
+DEFINE_CODE_TEST(079_searchword)
 {
-    Solution obj;
+    lc079::Solution obj;
     {
-        vector<int> p{9,15,7,20,3},i{9,3,15,20,7};
-        VERIFY_CASE(TREE_PREORDER(obj.buildTree(i,p)),"3 9 20 15 7");
-    }
+        vector<vector<char>> board{{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}};
+        VERIFY_CASE(obj.exist(board,""),false);
+        VERIFY_CASE(obj.exist(board,"ABCCED"),true);
+        VERIFY_CASE(obj.exist(board,"SEE"),true);
+        VERIFY_CASE(obj.exist(board,"ABCB"),false);
 
+    }
 }

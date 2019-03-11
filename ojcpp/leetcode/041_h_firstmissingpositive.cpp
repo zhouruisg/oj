@@ -21,7 +21,7 @@ Note:
 
 Your algorithm should run in O(n) time and uses constant extra space.
 思路
- 1.使用hashmap记录已有的数字，然后从小到大遍历。
+ 1.使用hashmap记录已有的数字，然后从小到大遍历。不是O(1) space
  2.不使用hashmap的话，如何做到O(1) space？ 使用priority queue的话是NlogN?？
 
  所以我们需要另想一种解法，既然不能建立新的数组，那么我们只能覆盖原有数组，我们的思路是把1放在数组第一个位置nums[0]，

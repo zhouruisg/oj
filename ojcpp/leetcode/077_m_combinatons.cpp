@@ -59,6 +59,6 @@ DEFINE_CODE_TEST(077_combinator)
         //VERIFY_CASE(PRINT_VVEC(obj.combine(4,2)),"1 2 1 3 1 4 2 3 2 4 3 4");
 
         vector<vector<int>> exp{{2,4},{3,4},{2,3},{1,2},{1,3},{1,4}};
-        VERIFY_CASE(VERIFY_VVEC(obj.combine(4,2),exp),true);
+        VERIFY_CASE(VERIFY_VVECINT(obj.combine(4, 2), exp),true);
     }
 }

@@ -227,7 +227,7 @@ namespace CODECH {
         return trim(ss.str());
     }
 
-    bool VERIFY_VVEC(std::vector<std::vector<int>> &&m,std::vector<std::vector<int>> &n) {
+    bool VERIFY_VVECINT(std::vector<std::vector<int>> &&m, std::vector<std::vector<int>> &n) {
         vector<int> a,b;
         for (auto &row : m){
             for (auto &v : row) {

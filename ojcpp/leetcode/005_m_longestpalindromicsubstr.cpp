@@ -16,7 +16,9 @@ Output: "bb"
 1.使用DP,用一个table来表示当前的状态,dp[i][j]=true表示start=i,end=j的字串为回文
 2.遍历s,对于每个字符，再从0,i进行遍历dp,如果某字符串是回文，那么去掉头尾他仍然是回文,如果头尾相等也是回文
 3. 比较浪费的是每次都要从头开始比较，因为不知道前一个字符能形成的回文起始点在哪里。
- 使用backtracking会TLE
+
+backtracking通常需要上下context关系，需要剪枝，递归，这个题目里不是特别明显，从左到右/前后的字符没有特别明显的递归关系，用loop也可以
+ 参考131,使用loop来解决
  */
 #include <codech/codech_def.h>
 using namespace std;
