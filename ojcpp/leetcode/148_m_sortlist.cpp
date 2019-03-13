@@ -33,62 +33,100 @@ Output: -1->0->3->4->5
  */
 
 #include <codech/codech_def.h>
-#include <codech/algo_common.h>
-#include <list>
+//#include <codech/algo_common.h>
+//#include <list>
 using namespace std;
 using namespace CODECH;
 
-class Solution {
-public:
-    ListNode* sortList(ListNode* head) {
-        if (head==nullptr)
-            return head;
-        ListNode *node = head;
-        int length = 0;
-        while (node) {
-            node=node->next;length++;
-        }
-        return sortHelper(head, length);
-    }
-
-    ListNode* sortHelper(ListNode* head, int length) {
-        if (head==nullptr || length<=0) // to make next null ptr
-            return head;
-
-        int count = 1;
-        ListNode *midNode = head;
-        while (count < length/2) {
-            midNode = midNode->next;
-            count++;
-        }
-        ListNode *rl = sortHelper(midNode->next,length - length/2);
-        midNode->next = nullptr;
-        ListNode *ll = sortHelper(head,length/2);
-        return mergeList(ll,rl);
-    }
-
-    ListNode *mergeList(ListNode*a, ListNode*b) {
-        ListNode* dummy = new ListNode(0);
-        ListNode *lastNode = dummy;
-        while (a && b) {
-            if (a->val < b->val) {
-                lastNode->next = a;a=a->next;
-            } else {
-                lastNode->next = b;b=b->next;
+namespace lc148 {
+    class Solution {
+    public:
+        ListNode* sortList(ListNode* head) {
+            if (head==nullptr)
+                return head;
+            ListNode *node = head;
+            int length = 0;
+            while (node) {
+                node=node->next;length++;
             }
-            lastNode=lastNode->next;lastNode->next=nullptr;
+            return sortHelper(head, length);
         }
-        lastNode->next = (a!=nullptr?a:b);
-        lastNode = dummy->next;
-        delete dummy;
-        return lastNode;
-    }
-};
+
+        ListNode* sortHelper(ListNode* head, int length) {
+            if (head==nullptr || length<=0) // to make next null ptr
+                return head;
+
+            int count = 1;
+            ListNode *midNode = head;
+            while (count < length/2) {
+                midNode = midNode->next;
+                count++;
+            }
+            ListNode *rl = sortHelper(midNode->next,length - length/2);
+            midNode->next = nullptr;
+            ListNode *ll = sortHelper(head,length/2);
+            return mergeList(ll,rl);
+        }
+
+        ListNode *mergeList(ListNode*a, ListNode*b) {
+            ListNode* dummy = new ListNode(0);
+            ListNode *lastNode = dummy;
+            while (a && b) {
+                if (a->val < b->val) {
+                    lastNode->next = a;a=a->next;
+                } else {
+                    lastNode->next = b;b=b->next;
+                }
+                lastNode=lastNode->next;lastNode->next=nullptr;
+            }
+            lastNode->next = (a!=nullptr?a:b);
+            lastNode = dummy->next;
+            delete dummy;
+            return lastNode;
+        }
+    };
+    // merge
+    class Solution1 {
+    public:
+        ListNode *merge(ListNode *a,ListNode*b) {
+            ListNode dummy(0);
+            ListNode*prev=&dummy;
+            while (a&&b) {
+                if (a->val<b->val) {
+                    prev->next=a;a=a->next;
+                } else {
+                    prev->next=b;b=b->next;
+                }
+                prev=prev->next;
+            }
+            prev->next=a?a:b;
+            return dummy.next;
+        }
+
+        ListNode* sortList(ListNode* head) {
+            if (!head || head->next==nullptr)
+                return head;
+            ListNode*fast=head->next;
+            ListNode*slow=head;
+            while (fast && fast->next) {
+                slow=slow->next;
+                fast=fast->next->next;
+            }
+            ListNode *l2=slow->next;
+            ListNode *l1=head;
+            slow->next=nullptr;  //这个很重要，必须设置为nullptr
+            l1=sortList(l1);
+            l2=sortList(l2);
+            return merge(l1,l2);
+        }
+    };
+}
+
 
 
 DEFINE_CODE_TEST(148_sortlist)
 {
-    Solution obj;
+    lc148::Solution1 obj;
     {
         ListNode *head = CREATE_LIST({4,2,1,3});
         VERIFY_CASE(PRINT_LIST(obj.sortList(head)),"1 2 3 4");

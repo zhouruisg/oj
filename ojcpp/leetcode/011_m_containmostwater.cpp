@@ -17,7 +17,7 @@ Note: You may not slant the container and n is at least 2.
  2 8 4 6 2 -> 8 4 6 is the container have most water.
 
  assume the widest is the most water one, then iterate and find
- 思路
+ 思路，考虑两侧，这个时候X跨度最大，然后逐渐收拢，找出最大值
  TODO
  */
 
@@ -27,59 +27,57 @@ Note: You may not slant the container and n is at least 2.
 
 using namespace std;
 
-class Solution {
-public:
-    /*bruteforce
-     * int maxArea(vector<int>& height) {
-        int maxArea = 0;
-        int l = height.size();
-        for (int i =0 ; i < l - 1; i++) {
-            int cur = height[i];
-            for (int j = i+1; j < l; j++) {
-                int next = height[j];
-                if (next >= cur) {
-                    maxArea = max(maxArea, cur*())
+namespace lc011 {
+    class Solution0 {
+        //bruteforce
+    public:
+        int maxArea(vector<int>& height) {
+            int maxArea = 0;
+            int l = height.size();
+            for (int i =0 ; i < l - 1; i++) {
+                int cur = height[i];
+                for (int j = i+1; j < l; j++) {
+                    int h=min(height[j],cur);
+                    maxArea = max(maxArea, h*(j-i));
                 }
             }
+            return maxArea;
         }
-    }*/
-    int maxArea0(vector<int>& height) {
-        int water = 0;
-        int i = 0, j = height.size() - 1;
-        while (i < j) {
-            int h = min(height[i], height[j]);
-            water = max(water, (j - i) * h);
-            while (height[i] <= h && i < j) i++;
-            while (height[j] <= h && i < j) j--;
+    };
+
+    // 使用two pointer的方法
+    class Solution {
+    public:
+        int maxArea(vector<int>& height) {
+            int maxArea = 0;
+            int i=0,j=height.size()-1;
+            while (i < j) {
+                int h = min(height[i],height[j]);
+                maxArea = max(maxArea, (j-i)*h);
+                while (height[i] <= h && i < j) i++;
+                while (height[j] <= h && i < j) j--;
+            }
+            return maxArea;
         }
-        return water;
-    }
-
-
-    int maxArea(vector<int>& height) {
-        int maxArea = 0;
-        int i=0,j=height.size()-1;
-        while (i < j) {
-            int h = min(height[i],height[j]);
-            maxArea = max(maxArea, (j-i)*h);
-            while (height[i] <= h && i < j) i++;
-            while (height[j] <= h && i < j) j--;
-        }
-        return maxArea;
-    }
-};
+    };
+}
 
 
 
-DEFINE_CODE_TEST(mostwater)
+
+DEFINE_CODE_TEST(011_mostwater)
 {
-    Solution obj;
-    vector<int> h = {2,8,4,6,2};
-    cout << obj.maxArea(h);
-
-    vector<int> h1 = {2,2,3};
-    cout << obj.maxArea(h1);
-
-
-
+    lc011::Solution0 obj;
+    {
+        vector<int> nums{1,8,6,2,5,4,8,3,7};
+        VERIFY_CASE(obj.maxArea(nums),49);
+    }
+    {
+        vector<int> h = {2,8,4,6,2};
+        VERIFY_CASE(obj.maxArea(h),12);
+    }
+    {
+        vector<int> h1 = {2,2,3};
+        VERIFY_CASE(obj.maxArea(h1),4);
+    }
 }

@@ -2,7 +2,7 @@
 // Created by rui.zhou on 2/5/2019.
 //
 
-/*
+/* DRW
  * Design a data structure that supports all following operations in average O(1) time.
 
 insert(val): Inserts an item val to the set if not already present.
@@ -64,16 +64,11 @@ public:
     bool remove(int val) {
         if (numsToIndex.find(val) == numsToIndex.end())
             return false;
-
+        //这里挺巧妙的，把最后一个数字和待删除数字互换，然后删除最后一个数字
         int indexToDelete = numsToIndex[val];
-
-
         nums[indexToDelete] = nums[nums.size() -1];
-
         numsToIndex[nums[indexToDelete]] = indexToDelete;
-
         nums.resize(nums.size() - 1);
-
         numsToIndex.erase(val);
 
         return true;
