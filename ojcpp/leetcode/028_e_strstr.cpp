@@ -39,7 +39,7 @@ using namespace CODECH;
 //目的是找出公共的头部和尾部组合,例如ABCDABD，D处为0
 //ABCDAB, B处为2，因为AB为公共组合。
 //构建next table,找出pattern 每一个字符处对应的公共长度，
-//如果是ABCDABA，最后一个A的值怎么设置?
+//如果是ABCDABA，最后一个A的值怎么设置?0
 
 // ABCDAB -> AB[2]
 // kmp search
@@ -47,44 +47,32 @@ using namespace CODECH;
 //my kmp
 class Solution {
 public:
-    int strStr(string h, string n) {
-        if (h.length() <= n.length()) { return h == n ? 0 : -1; }
-        // next table
-//        const int hl = h.length();
-//        int j = 0;
-//        int k = -1;
-//        vector<int> next(hl, 0);
-//        while (j < hl - 1) {
-//            if (k == -1 || h[j] == h[k])
-//                next[++j] = ++k;
-//            else
-//                k = next[k];
-//        }
+    int strStr(string haystack, string needle) {
+        const int nl = needle.length();
+        if (nl == 0) return 0;
 
-        //
-        const int nl = n.length();
         vector<int> next(nl, 0);
         int i=0,j=-1;
         //跳表，状态机的概念
-        //1. 第一个和最后一个必定是0,所以用最后一个位置来保存前一个next 值
+        //1. next[0]=0, 第一个和最后一个必定是0,所以用最后一个位置来保存前一个next 值
         //2.对于每个needle[i],取出next[i-1]处的idx(此处使j=i-1),如果相等，累加idx
         //如果第2步不相等，需要回退到上一层,取idx=next[idx]
         while (i<nl-1) {
-            if (j==-1 || n[j]==n[i]) {
+            if (j==-1 || needle[j]==needle[i]) {
                 next[++i]=++j;  //第一个和最后一个必定是0,所以用最后一个位置来保存前一个next 值:因此先++i, next[++i]
             } else {
                 j=next[j];i++;
             }
         }
-        cout << PRINT_VEC(std::move(next)) <<endl;
-        int hl = h.length();
+
+        int hl = haystack.length();
         for (int i = 0, j = 0; i < hl; i++){
-            if (j < nl && h[i] == n[j]) {
+            if (j < nl && haystack[i] == needle[j]) {
                 j++;
             } else {
                 while (j > 0){
                     j = next[j];
-                    if (h[i] == n[j]){
+                    if (haystack[i] == needle[j]){
                         j++;
                         break;
                     }
@@ -92,7 +80,7 @@ public:
             }
             if (j == nl) return i - nl + 1;
         }
-        return 0;
+        return -1;
     }
 };
 
@@ -169,8 +157,10 @@ public:
 
 DEFINE_CODE_TEST(028_strstr)
 {
-    Solution obj;
+    Solution1 obj;
     {
+        VERIFY_CASE(obj.strStr("aabaaabaaac","aabaaac"),4);
+
         VERIFY_CASE(obj.strStr("BBC ABCDAB ABCDABCDABDE","ABCDABD"),0);
         VERIFY_CASE(obj.strStr("ABABDABACDABABCABAB","ABABCABAB"),0);
         VERIFY_CASE(obj.strStr("abc","a"),0);
