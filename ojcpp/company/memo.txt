@@ -59,3 +59,76 @@ Longest palindrome ??
 Maximum average subtree ok
 Maze(给一个2D matrix，0代表路，1代表墙，终点是9，问可不可以到达终点。另一个变形是到达终点的最短路径) ok
 Most common words(给一个String，一个blacklist，返回不在blacklist里面并且出现频率最高的词)
+
+
+／／onsite
+被猎头linkedin 3撩面试，OA后拖拖拉拉了接近一个月才onsite，面试前就已经确定不会去他们这了，不过是最早开始的一家，想想还是去面一下吧，顺便套点信息出来回馈地里。
+
+我面的是Sunnyvale的Amazon lab126组下面的Alexa smart home组，楼很漂亮工位也不错，就是食堂不免费。
+
+不得不说他们家面试是真的累！9:30-4:00时间上堪比Google，但其实比Google还要累，下面慢慢说。
+9:30-10:00和hr印度大姐尬聊，大姐详细介绍了package的各项占比，以及面试时候各种behavior问题怎么答，各种苦口婆心，想想还是挺良心的，印度人也有不少好人啊！
+下面介绍一下所有可能遇到的bq，好在楼主特别擅长扯淡，几乎没在bq上挂过(除了一家startup，和CEO聊的时候说需要package不能太低，自爆了哈哈)。
+1 你工作或者学习中遇到过和队友或者同事意见特别不相同的情况吗？你听他们的还是他们听你的？为什么？最后结果怎么样？
+2 你遇到过最难解决的技术问题是什么？如果几乎没有解决方案的话你是怎么做的？最后成功了吗？
+3 你有没有过ddl前需要做重大决定，这个决定可能造成你meet ddl，也可能造成不能meet ddl？你怎么做的，最后结果真么样？
+4 如果你的manager分配给你特别不喜欢的活你怎么办？
+5 如果你收到一份function specification照着做，里面很多点你不同意，你怎么和manager或者pm沟通？
+6 如果你写的function specification被很多人喷出很多问题，你怎么办？
+7 如果你很不同意你的manager的一些做法，你咋办？
+8 如果你的队友或者同事有些愿意比如病了或者家庭原因，干不完他们的活，你怎么办？
+9 如果你发现一个严重影响客户体验的bug或者问题，但这块不是你负责，你怎么办？
+10 如果你发现一个事非常模棱两可，比如function specification你觉得不清楚，或者一段old code你完全看不懂，你怎么办？
+11 你做过最难的project是什么，你负责管理和分配人力吗？
+总之在这里我遇到的bq是最多的，非常的夸张。楼主对付bq的方法是尽量把他们归类，然后试着把话题引到自己准备过的case上，然后尽量多说，牵这面试官走，还能避免说的太少他们问更多的问题。
+
+10:00 - 11:00 白人hiring manager, 三姐manager shadow interview。全程bq一小时。服了。尬聊一小时，口干舌燥。
+11:00 - 12:00 似乎是中国大姐，亚裔小哥shadow不确定哪国人哪国裔，bq 15分钟，第一道题linked list 两个做addition划水，
+第二道题给一个void * ptr指向一块memory还有一个int代表frame count，memory里面有很多frame，每个frame前四个是32bit的元素，后两个是16bit的元素。
+让把所有frame里头后两个16bit的元素给提取出来返回。楼主melloc了一个ptr，然后针对对应的位置做memcopy，感觉主要是考底层c/cpp。
+12:00 - 1:00 台湾裔大哥带吃饭，点了个双层牛肉大汉堡加牛油果加薯条，还买了瓶椰汁饮料，久违的肥宅快乐餐，加额外肉的至尊升级，开心。反正是公司请客，不客气了！
+小哥很娇羞的说让我用receipt领完汉堡以后把receipt还给他，他要报销，因为他们没有免费午餐。吃完饭我说我可不可以不散步了，想回去睡一会，不然吃了这么多碳水下午困，
+小哥说没问题，送我回去了，大概12:40左右，这是这轮面试以来最开心的一次午饭了，吃的爽又快，避免了尬聊。
+12:50和人打了个电话。。说起来没完没了。。把1点的面试官关在外面了10分钟。。面试官1:10才进来。。
+1:10 - 2:00 三姐bar raiser，因为被我关了10分钟，进来就是大黑脸很生气的样子，楼主谎称我的manager有紧急bug给我打电话，实在不好意思。
+大姐依然怒气不减。快速过了5分钟bq，然后算法题是给一个unique int array，返回所有的可以构成一个sum target的combination。
+楼主就sort了一下稍微trim一下搜索范围，然后recursion dfs搞定，然后楼主说如果不是要具体的combination结果，只要count的话可以dp做。
+聊了聊时间复杂度。发现还剩下不少时间，大姐似乎怒气消了不少，又开始问bq，楼主模仿印度兄dei们说话时候开心晃脑袋的样子和大姐扯淡，
+似乎拉近了和大姐的距离，最后大姐喜笑颜开，楼主又道歉说不好意思耽误了十分钟，大姐说没事反正正常也要留给你一些时间问问题，耽误时间了你少问点也没啥，
+我准备的问题都问完了。
+2:00 - 3:00 印度小哥 + 白人不苟言笑小哥。白人小哥似乎经常健身胳膊还挺粗，不过也没有每天健身的楼主强壮，楼主气场再次胜利！
+第一题要实现一个数据结构class，在这里只能用一个数据结构实现两个stack，也就是要用一个array或者list来实现。
+楼主就偷懒说我用一个array分区使用实现两个stack吧，2个stack的size都是固定的，小哥说虽然一般stack没有size限制，但是你先写吧，楼主就写了，并且假设是int stack。
+两个stack都要有push和pop功能，简单来说就是两个ptr分别指向array不同部分，左部分是第一个，右部分是第二个，注意ptr操作，问题不大。
+小哥如何做到不只支持int，楼主说用T做generic。小哥说如果把size固定问题解决，楼主说用ArrayList。然后第二题，梨扣 伞伞，秒了，印度小哥要楼主写几个testcase过一遍。
+3:00 - 4:00 印度小哥 + 白人大哥 system design。说好的停车场，说好的tinyurl呢？既不是ood也不是web app的design！竟然是一道和rtos相关的design，果然是lab126啊就是有特点。无奈楼主有高达，在学校里上过rtos，自己写过rtos烧在TI嵌入式板子上，所以听到题以后不但没有虚，反倒挺高兴。下面进入正题。小哥说我们有一个api有个function叫button_event(button b1, operation o1, time t1)，我们一共有4哥button，第一个input是哪个button，第二个是press或者release，第三个是事件发生的时间。那么你设计一个module，通过收到的button_event来判断当前四个button的按下情况，然后显示在LCD上。楼主说可以设计一个interrup hanlder，然后每次button_event都会触发这个interrupt，interrupt会去连接四个button的GPIO pin上读当前的button数值，然后把这个数值通过call LCD write来写到LCD上。小哥说你这个design太低层了都到GPIO了。。而且operation和time的信息你都没用啊。楼主就说那先设计一个Status class存4个button对应的01值的int pattern以及status的时间，然后设计一个interrup hanlder，每次收到button_event都会触发这个interrupt，这个interrupt根据之前一个状态的Status，配上这次operation是press还是release，把之前状态中对应的bit设置成1或者清0，然后配上时间生成新的Status，把这个Status放到一个Queue里。在thread里加一个thread叫listener的，每隔一段时间就监控一下Queue里是不是有东西，如果有东西的话就把那个status拿出来，根据status里面的button pattern去唤醒LCD write thread。小哥说你这个是一个produce/consume模型啊，能不能简化一下。楼主说那就不要listener thread了，干脆把LCD_write放到sleep thread queue里头，然后在interrupt_handler里面发现status照之前status改变的话，就signal一个mutex，然后LCD_write在sleep queue里头就等这个mutex，等到了就进入thread queue里头去，priority低一点因为LCD_write的overhead很大，如果starving了就aging解决，而且绝对不能在interrupt_handler里面操作LCD_write（楼主在course project这么干过，LCD write太慢会造成很多个interrupt完成不了，把function stack越堆越高最后炸掉）。小哥们似乎还挺满意，又问了下如果极端情况用户手速极快，你这个方法会不会炸掉，楼主说为了写保护可以加个lock啥的。
+
+面试完就撤了，真的累。可以暂时休息一阵了。
+觉得有用就啊！看贴不攒不到人品啊！
+
+第一轮, 系统设计+ 15mins bq, 设计Twitter的timeline, [请大神帮忙看看]
+上来先bq, disagree问题, I:  project is using hibernate,  I suggest to use spring data instead of old design, the benefit is convenient and efficient (templates ), the result is group disagree my idea,
+I disagree but commit to it (amz principle), and in the future, and we have extra time we do the refactoring.
+the interviewer is confusing about it, I cannot clarify very well, shadow helps me to explain, spring data just add another layer.
+这块 解释的不好, 自己需要仔细搜搜如何解释 spring data 和 hibernate (其实都是orm)
+系统设计 twitter
+我照本宣科地说了 qps等计算, 算出了 40M/s 感觉这块完全是多余自己提, 面试官不感兴趣好像 [留个疑问在这里, 系统设计这种
+softarts，本帖隐藏的内容需要积分高于 188 才可浏览，您当前积分为 97。
+查看如何攒积分 Click here for more info.
+jpg" target="_blank">www.google.com/aa.jpg 作为key, 内容作为 value,  in-memory cache,  可以考虑用db作为数据backup
+之后问了我 lru , 我给出了算法设计 (最佳解)
+问高频查询情况, 给了lfu
+面试官total agree, 很开心
+这轮感觉不会有问题, 不过传说中的 bar raiser 过了就没事, 应该是童话故事.
+第四轮
+ood , 主要考继承 抽象类
+bq 问我性能和可读性 怎么考虑
+我脑抽的说了 先尽量搞定性能, 我其实是英语没听太懂, bq最难的其实就是英语!
+
+希望给大家点帮助, 个人建议, 面试官良莠不齐, 一定要跟住对方的思路和方向, 已经查考点, 你即使知道各种fansy, 他可能只考你 class level的基础.
+
+第一轮印度manager 女的，问了一堆bq，然后给了个maximum profit trading stock.很简单，我答出来了，分析完代码写完，她点点头。
+第二轮bar raiser，视频面的，一个12年经验的印度人，他在西雅图，给的design的题，先是ood问Amazon的主页有很多produc，怎么分类，都怎么做，然后问道了系统设计怎么存储。扯了一堆，代码写了一堆，最后他一直说cool, cool, cool. 然后一堆bq. 1point3acres
+
+第三轮白人姐姐，string calculator，一堆bq
+第四轮是印度小弟弟，bq一堆，然后是一个topological sort.

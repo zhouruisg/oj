@@ -29,35 +29,67 @@ namespace CODECH {
         }
     }
 
+//    TreeNode* LCREATE_TREENODE(const std::vector<int> &list)
+//    {
+//        TreeNode *root = new TreeNode(list[0]);
+//        std::deque<TreeNode*> toDo{root};
+//
+//        for (size_t i=0; i < list.size(); i++) {
+//            TreeNode *parent = toDo.front();
+//            toDo.pop_front();
+//            int idx = i * 2 + 1;
+//            if (idx<(int)list.size()) {
+//                int v1 = list[idx];
+//                if (v1 != null) {
+//                    parent->left = new TreeNode(v1);
+//                    toDo.push_back(parent->left);
+//                } else {
+//                    parent->left = nullptr;
+//                }
+//            }
+//
+//            idx++;
+//            if (idx < (int)list.size()) {
+//                int v2 = list[idx];
+//                if (v2 != null) {
+//                    parent->right = new TreeNode(v2);
+//                    toDo.push_back(parent->right);
+//                } else {
+//                    parent->right = nullptr;
+//                }
+//            }
+//        }
+//        return root;
+//    }
     TreeNode* LCREATE_TREENODE(const std::vector<int> &list)
     {
         TreeNode *root = new TreeNode(list[0]);
         std::deque<TreeNode*> toDo{root};
 
-        for (size_t i=0; i < list.size(); i++) {
+        //for (size_t i=0; i < list.size(); i++) {
+        int idx = 0;
+        while (!toDo.empty()) {
             TreeNode *parent = toDo.front();
             toDo.pop_front();
-            int idx = i * 2 + 1;
-            if (idx<(int)list.size()) {
-                int v1 = list[idx];
-                if (v1 != null) {
-                    parent->left = new TreeNode(v1);
-                    toDo.push_back(parent->left);
-                } else {
-                    parent->left = nullptr;
-                }
+            idx++;
+            int v1 = list[idx];
+            if (v1 != null) {
+                parent->left = new TreeNode(v1);
+                toDo.push_back(parent->left);
+            } else {
+                parent->left = nullptr;
             }
 
+
             idx++;
-            if (idx < (int)list.size()) {
-                int v2 = list[idx];
-                if (v2 != null) {
-                    parent->right = new TreeNode(v2);
-                    toDo.push_back(parent->right);
-                } else {
-                    parent->right = nullptr;
-                }
+            int v2 = list[idx];
+            if (v2 != null) {
+                parent->right = new TreeNode(v2);
+                toDo.push_back(parent->right);
+            } else {
+                parent->right = nullptr;
             }
+
         }
         return root;
     }
