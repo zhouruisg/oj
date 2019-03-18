@@ -220,3 +220,85 @@ Tell me about a time in which you worked under a tight deadline
 
 ====  my answer ======
 STAR
+* most difficult situation
+* how do you handle challenge
+->  as a sw developer, most of time will be only yechinical issue. but I remember one of the most difficult situation
+if it involve technical issue as well as facing customeer complaint and under huge pressure.
+
+situation:
+in agilent, new product got Occasionally crash, as it is at remote site, hard to reproduce issue and difficult to online debug
+1. impact the bussiness.
+2.difficult to communicate with US site.
+we could not communicate during the asian day time, but instead wait till night or next day for a reply. require work overnight
+3. technically it is hard to solve
+
+task:
+fixed the crash
+
+action:
+
+ came with a plan ->
+ 1.narrow the scope of problem, split into module,
+ 2.review the code and analysis the coredump, use valgrind to figure out the dangle pointer.
+ 3.setup the backup environment.
+ 4.discard raw ptr, move to c++11 (2011)
+
+result:
+isolate the suspected module, and rewrite some of the code.
+
+
+*have you make mistake,how to handle it?
+1.I rarely made mistake..carefully deal with my work, especially online service.
+just I need little time in a new environment
+
+2.when I joined current company yitu, my first project is evaluate a product performance and see any chance to build a quality control
+platform to do it. I could overlook the second part and spent too much time on first part and miss inside(because it is a tremendous project)
+because my department is infrastrcture dept, mission is to build the common platform(computing/training/storage/testing)
+but because I keep communicated with my boss frequently, understand what he is thinking and I quickly find the way.
+need to think big, in a bigger picture. ensure to understand clearly the team top priority
+
+
+*老板给你最差的评价是什么
+early stage of my career,many years ago
+I am a bit shy at that time. don't know communicate with colleagues.
+I was assigned to a support department, as a fresh grad I couldn't support too much thing. and it is critical Network element.
+manytimes I don't have permission to change it. so I got low ranking at the first half year.
+I realize I'd like to be programmer. and I found shortcoming is I am not good at communication.
+
+
+
+*disagree with some one at work/boss
+I treat work as work, very professional. my colleagues will be as well.
+I would talk with the person to understand the reasons behind, provide data metrics, reference to support my point of view
+I will put me on the same page as senior colleagues, my boss.if I insist I am right I could discuss with them later.
+as tiem being I could gain more knowledge to have a different understanding.
+
+
+
+*teamwork
+I am in infra dept. the mission is pursuafe other dept(product dev,research) to use our solution to facilitate dev, improve
+productivity.
+teamwork is very important and we very serious about it. as we want to ask others to use common platform/tools/platform/code reusable
+I must achieve it firstly. I will share different kinds of solution among team. when I work with other team and come up with some idea/
+solution I also whare with team member so that we can improve our solution.
+
+
+#decision
+yitu is a startup. and offline product. many team still use old school develop method. e.g. slow release procedure.
+manually do test. no CD last year.
+I push my cooperated team to change to devops mode, and also prepare for cloud based product.
+many people think it is big change but anyway they see the benefit after I give them training, presentation.
+
+I am also very grateful the company made same decision to move towards EP(Engineering Productivity)
+
+
+*你做了哪些事不属于你的工作范围确很有意义之类的，
+
+*你有没有过ddl前需要做重大决定，这个决定可能造成你meet ddl，也可能造成不能meet ddl？你怎么做的，最后结果真么样？
+
+
+
+
+
+
+
