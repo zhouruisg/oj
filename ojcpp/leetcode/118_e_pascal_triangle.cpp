@@ -18,7 +18,7 @@ Return
   next row numbersis [1, sum of two neighbour number,1]
 
  10:26pm
-
+杨辉三角形
  */
 
 #include <codech/codech_def.h>
@@ -28,22 +28,20 @@ Return
 
 using namespace std;
 
+//没啥特别的
 class Solution {
 public:
     vector<vector<int>> generate(int numRows) {
         vector<vector<int>> result;
-
-
         for (int i=0;i<numRows;i++) {
             vector<int> tmp;
             int a=0;
-            if (!result.empty()) {
-                for (auto &iter: result.back()) {
+            if (!result.empty()) {//第一行没有result
+                for (auto &iter: result.back()) {// 上一行的结果
                     tmp.push_back(a+iter);
                     a=iter;
                 }
             }
-
             tmp.push_back(1);
             result.push_back(tmp);
         }

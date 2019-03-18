@@ -17,9 +17,12 @@ matrix = [
 ]
 target = 3
 Output: true
- 由于横向纵向都是有序的，因此可以采用O(LogN)
+ 由于横向纵向都是有序的，而且下一行的数字都比上一行大，因此可以采用O(LogN)
+ 从右上角开始查找
  也可以看作是一个list来binary search
+ 复杂度评估? O(N)?
  TODO binary search
+
  */
 #include <codech/codech_def.h>
 using namespace std;

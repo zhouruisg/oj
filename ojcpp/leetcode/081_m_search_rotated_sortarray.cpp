@@ -21,9 +21,9 @@ Follow up:
 
 This is a follow up problem to Search in Rotated Sorted Array, where nums may contain duplicates.
 Would this affect the run-time complexity? How and why?
-
-TODO 思路
-
+和153很类似，但153没有重复数字
+ 因此需要比较mid和left是否一样，一样的话只能left++
+ 把mid的位置画出几张图，看看都有什么可能
  */
 #include <codech/codech_def.h>
 using namespace std;
@@ -31,7 +31,7 @@ namespace lc081 {
     class Solution {
     public:
         bool search(vector<int>& nums, int target) {
-            int left=0,right = nums.size()-1;
+            int left=0,right = nums.size()-1; //二分法一般需要include end
             while (left<=right) {
                 int mid=(left+right)/2;
                 if (nums[mid]==target)
@@ -40,7 +40,7 @@ namespace lc081 {
                 if (nums[mid]==nums[left]) {
                     left++;continue;
                 }
-
+                //两种图都得到一样的结果
                 if (nums[mid] > nums[left]) {
                     if (target<nums[mid] && target>=nums[left])
                         right=mid-1;

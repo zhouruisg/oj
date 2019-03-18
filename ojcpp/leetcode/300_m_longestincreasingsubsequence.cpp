@@ -16,6 +16,8 @@ Your algorithm should run in O(n2) complexity.
 Follow up: Could you improve it to O(n log n) time complexity?
 
 **DP
+找出最长递增队列的长度
+
  */
 
 #include <codech/codech_def.h>
@@ -23,48 +25,53 @@ Follow up: Could you improve it to O(n log n) time complexity?
 #include <vector>
 
 using namespace std;
-
-class Solution {
-public:
-    // time limit exceed.
-    int lengthOfLIS0(vector<int>& nums) {
-        return subLength(nums,INT_MIN, 0);
-    }
-
-    int subLength(vector<int>&nums, int prev, int curpos) {
-        // exit cond
-        if (curpos == nums.size())
-            return 0;
-        int taken = 0;
-        if (nums[curpos] > prev) {
-            taken = 1 + subLength(nums, nums[curpos], curpos+1);
+namespace {
+    class Solution {
+    public:
+        // time limit exceed.
+        int lengthOfLIS(vector<int> &nums) {
+            return subLength(nums, INT_MIN, 0);
         }
-        int nottaken = subLength(nums, prev, curpos + 1);
-        return max(taken, nottaken);
-    }
 
-    // dp[i]= longest increasing sequence, iterate 0~i to update dp[i]
-    int lengthOfLIS(vector<int>& nums) {
-        vector<int> dp(nums.size(), 1);
-        int res = 0;
-        for (int i = 0; i < nums.size(); ++i) {
-            for (int j = 0; j < i; ++j) {
-                if (nums[i] > nums[j]) {
-                    dp[i] = max(dp[i], dp[j] + 1);
-                }
+        int subLength(vector<int> &nums, int prev, int curpos) {
+            // exit cond
+            if (curpos == nums.size())
+                return 0;
+            int taken = 0;
+            if (nums[curpos] > prev) {
+                taken = 1 + subLength(nums, nums[curpos], curpos + 1);
             }
-            res = max(res, dp[i]);
+            int nottaken = subLength(nums, prev, curpos + 1);
+            return max(taken, nottaken);
         }
-        return res;
-    }
+    };
 
-};
+    class Solution1 {
+    public:
+        // dp[i]= longest increasing sequence, iterate 0~i to update dp[i]
+        // dp[i] 到i为止前面有多少个递增数字
+        int lengthOfLIS(vector<int>& nums) {
+            vector<int> dp(nums.size(), 1);
+            int res = 0;
+            for (int i = 0; i < nums.size(); ++i) {
+                for (int j = 0; j < i; ++j) {
+                    if (nums[i] > nums[j]) {
+                        dp[i] = max(dp[i], dp[j] + 1);
+                    }
+                }
+                res = max(res, dp[i]);
+            }
+            return res;
+        }
+
+    };
+}
 
 
 
 DEFINE_CODE_TEST(300_longest_increasing_subsequence)
 {
-    Solution obj;
+    Solution1 obj;
     {
         vector<int> nums{10,9,2,5,3,7,101,18};  //4
         VERIFY_CASE(obj.lengthOfLIS(nums),4);

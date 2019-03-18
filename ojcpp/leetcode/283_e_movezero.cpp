@@ -13,6 +13,7 @@ You must do this in-place without making a copy of the array.
 Minimize the total number of operations.
 10:24 am->
 
+ w 作为0 的写入位置,每遇到不为0的数字就和w位置交换
  */
 
 #include <codech/codech_def.h>
@@ -28,10 +29,7 @@ public:
         int w = 0;
         for (int i = 0; i< nums.size(); i++) {
             if (nums[i]!=0) {
-                swap(nums[w], nums[i]);
-                w++;
-            } else {
-                //nums[w] = 0;
+                swap(nums[w++], nums[i]);
             }
         }
     }

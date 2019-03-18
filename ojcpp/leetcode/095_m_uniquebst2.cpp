@@ -30,6 +30,7 @@ The above output corresponds to the 5 unique BST's shown below:
 17:00
 目前打算采用的方法太笨，但是思路可能是对的，一个新的节点，可以作为之前tree的parent,也可以作为其右树，
  但是需要针对1-2-3这种情况进行调整，例如1-2-3-4是一种情况，1-4-3-2又是另一种，从这里找出规律并生成子树，代码挺复杂的
+
  换一个思路，这种题目一般都是DP或者递归的方法，不然无法产生这种收敛的结果，考虑，取一个作为root,那么其左右两侧都是
  一棵树，从而可以递归的解决这个问题。
 
@@ -60,12 +61,12 @@ namespace lc095 {
                 lnodes.emplace_back(nullptr);
             }
             for (int i=start;i<=end;i++) {
-                const auto &left = create(start,i-1);
+                const auto &left = create(start,i-1);//第一次，左子树为null,第二次,0-0为左子树
                 const auto &right = create(i+1,end);
-
+                //相当于交叉组合
                 for (auto &l:left) {
                     for (auto &r: right) {
-                        TreeNode* node=new TreeNode(i);
+                        TreeNode* node=new TreeNode(i);//如果左右均为空，那么就创建一个叶节点
                         node->left=l;
                         node->right=r;
                         lnodes.emplace_back(node);

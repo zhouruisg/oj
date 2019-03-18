@@ -27,12 +27,14 @@ using namespace std;
 using namespace CODECH;
 namespace lc090 {
     // backtracking 套路，选取非重复数字时注意条件
+    // 由于可能有duplicate,必须先排序
+    // 先push, dfs,在pop
     class Solution {
     public:
         void dfs(vector<vector<int>> &ret,vector<int> &comb, int pos,vector<int>& nums ) {
             ret.emplace_back(comb);
             for (int i=pos;i<nums.size();i++) {
-                if (i!=pos && nums[i]==nums[i-1])
+                if (i!=pos && nums[i]==nums[i-1])  //注意不要duplicate
                     continue;
                 comb.emplace_back(nums[i]);
                 dfs(ret,comb,i+1,nums);//注意是i+1

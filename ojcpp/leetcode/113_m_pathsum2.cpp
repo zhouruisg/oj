@@ -27,7 +27,8 @@ TreeNode*root = LCREATE_TREENODE({5,4,8,11,null,13,4,7,2,null,null,5,1});
 ]
 
  11.06 pm ->11:18pm wtf!!!
- 但是需要注意推出条件,sum=0而且comb为空的时候
+ 找出所有path 的sum=target
+ 但是需要注意退出条件,sum=0而且comb为空的时候
  必须是leaf node!,即left & right都是null
  */
 

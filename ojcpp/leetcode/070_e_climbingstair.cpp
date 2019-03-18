@@ -28,7 +28,8 @@ Explanation:  There are three ways to climb to the top.
 1. 1 step + 1 step + 1 step
 2. 1 step + 2 steps
 3. 2 steps + 1 step
-
+青蛙可以跳1格，也可以跳2格
+ 就是组合问题，
  */
 
 #include <codech/codech_def.h>
@@ -38,8 +39,8 @@ class Solution {
 public:
     int climbStairs(int n)
     {
-        int f1 = 1;
-        int f2 = 2;
+        int f1 = 1;  // 只有1个台阶
+        int f2 = 2;  //有2个台阶
         int fn = 0;
         if (n == 1) return f1;
         if (n == 2) return f2;

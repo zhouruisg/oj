@@ -24,28 +24,29 @@ Explanation: Because the path 1→3→1→1→1 minimizes the sum.
 #include <codech/codech_def.h>
 using namespace std;
 
+//从右下角开始
 class Solution {
 public:
     int minPathSum(vector<vector<int>>& grid) {
         int row=grid.size();
         if (row==0) return 0;
         int col=grid[0].size();
-        vector<vector<int>> dp = grid;
+        vector<vector<int>> dp = grid; //每一个都是到终点的pathsum
         int minPath=INT_MAX;
         for (int i=row-1;i>=0;i--) {
             for (int j=col-1;j>=0;j--) {
-                if (j+1==col && i+1==row) {
+                if (j+1==col && i+1==row) {  //如果是最右下角，则为value
                     dp[i][j]= dp[i][j];
-                } else if (j+1==col) {
-                    dp[i][j]= dp[i][j]+dp[i+1][j];
-                } else if (i+1==row) {
-                    dp[i][j]= dp[i][j]+dp[i][j+1];
+                } else if (j+1==col) { //最右侧的列
+                    dp[i][j]= dp[i][j]+dp[i+1][j]; //自身+下一行
+                } else if (i+1==row) { //最下面的一行
+                    dp[i][j]= dp[i][j]+dp[i][j+1]; //自身+
                 } else {
                     dp[i][j]=min(dp[i+1][j],dp[i][j+1])+dp[i][j];
                 }
             }
         }
-        return dp[0][0];
+        return dp[0][0];  //最后返回起点的值
     }
 };
 

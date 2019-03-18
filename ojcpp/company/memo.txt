@@ -12,7 +12,19 @@ LINT596 Subtree with Maximum Average easy
 LINT1377 Find substring
 
 lc064 min path sum medium
+Close two sum 533
+Subtree with Maximum Average 597
+High 5 613,
+Find substring 1377
+K closest point 612,
+Cut off trees for golf event  1092
+Substring with distinct k 386
+Longest substring without repeating character 384,
+Closet target Value 1478,
+BST Node distance  1561,
+Most common word 1369
 
+LC543?
 
 2018-7
 BST 那个先建个树, 然后找LCA,然后算距离. K个不同字母的substring就是sliding window
@@ -34,17 +46,7 @@ https://www.jianshu.com/p/8d4325d9b539
 
 小土刀，很多题。https://wdxtub.com/interview/14520850399861.html
 做过的lintcode 里类似的题目：
-Close two sum 533
-Subtree with Maximum Average 597
-High 5 613,
-Find substring 1377
-K closest point 612,
-Cut off trees for golf event  1092
-Substring with distinct k 386
-Longest substring without repeating character 384,
-Closet target Value 1478,
-BST Node distance  1561,
-Most common word 1369
+
 
 https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=485818&extra=page%3D2%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3086%5D%5Bvalue%5D%3D9%26searchoption%5B3086%5D%5Btype%5D%3Dradio%26searchoption%5B3089%5D%5Bvalue%5D%5B5%5D%3D5%26searchoption%5B3089%5D%5Btype%5D%3Dcheckbox%26searchoption%5B3046%5D%5Bvalue%5D%3D5%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311%26orderby%3Ddateline
 Max sum pair，输入是两个List<List<Integer>>，第一个数是ID，第二个是Value，还有一个maxCapacity，返回所有pair。
@@ -66,21 +68,7 @@ Most common words(给一个String，一个blacklist，返回不在blacklist里面并且出现频率
 
 我面的是Sunnyvale的Amazon lab126组下面的Alexa smart home组，楼很漂亮工位也不错，就是食堂不免费。
 
-不得不说他们家面试是真的累！9:30-4:00时间上堪比Google，但其实比Google还要累，下面慢慢说。
-9:30-10:00和hr印度大姐尬聊，大姐详细介绍了package的各项占比，以及面试时候各种behavior问题怎么答，各种苦口婆心，想想还是挺良心的，印度人也有不少好人啊！
-下面介绍一下所有可能遇到的bq，好在楼主特别擅长扯淡，几乎没在bq上挂过(除了一家startup，和CEO聊的时候说需要package不能太低，自爆了哈哈)。
-1 你工作或者学习中遇到过和队友或者同事意见特别不相同的情况吗？你听他们的还是他们听你的？为什么？最后结果怎么样？
-2 你遇到过最难解决的技术问题是什么？如果几乎没有解决方案的话你是怎么做的？最后成功了吗？
-3 你有没有过ddl前需要做重大决定，这个决定可能造成你meet ddl，也可能造成不能meet ddl？你怎么做的，最后结果真么样？
-4 如果你的manager分配给你特别不喜欢的活你怎么办？
-5 如果你收到一份function specification照着做，里面很多点你不同意，你怎么和manager或者pm沟通？
-6 如果你写的function specification被很多人喷出很多问题，你怎么办？
-7 如果你很不同意你的manager的一些做法，你咋办？
-8 如果你的队友或者同事有些愿意比如病了或者家庭原因，干不完他们的活，你怎么办？
-9 如果你发现一个严重影响客户体验的bug或者问题，但这块不是你负责，你怎么办？
-10 如果你发现一个事非常模棱两可，比如function specification你觉得不清楚，或者一段old code你完全看不懂，你怎么办？
-11 你做过最难的project是什么，你负责管理和分配人力吗？
-总之在这里我遇到的bq是最多的，非常的夸张。楼主对付bq的方法是尽量把他们归类，然后试着把话题引到自己准备过的case上，然后尽量多说，牵这面试官走，还能避免说的太少他们问更多的问题。
+
 
 10:00 - 11:00 白人hiring manager, 三姐manager shadow interview。全程bq一小时。服了。尬聊一小时，口干舌燥。
 11:00 - 12:00 似乎是中国大姐，亚裔小哥shadow不确定哪国人哪国裔，bq 15分钟，第一道题linked list 两个做addition划水，
@@ -132,3 +120,103 @@ bq 问我性能和可读性 怎么考虑
 
 第三轮白人姐姐，string calculator，一堆bq
 第四轮是印度小弟弟，bq一堆，然后是一个topological sort.
+
+
+2019(1-3月) 码农类General 硕士 全职@Amazon - 猎头 - Onsite  | Other | 在职跳槽
+先是被猎头在linkedin上ping了，然后聊了一下，在线做了一个oa，然后说要约电面，后来说有hiring event，可以直接去，不用电面了，于是就参加了hiring event，是alexa search啥组的
+3.15的hiring event，下午一点开始，每场1小时，总共四场可以自己带电脑，也可以白板。电脑的话给了一个链接，在上面两人都可以看到，但是没有编译功能
+
+第一场，印度人，聊聊简历，一堆的bq，然后开始做题，给定一个二叉树，和一个数字，把所有综合小于该数字的路径都删掉。比如
+      3
+    /   \
+   2     1
+  /  \  /  \
+3  1  1  3
+给定数字  7
+
+那么从左到右的四条路径  3 - 2 - 3， 这条大于 7， 保留。   3 - 2 - 1，这条只有6， 要删除，但是由于3-2已经是之前的有效路径，所以只删除1
+右边两条 3 - 1 -1 不行 3- 1 -3，可以， 所以 删除一个1，最后返回这个：. 1point3acres
+      3
+    /   \
+   2     1
+  /         \
+3          3
+
+大概有30-35分钟左右来做这个题吧。
+
+第二场，不知道为什么两个人，好像是shadow，一个美国人，一个不知道哪里的。还是谈简历，问bq，不过这两个人问的bq比较少，大概有40分钟做题
+题目是蠡口舞陆，合并区间，20分钟讲完写完，应该没问题，但是还剩下20分钟，很尴尬，然后面试官只好强行让我在自己做个测试例子，然后跑给他们看，最后还有10分钟，我又强行讲了一下自己的简历，然后实在不行，提前5分钟结束了。。。
+
+第三场，是个印度manager，挺能尬聊的那种，讲简历和bq说了30分钟，最后30分钟让我设计一个在线下棋系统。设计一个网站，可以两个人同时下棋，下棋的逻辑的引擎我不用考虑，就考虑整体的设计。我其实没怎么准备过设计题，所以就在那里跟他瞎扯，最后画了一个大概。最后10分钟，我们纠结于怎么确定需要的服务器的数量。我说根据我的经验，做perf test然后看我们要解决多大的问题，然后得出要多少机器。但是这不是他想要的答案，他一直push我让我从另外的角度想，问我可以监测哪些数据，但是我实在没get到，只说了一些延迟啥的。最后五分钟他只好自己解释了一下，其实他大概想要的是通过设置一些metric，然后监测着，然后通过数据的变化predict出负载要满，需要更多机器。其实最后我还是没太懂，但是大概感觉是想通过收集数据然后machine learning或者套用什么模型，然后做出预测的一种办法吧，这个可能跟他们组的做的东西有关，我确实也没有这种思维。。。。。
+
+第四场，美国人，还是老规矩，25分钟左右的BQ和简历吧，然后开始做题。 给定一个目录，和一些规则，输出所有符合规则的文件。 规则现在可以只考虑两条，一是文件名，比如所有txt的文件，二十大小，比如只输出特定大小区间的文件，但是以后可能有更多规则
+我的做法是先设计了一个RuleBase，带有一个isvalid的函数，然后实现了两个规则RuleNameMatch和RuleFileInSize来extend RuleBase，然后写了一个api，List<File> getAllFilesMatchRules(String directory, RuleBase[])，我说我不知道咋获取directory下的所有文件，只有假设了一个api，List<File> getAllFilesInDir(String directory)，有了这个就比较简单了，遍历所有文件，对每个文件，遍历所有rule，有一个不valid，就跳过剩下的，所有都符合，就加入结果。
+
+大概写了这么一个东西，然后面试官说现在的所有规则是And，怎么变成or，要可以切换。然后我就说改一下api，wrap一个ruleManager，里面有rule[]，还有一个flag来指定rule之间的关系，没有实现，就讲了一下。
+最后还有五分钟左右，让我自习实现一下RuleFileInSize规则，要可以自定义  小于， 小于等于， 大于， 大于等于，以及(], [)， 都没有什么难的，说的通就行。
+
+
+
+最后最后，求大米........
+
+
+技术部分：
+第一轮：蠡口 舞嗣伞  LC543
+第二轮：设计一个分布式系统，管理联系人。
+    功能有：每个用户（有user_id）可以上传所有的联系人（包括姓，名和电话信息）；对于某个user_id，返回所有的联系人；对于某个电话，返回含有这个电话联系人的所有user_id。
+第三轮：OOD，设计一个狗DayCare，主要需要实现的方法就是给一只狗，决定放到哪个房间。
+    已知信息有：每种狗具有一些属性，比如年龄，尺寸，性别，是否烈犬，是否哺乳，是否接种疫苗等等；狗DayCare有三种房间：小狗房，大狗房，和单独狗笼房。
+    狗的属性决定了它可以去哪种房间：没接种疫苗的不收；年纪很小的狗，烈性狗，哺乳期的狗优先去单独狗笼；除此之外的按照尺寸去大狗房或者小狗房。
+    判断去哪个房间的函数里不能用一串if else，因为扩展性不好。所以本质上应该是怎么设计condition以及对condition的判断
+    整体上跟停车场设计有类似之处。
+第四轮：背景prime member购物。
+    对于某个具体的产品，有不同商家给出offer，亚麻会给你默认给你推荐一个，设计针对某个商品的类，函数包括添加offer，获得最好offer并移除。
+    offer类具体成员有商家id，商家报价，list of该商家得到过的所有review值（1到5）。
+    最好offer的优先级是：平均review评分>价格>review的数量。
+    觉得用堆维护offer即可，结果白人面试官说不能直接用Java的PriorityQueue，要用的话必须自己实现。
+BQ没有专门一轮，但是每轮都有，都是常规问题：赶不上ddl，和上司意见不一致，work hard的经历，没有足够数据back-up idea等等
+
+
+
+========= BQ ========================
+https://www.thebalancecareers.com/behavioral-job-interview-questions-2059620
+
+赶不上ddl
+和上司意见不一致
+work hard的经历
+没有足够数据back-up idea
+
+//不得不说他们家面试是真的累！9:30-4:00时间上堪比Google，但其实比Google还要累，下面慢慢说。
+//9:30-10:00和hr印度大姐尬聊，大姐详细介绍了package的各项占比，以及面试时候各种behavior问题怎么答，各种苦口婆心，想想还是挺良心的，印度人也有不少好人啊！
+//下面介绍一下所有可能遇到的bq，好在楼主特别擅长扯淡，几乎没在bq上挂过(除了一家startup，和CEO聊的时候说需要package不能太低，自爆了哈哈)。
+
+1 你工作或者学习中遇到过和队友或者同事意见特别不相同的情况吗？你听他们的还是他们听你的？为什么？最后结果怎么样？
+2 你遇到过最难解决的技术问题是什么？如果几乎没有解决方案的话你是怎么做的？最后成功了吗？
+3 你有没有过ddl前需要做重大决定，这个决定可能造成你meet ddl，也可能造成不能meet ddl？你怎么做的，最后结果真么样？
+4 如果你的manager分配给你特别不喜欢的活你怎么办？
+5 如果你收到一份function specification照着做，里面很多点你不同意，你怎么和manager或者pm沟通？
+6 如果你写的function specification被很多人喷出很多问题，你怎么办？
+7 如果你很不同意你的manager的一些做法，你咋办？
+8 如果你的队友或者同事有些愿意比如病了或者家庭原因，干不完他们的活，你怎么办？
+9 如果你发现一个严重影响客户体验的bug或者问题，但这块不是你负责，你怎么办？
+10 如果你发现一个事非常模棱两可，比如function specification你觉得不清楚，或者一段old code你完全看不懂，你怎么办？
+11 你做过最难的project是什么，你负责管理和分配人力吗？
+总之在这里我遇到的bq是最多的，非常的夸张。楼主对付bq的方法是尽量把他们归类，然后试着把话题引到自己准备过的case上，然后尽量多说，牵这面试官走，还能避免说的太少他们问更多的问题。
+
+
+最后说BQ，不知道为什么这么多BQ，但是亚马同学说他们是有一些principle的，每次review都要套用这些principle，我估计面试官也是在套用这些principle，所以提前了解下比较好。
+比较常见的BQ：
+老板给你最差的评价是什么，
+Standard和delivery你选哪个，
+老板说不重要，你觉得超级重要怎么办，
+你做了哪些事不属于你的工作范围确很有意义之类的，
+
+Tell me about a time in which you disagreed with a coworker
+Tell me about your most challenging project that best showcases your skills for Amazon
+Tell me about a time in which you worked under a tight deadline
+
+//都不是很好答。不过其实这个问题是可以换的，面试官那里好像有很多问题，可能是HR给他们准备好了，所以如果你想不出来，可以换个问题。
+
+
+====  my answer ======
+STAR

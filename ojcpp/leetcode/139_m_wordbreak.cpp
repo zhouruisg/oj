@@ -42,9 +42,9 @@ namespace lc139 {
                 return false;
 
             for (auto &iter:wordDict) {
-                if (s.find(iter)==0) {
+                if (s.find(iter)==0) { //found
                     wordLength=iter.length();
-                    string piece=s.substr(wordLength);
+                    string piece=s.substr(wordLength); //move forward
                     if (dfs(nomatch,piece,wordDict))
                         return true;
                 }
@@ -58,21 +58,7 @@ namespace lc139 {
         }
     };
 
-    //DP
-//    Set ws = new HashSet<>(wordDict);
-//    boolean[] dp = new boolean[s.length()+1];
-//    dp[s.length()] = true;
-//    for(int i=s.length(); i>0; i--){
-//    if(dp[i]){
-//    for(int j=i-1;j>=0;j--){
-//    dp[j] = dp[j] || ws.contains(s.substring(j,i));
-//    if(dp[0]) return true;
-//}
-//}
-//}
-//return dp[0];
-//}
-    // 思路, 从左往右匹配，dp[n] 记为从1字符起到n字符的匹配情况。dp[0]作为占位符
+    // 思路, 从左往右匹配，dp[n] 记为从1字符起到n字符的匹配情况true/false。dp[0]作为占位符
     class Solution1 {
     public:
         bool wordBreak(string s, vector<string>& wordDict) {
@@ -81,6 +67,8 @@ namespace lc139 {
             dp[0]=1;
             for (int i=1;i<=s.length();i++) {
                 for (int j=0;j<i;j++) {
+                    // dp[j] ----str(j..i) 都匹配，那么dp[i]为true
+                    // 转移方程
                     if (dp[j] && dict.count(s.substr(j,i-j))) {
                         dp[i]=1;
                         break;

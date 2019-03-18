@@ -2,7 +2,7 @@
 // Created by rui.zhou on 2/6/2019.
 //
 
-/*
+/*topological sort
  * There are a total of n courses you have to take, labeled from 0 to n-1.
 
 Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is expressed as a pair: [0,1]
@@ -26,7 +26,10 @@ Note:
 
 The input prerequisites is a graph represented by a list of edges, not adjacency matrices. Read more about how a graph is represented.
 You may assume that there are no duplicate edges in the input prerequisites.
+TODO topological sort
+
  */
+
 
 #include <codech/codech_def.h>
 #include <typeinfo>
@@ -35,82 +38,6 @@ using namespace std;
 
 class Solution {
 public:
-    // should work
-//    bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
-//        if (numCourses<=1)
-//            return true;
-//        unordered_map<int, list<int>> map;
-//        unordered_map<int, bool> visited;
-//        for (int i=0;i<numCourses;i++) {
-//            visited[i]=false;
-//        }
-//        for (pair<int, int> &p: prerequisites) {
-//            int course = p.first;
-//            if (map.find(course)==map.end()) {
-//                map[course] = list<int>(1,p.second);
-//            } else {
-//                list<int> &lst = map[course];
-//                lst.push_back(p.second);
-//            }
-//        }
-//
-//
-//        for (auto &el : map) {
-//            list<int> &lst = map[el.first];
-//            cout << "checking course " << el.first << ":";
-//            for (auto el : lst) {
-//                cout << el << " ";
-//            }
-//            cout << endl;
-//
-//            for (auto el : lst) {
-//
-//                //cout << "new visit map for " << el <<endl;
-//                if (!helper(el,map,visited))
-//                    return false;
-//            }
-//        }
-//        return true;
-//    }
-//    // 只在list的元素中判断是否访问过，
-//    // 不在map[key]中判断
-//    // 只判断是否访问不行，需要判断能否形成环状
-//    bool helper(int course, unordered_map<int, list<int>> &map,unordered_map<int, bool> &visited) {
-//        if (visited[course]) {
-//            cout << "visited " << course <<endl;
-//            return false;
-//        }
-//
-//        visited[course] = true;
-//
-//        cout << "visited [";
-//        for (auto &el : visited) {
-//            if (el.second)
-//                cout << el.first << " ";
-//        }
-//        cout << "]" << endl;
-//        if (map.find(course)!=map.end()) {
-//            list<int> &lst = map[course];
-//
-//
-//
-//
-//
-//            cout << "helper " << course << ":";
-//            for (auto el : lst) {
-//                cout << el << " ";
-//            }
-//            cout << endl;
-//            for (auto el : lst) {
-//                if (!helper(el,map,visited))
-//                    return false;
-//            }
-//
-//        }
-//        visited[course] = false;
-//        return true;
-//    }
-    // simple version
     bool canFinish(int numCourses, vector<pair<int, int>>& prerequisites) {
         if (numCourses<=1)
             return true;
@@ -119,6 +46,7 @@ public:
         for (int i=0;i<numCourses;i++) {
             visited[i]=false;
         }
+        //建立邻接表,ID->LIST<DEP_ID>
         for (pair<int, int> &p: prerequisites) {
             int course = p.first;
             if (map.find(course)==map.end()) {
@@ -128,9 +56,10 @@ public:
                 lst.push_front(p.second);
             }
         }
+        //遍历
         for (auto &el : map) {
             forward_list<int> &lst = map[el.first];
-            if (!helper(el.first,map,visited))
+            if (!helper(el.first,map,visited)) //el.first = course
                 return false;
 
         }
@@ -141,8 +70,7 @@ public:
         if (visited[course]) {
             return false;
         }
-
-        visited[course] = true;
+        visited[course] = true; // 先将起点置为VISITED,然后检查每个dep course
         if (map.find(course)!=map.end()) {
             forward_list<int> &lst = map[course];
             for (auto el : lst) {
@@ -150,7 +78,11 @@ public:
                     return false;
             }
         }
+        //退出的时候必须reset visited，因为已经完成了这个course
+        // 因为其它的路径可能和这个couse没有依赖关系，但是也会访问到
         visited[course] = false;
+
+
         return true;
     }
 };

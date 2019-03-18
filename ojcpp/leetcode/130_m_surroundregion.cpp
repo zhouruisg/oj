@@ -27,6 +27,8 @@ Surrounded regions shouldn’t be on the border, which means that any 'O' on the
 using namespace std;
 using namespace CODECH;
 
+// 并查集,
+// 尝试BFS解决
 
 namespace lc130 {
     class UnionFind {
@@ -108,6 +110,53 @@ namespace lc130 {
                     }
                 }
             }
+        }
+    };
+
+
+    // BFS
+    class Solution1 {
+    public:
+        void solve(vector<vector<char>> &board) {
+            int row=board.size();
+            if (row==0) return;
+            int col=board[0].size();
+            vector<pair<int,int>> oxy;
+            for (int i=0;i<row;i++) {
+                if (board[i][0]=='O') {
+                    oxy.emplace_back(i,0);
+                }
+                if (board[i][col-1]=='O') {
+                    oxy.emplace_back(i,col-1);
+                }
+            }
+            for (int i=0;i<col;i++) {
+                if (board[0][i]=='O') {
+                    oxy.emplace_back(0,i);
+                }
+                if (board[row-1][i]=='O') {
+                    oxy.emplace_back(row-1,i);
+                }
+            }
+            while (!oxy.empty()) {
+                auto &iter = oxy.back();
+                int x = iter.first;int y = iter.second;
+                board[x][y]='Y';
+                oxy.pop_back();
+                if(x>0 && board[x-1][y] == 'O' ) {oxy.emplace_back(x-1,y);}
+                if(x<row-1 && board[x+1][y] == 'O' ) {oxy.emplace_back(x+1,y);}
+                if(y>0 && board[x][y-1] == 'O' ) {oxy.emplace_back(x,y-1);}
+                if(y<col-1 && board[x][y+1] == 'O' ) {oxy.emplace_back(x,y+1);}
+            }
+            for(int i =0; i< row; i++)
+                48:            {
+                49:                 for(int j =0; j< col; j++)
+                    50:                 {
+                    51:                      if(board[i][j] =='O') board[i][j] = 'X';
+                    52:                      if(board[i][j] == 'Y') board[i][j] = 'O';
+                    53:                 }
+                54:            }
+
         }
     };
 }

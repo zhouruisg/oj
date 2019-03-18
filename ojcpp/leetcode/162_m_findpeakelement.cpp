@@ -19,7 +19,7 @@ click to show spoilers.
 Note:
 Your solution should be in logarithmic complexity.
 对数的一般属于binary search，注意到相邻的元素均不相等，
-二分，比较两个中值，不会出现 4,5,1,1,1,1,1,1, 这个情况
+二分，比较两个中值，不会出现 4,5,1,1,1,1,1,1, 这个情况，否则无法二分
  */
 
 
@@ -32,7 +32,7 @@ public:
         int l = 0, r = nums.size() - 1;
         while (l < r) {
             int mid = (l + r) / 2;
-            if (nums[mid] > nums[mid + 1])
+            if (nums[mid] > nums[mid + 1]) // 在左侧
                 r = mid;
             else
                 l = mid + 1;

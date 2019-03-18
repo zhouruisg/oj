@@ -30,29 +30,35 @@ f(i)=
 #include <codech/codech_def.h>
 
 using namespace std;
+namespace {
+    class Solution {
+    public:
+        //iterate
+        int maxSubArray(vector<int> &nums) {
+            int maxsum = nums[0], cursum = nums[0];
+            for (int i = 1; i < nums.size(); i++) {
+                cursum = max(nums[i], cursum + nums[i]);
+                maxsum = max(cursum, maxsum);
+            }
+            return maxsum;
+        }
+    };
+    class Solution1 {
+    public:
+        // dp 记住当前最大值,实际上我们只需要上一个dp[i-1]，所以用变量取代
+        int maxSubArray(vector<int> &nums) {
+            vector<int> dp(nums.size(), 0);
+            int maxsum = nums[0];
+            dp[0] = nums[0];
+            for (int i = 1; i < nums.size(); i++) {
+                dp[i] = max(dp[i - 1] + nums[i], nums[i]);
+                maxsum = max(dp[i], maxsum);
+            }
+            return maxsum;
+        }
+    };
+}
 
-class Solution {
-public:
-    //iterate
-    int maxSubArray0(vector<int>& nums) {
-        int maxsum = nums[0],cursum = nums[0];
-        for (int i=1;i<nums.size();i++) {
-            cursum = max(nums[i],cursum+nums[i]);
-            maxsum = max(cursum, maxsum);
-        }
-        return maxsum;
-    }
-    // dp
-    int maxSubArray(vector<int>& nums) {
-        vector<int> dp(nums.size(),0);
-        int maxsum = nums[0];
-        dp[0]=nums[0];
-        for (int i=1;i<nums.size();i++) {
-            dp[i]= max(dp[i-1]+nums[i],nums[i]);
-            maxsum = max(dp[i],maxsum);
-        }
-        return maxsum;
-    }
 
     // divide and conquer
 //    int maxSubArray(vector<int>& nums) {
@@ -63,7 +69,7 @@ public:
 //        }
 //        return maxsum;
 //    }
-};
+
 
 DEFINE_CODE_TEST(053_maximum_subarray)
 {

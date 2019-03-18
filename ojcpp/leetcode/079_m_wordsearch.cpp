@@ -20,7 +20,8 @@ board =
 Given word = "ABCCED", return true.
 Given word = "SEE", return true.
 Given word = "ABCB", return false.
-
+更优化的方案，记下所有对应开头的字母位置
+建立4个方向，逐个测试,dfs，套路
  */
 
 #include <codech/codech_def.h>

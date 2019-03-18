@@ -91,6 +91,7 @@ public:
 };
 
 // 将当前的minval和maxval传递到各个子树。
+// 太漂亮的代码了
 class Solution {
 public:
     bool isValidBST(TreeNode* root) {

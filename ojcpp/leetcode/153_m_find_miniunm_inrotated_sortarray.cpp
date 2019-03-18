@@ -23,22 +23,22 @@ Output: 0
 
 #include <codech/codech_def.h>
 using namespace std;
-
+//找出最小的数字，因为没有重复数字，所以用二分法找出最后2个数
 namespace lc153 {
     class Solution {
     public:
         int findMin(vector<int>& nums) {
             //if (nums.empty()) return 0;
             int left=0,right=nums.size()-1;
-            while (left<=right && right-left>1) {
+            while (left<=right && right-left>1) { //要求必须有2个数
                 int mid=(left+right)/2;
-                if (nums[mid]<nums[left]) {
+                if (nums[mid]<nums[left]) {  //发生移位，最小数在左侧
                     right=mid;
                 } else {
                     if (nums[left]<nums[mid] && nums[mid]<nums[right]) {
-                        return nums[left];
+                        return nums[left];  //按顺序，最小数就是left
                     } else {
-                        left=mid;
+                        left=mid; //否则往右寻找
                     }
                 }
             }

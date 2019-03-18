@@ -36,6 +36,7 @@ namespace lc059 {
 //            }
 //        }
 //    };
+     //生成一个旋转矩阵
     //5:42 pm - 6:03
     class Solution0 {
     public:
@@ -62,6 +63,7 @@ namespace lc059 {
     };
 
     // 一个直观的四个方向旋转的思路，写了大概30分钟
+    //就是先右-下-左-上-右，每次碰到已访问的节点，就变向
     class Solution {
     public:
         vector<vector<int>> generateMatrix(int n) {
@@ -71,7 +73,7 @@ namespace lc059 {
             int dy[]={0,1,0,-1};
             int row=0,col=0,dir=0;
             while (true) {
-                if (m[row][col]==0) {
+                if (m[row][col]==0) { //未设置过
                     m[row][col]=++cur;
                     if (cur==n*n)
                         break;
@@ -79,7 +81,7 @@ namespace lc059 {
                 int next_row=row+dy[dir];
                 int next_col=col+dx[dir];
                 if (next_row<0||next_col<0||next_row>=n||next_col>=n ||(m[next_row][next_col]!=0)) {
-                    dir++;
+                    dir++;//变向
                     if (dir>=4) dir=0;
                     row+=dy[dir];
                     col+=dx[dir];

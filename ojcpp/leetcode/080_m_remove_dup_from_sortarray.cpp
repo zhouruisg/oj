@@ -37,6 +37,8 @@ int len = removeDuplicates(nums);
 for (int i = 0; i < len; i++) {
     print(nums[i]);
 }
+ 去掉多于2次的数字,返回长度
+
  */
 
 #include <codech/codech_def.h>
@@ -73,7 +75,8 @@ namespace lc080 {
         }
     };
 
-    // 精简了代码
+    // 精简了代码,如果没要求in-place,可以直接删除该元素
+    // 从idx=1开始，如果和前一个相等,则检查计数
     class Solution1 {
     public:
         int removeDuplicates(vector<int>& nums) {
@@ -83,7 +86,7 @@ namespace lc080 {
             int r_count=1;
             for (int i=r;i<end;i++) {
                 if (nums[i]==nums[i-1]) {
-                    if (r_count<2) {
+                    if (r_count<2) {//相等,但是未到2次
                         nums[w++]=nums[i];
                         r_count++;
                     }
@@ -96,11 +99,30 @@ namespace lc080 {
             return w;
         }
     };
+
+    class Solution2 {
+    public:
+        int removeDuplicates(vector<int>& nums) {
+            if (nums.size()<3)
+                return nums.size();
+            int w=1;
+            int count = 1; //allow 1 duplicate
+            for (int i=1;i<nums.size();i++) {
+                if (nums[i]==nums[i-1] && count==0) {
+                } else { //不等，可以写
+                    if (nums[i]==nums[i-1]) count--;
+                    else count=1;
+                    nums[w++]=nums[i];
+                }
+            }
+            return w;
+        }
+    };
 }
 
 DEFINE_CODE_TEST(080_remove_duplicate_from_sorted_array)
 {
-    lc080::Solution1 obj;
+    lc080::Solution2 obj;
     {
         vector<int> nums{1,1,1,2};
         VERIFY_CASE(obj.removeDuplicates(nums),3);

@@ -21,6 +21,7 @@ return [1,6],[8,10],[15,18].
  * };
  */
 
+//合并重叠区间
 #include <codech/codech_def.h>
 #include <algorithm>
 

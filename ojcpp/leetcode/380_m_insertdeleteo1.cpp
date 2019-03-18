@@ -33,7 +33,13 @@ randomSet.insert(2);
 
 // Since 2 is the only number in the set, getRandom always return 2.
 randomSet.getRandom();
-这是DRW曾经面试过的题目,并不是很特别，使用hashtable达到insert / remove O(1)，使用vector达到random
+
+这是DRW曾经面试过的题目,并不是很特别, 要求insert / remove 都是O(1)，并且能随机返回一个element
+ 使用hashtable达到insert / remove O(1)，同时使用vector来记下 index-nums映射，
+ 每插入一个元素，从vector得到一个新的index，插入到vector末尾
+ 每删除一个元素,得到index,去vector中删除对应元素，为了不影响vector layout,需要把末尾的元素来swap
+
+
 
  */
 
@@ -66,20 +72,19 @@ public:
             return false;
         //这里挺巧妙的，把最后一个数字和待删除数字互换，然后删除最后一个数字
         int indexToDelete = numsToIndex[val];
-        nums[indexToDelete] = nums[nums.size() -1];
-        numsToIndex[nums[indexToDelete]] = indexToDelete;
-        nums.resize(nums.size() - 1);
-        numsToIndex.erase(val);
+        nums[indexToDelete] = nums[nums.size() -1]; // 等于最后一个元素
+        numsToIndex[nums[indexToDelete]] = indexToDelete; // update hashtable
+        nums.resize(nums.size() - 1);  // 相当于删除最后一个元素.
+        // If n is smaller than the current container size, the content is reduced to its first n elements, removing those beyond (and destroying them).
+        numsToIndex.erase(val); // 删除hashtable中的元素
 
         return true;
     }
 
     /** Get a random element from the set. */
     int getRandom() {
-
         if (nums.size() == 0) return -1;
         if (nums.size() == 1) return nums[0];
-
         int index = rand() % (nums.size());
 
         return nums[index];

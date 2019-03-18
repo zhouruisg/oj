@@ -5,7 +5,8 @@
 /*
  * A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
 
-The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
+The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right
+ corner of the grid (marked 'Finish' in the diagram below).
 
 Now consider if some obstacles are added to the grids. How many unique paths would there be?
 
@@ -48,13 +49,13 @@ namespace lc063 {
             //从最右下角取起，某一点到达终点的路径，等于其右侧和下侧的路径数
             for (int i=m-1;i>=0;i--) {
                 for (int j=n-1;j>=0;j--) {
-                    if (obstacleGrid[i][j]!=1) {
+                    if (obstacleGrid[i][j]!=1) { //如果没有障碍
                         if (j==n-1 && i==m-1) {
                             dp[i][j]=1;
                         } else if (j==n-1) {
-                            dp[i][j] = dp[i+1][j];
+                            dp[i][j] = dp[i+1][j]; //只有一条路径
                         } else if (i==m-1) {
-                            dp[i][j] = dp[i][j+1];
+                            dp[i][j] = dp[i][j+1];//只有一条路径
                         } else {
                             dp[i][j]=dp[i][j+1]+dp[i+1][j];
                         }

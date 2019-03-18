@@ -26,7 +26,8 @@ Output: 2
 Follow up:
 Can you do it in O(n) time?
  2:29
- 没思路,想复杂了，就是暴力看前一个的差和本个的差是否相反,负负得正
+ 前后两个差是否符号相反
+ 没思路,想复杂了，就是暴力看前一个的差和本个的差相乘是否<=0,
  */
 
 #include <codech/codech_def.h>
@@ -45,6 +46,9 @@ namespace lc376 {
             for (int i=2;i<nums.size();i++) {
                 if (nums[i]!=nums[i-1]) {
                     if ((nums[i]-nums[i-1])*dif<=0) {  //只要后面有相邻的构成wiggle就可以了
+                        //=0的原因是第一个dif可能=0
+                        // 需要排除划掉这个元素不会影响结果正确性
+                        //贪心算法保证的，跳过不合适的
                         ans+=1;
                         dif=nums[i]-nums[i-1];
                     }

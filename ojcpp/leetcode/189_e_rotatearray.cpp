@@ -33,21 +33,49 @@ Could you do it in-place with O(1) extra space?
 using namespace std;
 using namespace CODECH;
 
-class Solution {
-public:
-    void rotate(vector<int>& nums, int k) {
-        int l=nums.size();
-        k=k%l;
-        for (int i=1;i<=k;i++) {
-            int moving = nums[l-1];
-            int tmp = nums[l-1];
-            for (int j=l-2;j>=0;j--) {
-                nums[j+1] = nums[j];
+namespace {
+    class Solution {
+    public:
+        void rotate(vector<int>& nums, int k) {
+            int l=nums.size();
+            k=k%l;  // 比较傻的方法,相当于移动K次,
+            for (int i=1;i<=k;i++) {
+                //int moving = nums[l-1];
+                int tmp = nums[l-1];  //记住最后一个字符,每个逐个右移，太傻了
+                for (int j=l-2;j>=0;j--) {
+                    nums[j+1] = nums[j];
+                }
+                nums[0] = tmp;
             }
-            nums[0] = tmp;
         }
-    }
-};
+    };
+    // 需要额外空间
+    class Solution1 {
+    public:
+        void rotate(vector<int>& nums, int k) {
+            vector<int> t = nums;
+            for (int i = 0; i < nums.size(); ++i) {
+                nums[(i + k) % nums.size()] = t[i];
+            }
+        }
+    };
+    // 1 2 3 4 5 6 7
+    // 4 3 2 1 5 6 7
+    // 4 3 2 1 7 6 5
+    // 5 6 7 1 2 3 4
+    // 妙!!!
+    class Solution2 {
+    public:
+        void rotate(vector<int>& nums, int k) {
+            if (nums.empty() || (k %= nums.size()) == 0) return;
+            int n = nums.size();
+            reverse(nums.begin(), nums.begin() + n - k);
+            reverse(nums.begin() + n - k, nums.end());
+            reverse(nums.begin(), nums.end());
+        }
+    };
+
+}
 
 DEFINE_CODE_TEST(189_rotatearray)
 {

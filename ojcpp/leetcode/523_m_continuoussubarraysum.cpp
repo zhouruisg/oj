@@ -22,6 +22,7 @@ The length of the array won't exceed 10,000.
 You may assume the sum of all the numbers is in the range of a signed 32-bit integer.
 
 重复数字？
+找出连续数组的和是K的倍数，yitu 面试题
  */
 
 
@@ -29,7 +30,6 @@ You may assume the sum of all the numbers is in the range of a signed 32-bit int
 
 // 10级台阶， 有一个人，需要从台阶底部，走上顶部。
 // 每次可以走1级，也可以走2级，请问他走上10级台阶有多少种不同的走法？
-
 
 // count, 输入 int 类型数组， 假设每个数都是正整数。
 // nums[i] <= 1000, size(nums) <= 10000
@@ -40,9 +40,24 @@ You may assume the sum of all the numbers is in the range of a signed 32-bit int
 #include <codech/codech_def.h>
 
 using namespace std;
-
-class Solution {
-public:
+namespace {
+    class Solution {
+    public:
+        bool checkSubarraySum(vector<int>& nums, int k) {
+            /*那就是，若数字a和b分别除以数字c，若得到的余数相同，那么(a-b)必定能够整除c*/
+            int n = nums.size(), sum = 0;
+            unordered_map<int, int> m{{0,-1}}; // 表示map[0]=-1，作为一个起始位
+            for (int i = 0; i < n; ++i) {
+                sum += nums[i];
+                int t = (k == 0) ? sum : (sum % k);  //为余数
+                if (m.count(t)) {
+                    if (i - m[t] > 1) return true; //表示在前一个数之后,但是i=0不行，因为>1不成立
+                } else m[t] = i;  //记下索引
+            }
+            return false;
+        }
+    };
+}
     /*
     bool checkSubarraySum0(vector<int>& nums, int k) {
         int count = 0;
@@ -87,20 +102,7 @@ public:
         return false;
     }
     */
-    bool checkSubarraySum(vector<int>& nums, int k) {
-        /*那就是，若数字a和b分别除以数字c，若得到的余数相同，那么(a-b)必定能够整除c*/
-        int n = nums.size(), sum = 0;
-        unordered_map<int, int> m{{0,-1}};
-        for (int i = 0; i < n; ++i) {
-            sum += nums[i];
-            int t = (k == 0) ? sum : (sum % k);
-            if (m.count(t)) {
-                if (i - m[t] > 1) return true;
-            } else m[t] = i;
-        }
-        return false;
-    }
-};
+
 
 
 DEFINE_CODE_TEST(523_continuous_subarray)

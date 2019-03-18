@@ -46,40 +46,65 @@ Output: 42
 using namespace CODECH;
 using namespace std;
 
-class Solution {
-public:
-    int totalmax;
-    int maxPathSum(TreeNode* root) {
-        totalmax = INT_MIN;
-        dfs(root);
-        return totalmax;
-    }
+namespace {
+    class Solution {
+    public:
+        int totalmax;
+        int maxPathSum(TreeNode* root) {
+            totalmax = INT_MIN;
+            dfs(root);
+            return totalmax;
+        }
 
-    int dfs(TreeNode *node) { // , int &left, int &m2, int &m3
-        if (!node)
-            return 0;
-        int left = dfs(node->left);
-        int right = dfs(node->right);
-        int submax = max(left, right);
-        //int curmax = max(submax+node->val,0);
-        int curmax = submax+node->val;
-        totalmax = max(totalmax,curmax);
-        totalmax = max(totalmax,left+right+node->val);
-        return max(curmax,0);
+        int dfs(TreeNode *node) { // , int &left, int &m2, int &m3
+            if (!node)
+                return 0;
+            int left = dfs(node->left);
+            int right = dfs(node->right);
+            int submax = max(left, right);
+            //int curmax = max(submax+node->val,0);
+            int curmax = submax+node->val;
+            totalmax = max(totalmax,curmax);
+            totalmax = max(totalmax,left+right+node->val);
+            return max(curmax,0);
 
-    }
-};
+        }
+    };
+    class Solution1 {
+    public:
+        int maxPathSum(TreeNode* root) {
+            maxsum = INT_MIN;
+            return max(maxsum,dfs(root));
+        }
+    private:
+        int maxsum = INT_MIN;
+        int dfs(TreeNode *node) { // , int &left, int &m2, int &m3
+            if (!node)
+                return 0;
+            int val = node->val;
+            int left = dfs(node->left);
+            int right = dfs(node->right);
+
+            maxsum = max({maxsum,val+left+right,val,val+left,val+right});
+            return max({val,val+left,val+right});
+        }
+    };
+
+}
+
 
 DEFINE_CODE_TEST(124_h_bstmaxsum) {
-    Solution obj;
+    Solution1 obj;
     {
-        vector<int> nums{-10,9,20,null,null,15,7};
-        TreeNode *root = LCREATE_TREENODE(nums);
-        VERIFY_CASE(obj.maxPathSum(root),42);
-    }
-    {
-        vector<int> nums{-3};
+        vector<int> nums{-3,null,null};
         TreeNode *root = LCREATE_TREENODE(nums);
         VERIFY_CASE(obj.maxPathSum(root),-3);
     }
+
+    {
+        vector<int> nums{-10,9,20,null,null,15,7,null,null,null,null};
+        TreeNode *root = LCREATE_TREENODE(nums);
+        VERIFY_CASE(obj.maxPathSum(root),42);
+    }
+
 }

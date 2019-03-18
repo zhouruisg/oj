@@ -24,15 +24,16 @@ Bonus point if you are able to do this using only O(n) extra space, where n is t
 using namespace std;
 
 namespace lc120 {
-    // try DP
+    //从下往上, dp[0]=dp[0]和dp[1]得最小值+上一层triangle的值
+
     class Solution {
     public:
         int minimumTotal(vector<vector<int>>& triangle) {
             if (triangle.empty())
                 return 0;
             int sz=triangle.size();
-            vector<int> dp{triangle[sz-1]};
-            for (int i=sz-2;i>=0;i--) {
+            vector<int> dp{triangle[sz-1]};//取最后一行的值作为起始值
+            for (int i=sz-2;i>=0;i--) { //layer层次
                 for (int j=0;j<triangle[i].size();j++) {
                     dp[j]=min(dp[j],dp[j+1])+triangle[i][j];
                 }

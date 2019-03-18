@@ -20,7 +20,7 @@ Return the following binary tree:
   9  20
     /  \
    15   7
-
+从preorder和inorder构造 tree
  */
 /**
  * Definition for a binary tree node.
@@ -36,13 +36,16 @@ Return the following binary tree:
  * 思路很简单，但是写代码花了较多时间，主要是一些位置的计算比较麻烦
  * preorder的第一个肯定为root,然后去inorder找出root左边的为left subtree,inorder右边为right subtree
  * 简洁的代码可以考虑slice vector
+ *
+ * 可以参考106 rebuild from inorder and postorder来做
  */
 
 #include <codech/codech_def.h>
 using namespace std;
 using namespace CODECH;
 
-namespace makebintree {
+namespace {
+    //估计也会内存溢出
     class Solution {
     public:
         TreeNode *dfs(shared_ptr<vector<int>> preorder, shared_ptr<vector<int>> inorder) {
@@ -101,7 +104,7 @@ namespace makebintree {
         }
     };
 
-    // 需要调整范围
+    // 需要调整范围，这个做法简直吐血了
     class Solution0 {
     public:
         TreeNode *dfs(vector<int> &preorder, int p0, int p1, vector<int> &inorder, int i0, int i1) {
@@ -182,7 +185,7 @@ namespace makebintree {
 
 DEFINE_CODE_TEST(105_maketreefrompreorder)
 {
-    makebintree::Solution0 obj;
+    Solution0 obj;
 //    {
 //        vector<int> p{1,2,3,4};
 //        auto iter=find(p.begin(),p.end(),4);

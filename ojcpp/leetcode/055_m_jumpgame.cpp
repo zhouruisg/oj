@@ -21,49 +21,64 @@ A = [3,2,1,0,4], return false.
 #include <codech/codech_def.h>
 
 using namespace std;
-
-class Solution {
-public:
-    // TLE
-    bool canJump0(vector<int>& nums) {
-        return loop(nums, 0);
-    }
-
-    bool loop(vector<int> &nums, int pos) {
-        if (pos == nums.size()-1)
-            return true;
-        if (pos >= nums.size())
-            return false;
-        int jump = nums[pos];
-        for (int i = 1; i <= jump; i++) {
-            if (loop(nums, pos+i))
-                return true;
+namespace {
+    class Solution {
+    public:
+        // TLE
+        bool canJump(vector<int> &nums) {
+            return loop(nums, 0);
         }
-        return false;
-    }
-    // my solution!
-    bool canJump(vector<int>& nums) {
-        if (nums.empty())
-            return false;
-        if (nums.size()==1)
-            return true;
-        int end = nums[0];
-        int l = nums.size()-1;
-        int start = 1;
-        while (start <=end && start<=l) {
-            end = max(end, nums[start]+start);
-            if (end >= l)
-                return true;
-            start++;
-        }
-        return (end >= l)?true:false;
-    }
 
-};
+        bool loop(vector<int> &nums, int pos) {
+            if (pos == nums.size() - 1)
+                return true;
+            if (pos >= nums.size())
+                return false;
+            int jump = nums[pos];
+            for (int i = 1; i <= jump; i++) {
+                if (loop(nums, pos + i))
+                    return true;
+            }
+            return false;
+        }
+    };
+
+//    public boolean canJump(int[] A){
+//        int maxposition = 0;
+//        for(int start = 0; start <= maxposition && start < A.length; start ++){
+//            if((A[start] + start) > maxposition)
+//                maxposition = (A[start] + start);
+//            if(maxposition >= (A.length - 1))return true;
+//        }
+//        return false;
+//    }
+    //实在没看懂
+    class Solution1 {
+    public:
+        bool canJump(vector<int>& nums) {
+            if (nums.empty())
+                return false;
+            if (nums.size()==1)
+                return true;
+            int end = nums[0];
+            int l = nums.size()-1;
+            int start = 1;
+            while (start <=end && start<=l) {
+                end = max(end, nums[start]+start);
+                if (end >= l)
+                    return true;
+                start++;
+            }
+            return (end >= l)?true:false;
+        }
+    };
+}
+
+
 
 DEFINE_CODE_TEST(055_jumpgame)
 {
-    Solution obj;
+    Solution1 obj;
     {
         vector<int> nums{2,0};
         VERIFY_CASE(obj.canJump(nums),true);

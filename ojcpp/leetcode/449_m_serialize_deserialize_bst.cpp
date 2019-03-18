@@ -85,12 +85,12 @@ namespace lc449 {
                 if (idx%2==1) {
                     parent->left=child;
                     if (child)
-                        toDo.push_back(parent->left);
+                        toDo.push_back(child);
                 }
                 if (idx%2==0) {
                     parent->right=child;
                     if (child)
-                        toDo.push_back(parent->right);
+                        toDo.push_back(child);
                     toDo.pop_front();
                 }
                 idx++;

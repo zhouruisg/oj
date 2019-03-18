@@ -25,7 +25,7 @@ If there are lots of incoming S, say S1, S2, ... , Sk where k >= 1B, and you wan
 Credits:
 Special thanks to @pbrother for adding this problem and creating all test cases.
 
-
+subsequence的意思是可以删除部分字符得到这个
  */
 
 #include <codech/codech_def.h>
