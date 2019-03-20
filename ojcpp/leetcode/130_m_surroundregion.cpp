@@ -148,14 +148,14 @@ namespace lc130 {
                 if(y>0 && board[x][y-1] == 'O' ) {oxy.emplace_back(x,y-1);}
                 if(y<col-1 && board[x][y+1] == 'O' ) {oxy.emplace_back(x,y+1);}
             }
-            for(int i =0; i< row; i++)
-                48:            {
-                49:                 for(int j =0; j< col; j++)
-                    50:                 {
-                    51:                      if(board[i][j] =='O') board[i][j] = 'X';
-                    52:                      if(board[i][j] == 'Y') board[i][j] = 'O';
-                    53:                 }
-                54:            }
+//            for(int i =0; i< row; i++)
+//                48:            {
+//                49:                 for(int j =0; j< col; j++)
+//                    50:                 {
+//                    51:                      if(board[i][j] =='O') board[i][j] = 'X';
+//                    52:                      if(board[i][j] == 'Y') board[i][j] = 'O';
+//                    53:                 }
+//                54:            }
 
         }
     };
