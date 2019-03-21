@@ -28,37 +28,6 @@ namespace CODECH
     // create tree per layer
     TreeNode* CREATE_TREENODE(int idx, const std::vector<int> &list);
 
-    //TreeNode *root = LCREATE_TREENODE({1,null,2,3,null,null,null});
-    // ��ÿһ�����������.
-//    inline TreeNode* LCREATE_TREENODE(const std::vector<int> &list)
-//    {
-//        TreeNode *root = new TreeNode(list[0]);
-//        std::deque<TreeNode*> toDo{root};
-//
-//        for (int i=1; i < list.size()-1; i+=2) {
-//            TreeNode *parent = toDo.front();
-//            toDo.pop_front();
-//            if (i<list.size()) {
-//                int v1 = list[i];
-//                if (v1 != null) {
-//                    parent->left = new TreeNode(v1);
-//                    toDo.push_back(parent->left);
-//                } else {
-//                    parent->left = nullptr;
-//                }
-//            }
-//            if ((i+1) < list.size()) {
-//                int v2 = list[i + 1];
-//                if (v2 != null) {
-//                    parent->right = new TreeNode(v2);
-//                    toDo.push_back(parent->right);
-//                } else {
-//                    parent->right = nullptr;
-//                }
-//            }
-//        }
-//        return root;
-//    }
 
     TreeNode* LCREATE_TREENODE(const std::vector<int> &list);
 
