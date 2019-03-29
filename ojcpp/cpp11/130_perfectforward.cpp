@@ -16,8 +16,8 @@ namespace {
     {
         f(std::forward<T>(param));      // 转发到f
     }
-    int processVal(int value) {}
-    int processVal(int value, int priority) {}
+    int processVal(int value) { return 0;}
+    int processVal(int value, int priority) {return 0;}
 
     void testfuncptr()
     {
@@ -36,3 +36,4 @@ DEFINE_CODE_TEST(emc_130_perfect_forward)
 {
     testfuncptr();
 }
+

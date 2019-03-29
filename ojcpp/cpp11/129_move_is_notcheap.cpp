@@ -3,7 +3,8 @@
 //
 
 #include <codech/codech_def.h>
-
+#include <array>
+using namespace std;
 namespace {
     void array2D() {
         std::array<std::array<int, 3>, 3> arr = {{{5, 8, 2}, {8, 3, 1}, {5, 3, 9}}};
