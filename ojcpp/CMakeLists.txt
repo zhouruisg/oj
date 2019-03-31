@@ -55,6 +55,7 @@ file(GLOB_RECURSE CPP11 "cpp11/*.cpp")
 file(GLOB_RECURSE COMPANY "company/*.cpp")
 file(GLOB_RECURSE LINT "lintcode/*.cpp")
 file(GLOB_RECURSE DESIGN "design/*.cpp")
+file(GLOB_RECURSE CODILITY "ytilidoc/*.cpp")
 
 set(SOURCE_FILES
         ${LEETCODE}
@@ -64,6 +65,7 @@ set(SOURCE_FILES
         ${COMPANY}
         ${LINT}
         ${DESIGN}
+        ${CODILITY}
         )
 
 add_executable(ojcpp ${SOURCE_FILES})
