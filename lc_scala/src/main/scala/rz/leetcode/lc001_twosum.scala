@@ -1,5 +1,5 @@
-//import codech.BaseExtension
-//import scala.annotation.StaticAnnotation
+package rz.leetcode
+import rz.codech.BaseExtension
 
 package lc001 {
   object Solution {
@@ -30,6 +30,17 @@ package lc001 {
     }
   }
 
+  class Test extends BaseExtension {
+    def init {
+      val arr = Array(2, 7, 11, 15)
+      println(Solution.twoSum(arr, 9).deep == Array(0, 1).deep)
+      println(Solution1.twoSum(arr, 9).deep == Array(0, 1).deep)
+    }
+    //def name : String = {"001 TwoSum"}
+    val name = "001 TwoSum"
+  }
+
+}
 
 /*  object Test {
     def main(args: Array[String]) {
@@ -48,16 +59,16 @@ package lc001 {
 //      println(Solution1.twoSum(arr, 9).deep == Array(0, 1).deep)
 //    }
 //  }
-}
 
-package codech {
-  import lc001.{Solution, Solution1}
-  class TwoSumEntry extends BaseExtension {
-    def init {
-      val arr = Array(2, 7, 11, 15)
-      println(Solution.twoSum(arr, 9).deep == Array(0, 1).deep)
-      println(Solution1.twoSum(arr, 9).deep == Array(0, 1).deep)
-    }
-  }
-}
+
+//package codech {
+//  import lc001.{Solution, Solution1}
+//  class TwoSumEntry extends BaseExtension {
+//    def init {
+//      val arr = Array(2, 7, 11, 15)
+//      println(Solution.twoSum(arr, 9).deep == Array(0, 1).deep)
+//      println(Solution1.twoSum(arr, 9).deep == Array(0, 1).deep)
+//    }
+//  }
+//}
 

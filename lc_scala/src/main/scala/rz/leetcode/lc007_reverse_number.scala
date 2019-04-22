@@ -1,4 +1,8 @@
+package rz.leetcode
+import rz.codech.BaseExtension
+
 import scala.util.Try
+
 package lc007 {
   object Solution {
     def reverse(x: Int): Int = {
@@ -10,5 +14,12 @@ package lc007 {
       }
       //Try(rev.init.toInt * x.signum).getOrElse(0)
     }
+  }
+
+  class Test extends BaseExtension {
+    def init {
+      println(Solution.reverse(121) == 121)
+    }
+    val name = "007 reverse number"
   }
 }
