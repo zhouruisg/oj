@@ -26,6 +26,7 @@ elseif(WIN32 )
 endif()
 
 
+include_directories(../ojcpp/)
 #set(Boost_NO_SYSTEM_PATHS TRUE)
 #
 #if (Boost_NO_SYSTEM_PATHS)
@@ -49,10 +50,12 @@ message("project path:" ${PROJECT_SOURCE_DIR})
 
 # src files =======================================
 file(GLOB_RECURSE CPP11 "cpp11/*.cpp")
+file(GLOB_RECURSE MAIN "../ojcpp/codech/*.cpp")
 
 
 set(SOURCE_FILES
         ${CPP11}
+        ${MAIN}
         )
 
 add_executable(vcprj ${SOURCE_FILES})

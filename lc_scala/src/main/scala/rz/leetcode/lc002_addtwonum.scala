@@ -13,7 +13,7 @@ package lc002 {
       val dummy = ListNode(0)
       var prev=dummy
       var carry = 0
-      while (cur1!=null ||  cur2!=null) {
+      while (cur1!=null ||  cur2!=null || carry !=0) {
         val (s1,next1) = cur1 match {
           case null => (0,null)
           case _=> (cur1.x, cur1.next)
@@ -34,7 +34,10 @@ package lc002 {
     }
   }
   class Test extends BaseExtension {
-    def init {
+    def init: Unit = {
+      val h1:ListNode = ListNode(2,4,3)
+      val h2:ListNode = ListNode(5,6,4)
+      println(Solution.addTwoNumbers(h1,h2)=="7->0->8")
     }
     val name = "002 Add two number"
   }

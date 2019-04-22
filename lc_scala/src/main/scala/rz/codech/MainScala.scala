@@ -42,10 +42,24 @@ object MainScala {
   }
 
   def main(args: Array[String]): Unit = {
-    println("Started")
-    extensions.foreach(println)  // apply println to each element, no sideeffect
+    //println("Started")
+//    for (ext<-extensions) {
+//      println()
+//    }
+    val lst = extensions
+    for (i<- 0 until lst.length) {
+      println("#"+i+"..... "+lst(i))
+    }
+    println("Hello, world!Please input test No#")
+    val idx=scala.io.StdIn.readInt()
+    lst(idx).init
+    //extensions.foreach(println)  // apply println to each element, no sideeffect
 
-    //println("Hello, world!Please input test No#")
+
+    //println("The value of a is "+ a)
+
+
+
     // list
 //    val func = lc001.Test.entry()
 //    initCode += (()=>func)
@@ -59,8 +73,7 @@ object MainScala {
 //    }
 
 
-    //val a=scala.io.StdIn.readInt()
-    //println("The value of a is "+ a)
+
 
 
     //lc001.Test.entry()
