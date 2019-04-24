@@ -18,6 +18,7 @@ The three squares in given range are 9,
  */
 
 #include <codech/codech_def.h>
+#include <cmath>
 using namespace std;
 namespace {
     int solution(int a, int b)

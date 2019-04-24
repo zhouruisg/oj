@@ -37,7 +37,7 @@ Explanation: Maximum amount of money the thief can rob = 4 + 5 = 9.
 using namespace std;
 using namespace CODECH;
 namespace {
-    class Solution {
+    class Solution0 {
     public:
         int maxVal = INT_MIN;
         int rob(TreeNode* root) {
@@ -53,11 +53,33 @@ namespace {
                 dfs(node->left,amount,true);
                 dfs(node->right,amount,true);
                 maxVal=max(amount,maxVal);
-                //amount-=node->val;
+                amount-=node->val;
             }
             dfs(node->left,amount,false);
             dfs(node->right,amount,false);
             maxVal=max(amount,maxVal);
+        }
+    };
+    //
+    class Solution {
+    public:
+        int rob(TreeNode* root) {
+            auto pr=dfs(root);
+            return pr.second;
+        }
+        pair<int,int> dfs(TreeNode *node) {
+            if (!node)
+                return make_pair(0,0);
+            int val = node->val;
+            //pair->first => take this node
+            //pair->second => not take this node
+            auto pl = dfs(node->left);
+            auto pr = dfs(node->right);
+            int temp=max(val+pl.first+pr.first,pl.second+pr.second);
+            int first = pl.second+pr.second;  //
+            int second = temp;
+
+            return make_pair(first,second);
         }
     };
 }
@@ -66,6 +88,12 @@ namespace {
 DEFINE_CODE_TEST(337_rob_house3)
 {
     Solution obj;
-    TreeNode *root=LCREATE_TREENODE({3,4,5,1,3,null,1,null,null,null,null,null,null});
-    VERIFY_CASE(obj.rob(root),7);
+    {
+        TreeNode *root=LCREATE_TREENODE({4,1,null,2,null,3,null,null,null});
+        VERIFY_CASE(obj.rob(root),7);
+    }
+    {
+        TreeNode *root=LCREATE_TREENODE({3,4,5,1,3,null,1,null,null,null,null,null,null});
+        VERIFY_CASE(obj.rob(root),9);
+    }
 }

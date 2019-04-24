@@ -25,6 +25,7 @@
 //
 //
 #include <codech/codech_def.h>
+#include <cmath>
 using namespace std;
 
 namespace {
