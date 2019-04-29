@@ -1,24 +1,33 @@
 package main
 
 import (
-	"fmt"
 	"reflect"
+	"fmt"
 )
 
 func init() {
-	testm["twosum"] = func() []int  {
-		return twoSum([]int{2, 7, 11, 15},9)
-	}
+	//testm["twosum"] = func() []int  {
+	//	return twoSum([]int{2, 7, 11, 15},9)
+	//}
+	//
+	//testarr = append(testarr,
+	//	&TestInfo{"twosum",func() bool  {
+	//		var ret = twoSum([]int{2, 7, 11, 15},9)
+	//		var exp = []int{0,1}
+	//		return reflect.DeepEqual(ret, exp)
+	//		//return ret == exp
+	//	}})
 
-	testarr = append(testarr,
-		&TestInfo{"twosum",func() bool  {
+	testList = append(testList,TestEntry{"twosum",func (){
+		fmt.Println("execute two sum test")
+		{
 			var ret = twoSum([]int{2, 7, 11, 15},9)
 			var exp = []int{0,1}
-			return reflect.DeepEqual(ret, exp)
-			//return ret == exp
-		}})
+			fmt.Println(reflect.DeepEqual(ret, exp))
+		}
+	}})
 
-	testList = append(testList,TestEntry{"twosum"})
+
 	//testList = append(testList,
 	//	&TestInfo{"twosum",func() bool  {
 	//		var ret = twoSum([]int{2, 7, 11, 15},9)
@@ -37,14 +46,6 @@ func init() {
 
 }
 
-func (entry TestEntry) execTest(){
-	fmt.Println("execute two sum test")
-	{
-		var ret = twoSum([]int{2, 7, 11, 15},9)
-		var exp = []int{0,1}
-		fmt.Println(reflect.DeepEqual(ret, exp))
-	}
-}
 
 func twoSum(nums []int, target int) []int {
 	tmpMap := make(map[int]int)
