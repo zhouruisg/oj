@@ -40,12 +40,21 @@ var (
 func CreateLinkedList(lst []int) *ListNode{
 	dummy := ListNode{0,nil}
 	prev := &dummy
-	for v:=range lst {
+	for _,v:=range lst {
 		prev.Next = &ListNode{v, nil}
 		prev = prev.Next
 	}
 	return dummy.Next
 }
+
+func LinkedListToArr(head *ListNode) []int {
+	var ret []int
+	for ;head!=nil;head = head.Next {
+		ret = append(ret, head.Val)
+	}
+	return ret
+}
+
 func main() {
 	fmt.Println("Hello World LeetCode Golang")
 	fmt.Println("---------------------")
@@ -64,6 +73,7 @@ func main() {
 		fmt.Printf("%d%s%20s\n",idx, "..........", pr.name)
 	}
 
+	//testList[1].callback()
 	reader := bufio.NewReader(os.Stdin)
 	idxStr, err:=reader.ReadString('\n')
 	idxStr = strings.TrimSuffix(idxStr, "\n")
