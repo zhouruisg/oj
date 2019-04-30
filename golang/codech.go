@@ -68,10 +68,13 @@ func main() {
 	//}
 	//fmt.Printf("\nLength: %d", len(readText))
 	//fmt.Printf("\nData Read: \n%s", readText)
-
+	var container = []string{"zero","one","two"}
 	for idx, pr := range testList {
-		fmt.Printf("%d%s%20s\n",idx, "..........", pr.name)
+		fmt.Printf("%d%s%20s\n",idx, "..........", pr.name,)
+		container :=map[int]string{0:"zero",1:"one",2:"twp"}
+		fmt.Printf("element value is %q",container[1])
 	}
+	fmt.Printf("outter element value is %q",container[1])
 
 	//testList[1].callback()
 	reader := bufio.NewReader(os.Stdin)
