@@ -8,7 +8,7 @@ using namespace std;
 
 namespace CODECH {
     // depreciated, create tree per layer
-    TreeNode* CREATE_TREENODE(int idx, const std::vector<int> &list)
+    /*TreeNode* CREATE_TREENODE(int idx, const std::vector<int> &list)
     {
         size_t len = list.size();
         if (idx <(int) len)
@@ -27,7 +27,46 @@ namespace CODECH {
         {
             return nullptr;
         }
+    }*/
+    TreeNode* CREATE_TREENODE(const std::vector<int> &list)
+    {
+        TreeNode *root = new TreeNode(list[0]);
+        std::deque<TreeNode*> toDo{root};
+
+        int idx = 0;
+        while (!toDo.empty()) {
+            TreeNode *parent = toDo.front();
+            toDo.pop_front();
+
+            idx++;
+            if (idx<list.size()) {
+                int v1 = list[idx];
+                if (v1 != null) {
+                    parent->left = new TreeNode(v1);
+                    toDo.push_back(parent->left);
+                } else {
+                    parent->left = nullptr;
+                }
+            } else {
+                break;
+            }
+
+            idx++;
+            if (idx<list.size()) {
+                int v2 = list[idx];
+                if (v2 != null) {
+                    parent->right = new TreeNode(v2);
+                    toDo.push_back(parent->right);
+                } else {
+                    parent->right = nullptr;
+                }
+            } else {
+                break;
+            }
+        }
+        return root;
     }
+
 
 //    TreeNode* LCREATE_TREENODE(const std::vector<int> &list)
 //    {

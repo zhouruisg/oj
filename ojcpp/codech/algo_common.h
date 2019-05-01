@@ -26,7 +26,8 @@ namespace CODECH
     };
 
     // create tree per layer
-    TreeNode* CREATE_TREENODE(int idx, const std::vector<int> &list);
+    //TreeNode* CREATE_TREENODE(int idx, const std::vector<int> &list);
+    TreeNode* CREATE_TREENODE(const std::vector<int> &list);
 
 
     TreeNode* LCREATE_TREENODE(const std::vector<int> &list);
