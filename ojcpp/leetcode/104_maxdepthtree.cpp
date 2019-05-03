@@ -25,42 +25,47 @@ return its depth = 3.
 #include <codech/algo_common.h>
 using namespace CODECH;
 using namespace std;
-class Solution {
-public:
-    int maxDepth(TreeNode* root) {
-        int maxDepth = 0;
-        int depth = 0;
-        maxDepth = traversal(root, maxDepth,depth);
-        return maxDepth;
-    }
+namespace {
+    class Solution0 {
+    public:
+        int maxDepth(TreeNode* root) {
+            int maxDepth = 0;
+            int depth = 0;
+            maxDepth = traversal(root, maxDepth,depth);
+            return maxDepth;
+        }
 
-    int traversal(TreeNode *node, int &maxDepth, int depth) {
-        if (!node)
+        int traversal(TreeNode *node, int &maxDepth, int depth) {
+            if (!node)
+                return depth;
+
+            maxDepth=max(maxDepth, traversal(node->left,maxDepth,depth+1));
+            maxDepth=max(maxDepth, traversal(node->right,maxDepth,depth+1));
+
+            return maxDepth;
+        }
+    };
+
+    //
+    class Solution {
+    public:
+        int maxDepth(TreeNode* root) {
+            if (!root)
+                return 0;
+            int depth = 0;
+            depth = max(depth, 1 + maxDepth(root->left));
+            depth = max(depth, 1 + maxDepth(root->right));
             return depth;
+        }
+    };
+}
 
-        maxDepth=max(maxDepth, traversal(node->left,maxDepth,depth+1));
-        maxDepth=max(maxDepth, traversal(node->right,maxDepth,depth+1));
-
-        return maxDepth;
-    }
-    // ===============================
-    int maxDepth1(TreeNode* root) {
-        if (!root)
-            return 0;
-        int maxDepth = 0;
-        maxDepth = max(maxDepth, 1 + maxDepth1(root->left));
-        maxDepth = max(maxDepth, 1 + maxDepth1(root->right));
-        return maxDepth;
-    }
-};
 
 DEFINE_CODE_TEST(104_maxdepthtree)
 {
-    //TODO
-//    TreeNode *root = CODECH::CREATE_TREENODE(0, {3, 9, 20, 0, 0, 15, 7});
-//    TREE_PREORDER(root);
-//    Solution obj;
-//    VERIFY_CASE(obj.maxDepth(root),3);
-
-
+    Solution obj;
+    {
+        TreeNode *root = CODECH::CREATE_TREENODE({3, 9, 20, null, null, 15, 7});
+        VERIFY_CASE(obj.maxDepth(root),3);
+    }
 }

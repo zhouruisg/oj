@@ -1,7 +1,7 @@
 import glob, codecs
 
 #configfiles = glob.glob(r'C:\Users\sam\Desktop\**\*.txt', recursive=True)
-#fn="ojcpp/company/memo.txt"
+#fn="ojcpp/company/amazon_memo.txt"
 
     
 
