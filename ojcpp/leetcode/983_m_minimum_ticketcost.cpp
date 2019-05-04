@@ -49,83 +49,30 @@ costs.length == 3
 
 
 #include <codech/codech_def.h>
+#include <set>
 using namespace std;
 
 namespace {
-    class Solution0 {
-    public:
-        int mincostTickets(vector<int>& days, vector<int>& costs) {
-            if (min({costs[0],costs[1]/7,costs[2]/30}) == costs[0]) {
-                return days.size()*costs[0];
-            }
-
-            int count = 3;
-            if (costs[1]/7<costs[2]/30) {
-                count = 2;
-            }
-            vector<int> dp(days.size()+1,0);
-            for (int i=1;i<=days.size();i++) {
-                dp[i]=dp[i-1]+costs[0];
-            }
-
-            vector<int> gap{1,7,30};
-            int minCost=costs[0]*days.size();
-
-            for (int i=0;i<3;i++) {
-                int start = 0;
-                for (int j=1;j<days.size();j++) {
-                    if (days[j]-days[start]<gap[i]) {
-                        dp[j+1] = min(dp[j+1],dp[start]+costs[i]);
-                    } else {
-                        dp[j+1] = min({dp[j+1],dp[j]+costs[0],dp[j]+costs[1],dp[j]+costs[2]});
-                        start=j;
-                    }
-                }
-            }
-            return dp[days.size()];
-        }
-    };
-
-
     class Solution {
     public:
         int mincostTickets(vector<int>& days, vector<int>& costs) {
-            if (min({costs[0],costs[1]/7,costs[2]/30}) == costs[0]) {
-                return days.size()*costs[0];
-            }
-
-            int count = 3;
-            if (costs[1]/7<costs[2]/30) {
-                count = 2;
-            }
-            vector<int> dp(days.size()+1,0);
-            for (int i=1;i<=days.size();i++) {
-                dp[i]=dp[i-1]+costs[0];
-            }
-
-            vector<int> gap{1,7,30};
-            int minCost=costs[0]*days.size();
-
-            for (int i=0;i<3;i++) {
-                for (int j=0;j<days.size();j++) {
-
-                    for (int k=j;k>0;k--) {
-                        days[k]>days[j]-gap[i]
-                    }
-
-
-
-
-
+            vector<int> dp(366,0);
+            dp[0]=0;
+            set<int> trip(days.begin(),days.end());
+            for (int i=1;i<366;i++) {
+                if (trip.count(i)==0) {
+                    dp[i]=dp[i-1];
+                } else {
+                    dp[i] = min({dp[i-1]+costs[0],dp[max(0,i-7)]+costs[1],dp[max(0,i-30)]+costs[2]});
                 }
             }
-            return dp[days.size()];
+            return dp[days[days.size()-1]];
         }
     };
 }
 
 
-DEFINE_CODE_TEST(993_minimum_ticketcost)
+DEFINE_CODE_TEST(983_minimum_ticketcost)
 {
     Solution obj;
     {
