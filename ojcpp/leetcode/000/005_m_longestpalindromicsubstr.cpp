@@ -33,7 +33,7 @@ namespace {
             for (int i=0;i<s.length();i++) {
                 dp[i][i]=true;  //i 到 i，即字符本身是回文
                 for (int j=0;j<i;j++) {
-                    // j->i是否为回文,两个条件
+                    // j-i是否为回文,两个条件
                     // 1. 如果j+1 ~ i-1是回文并且s[j]==s[i],当i=0，循环没进来
                     // 2. 相邻字符相等(因为j+1和i-1无法覆盖相邻字符case)
                     dp[j][i] = (s[j]==s[i] && i-j==1) || (s[j]==s[i] && dp[j+1][i-1]==true );

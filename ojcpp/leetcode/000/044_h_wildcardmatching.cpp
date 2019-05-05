@@ -96,7 +96,7 @@ namespace wildcard {
             dp[0][0]=true;  // empty string match empty string
             for (int i=0;i<n;i++) {
                 if (p[i]=='*') {
-                    dp[0][i+1] = dp[0][i]; //主要是处理连续*,另一层意思是当p 为*是,dp[0][pj]的match情况等于dp[0][pj-1]
+                    dp[0][i+1] = dp[0][i]; //主要是处理连续*,另一层意思是当p 为*时,dp[0][pj]的match情况等于dp[0][pj-1]
                 }
             }
             for (int i=1;i<=m;i++) {

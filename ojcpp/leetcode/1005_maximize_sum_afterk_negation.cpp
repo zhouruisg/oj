@@ -68,7 +68,7 @@ namespace c127 {
     };
 }
 
-DEFINE_CODE_TEST(c127_maximizesum)
+DEFINE_CODE_TEST(1005_maximizesum)
 {
     c127::Solution obj;
     {
