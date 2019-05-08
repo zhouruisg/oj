@@ -24,7 +24,7 @@ using namespace CODECH;
 
 class Solution {
 public:
-    //no less than target
+    //no less than target (>=target)
     int lower_bound(vector<int> &nums, int target) {
         int start = 0, end = nums.size()-1;
         while (start <= end) {
