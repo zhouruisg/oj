@@ -32,38 +32,45 @@ Your code should preferably run in O(n) time and use only O(1) memory.
 using namespace CODECH;
 using namespace std;
 
-class Solution {
-public:
-    ListNode *getIntersectionNode0(ListNode *headA, ListNode *headB) {
-        unordered_set<ListNode*> nodes;
-        while (headA) {
-            nodes.insert(headA);
-            headA = headA->next;
-        }
-
-        while (headB) {
-            auto &&iter = nodes.find(headB);
-            if (iter!=nodes.end()) {
-                return headB;
+namespace {
+    // hashmap
+    class Solution0 {
+    public:
+        ListNode *getIntersectionNode0(ListNode *headA, ListNode *headB) {
+            unordered_set<ListNode *> nodes;
+            while (headA) {
+                nodes.insert(headA);
+                headA = headA->next;
             }
-            headB = headB->next;
+
+            while (headB) {
+                auto &&iter = nodes.find(headB);
+                if (iter != nodes.end()) {
+                    return headB;
+                }
+                headB = headB->next;
+            }
+
+            return nullptr;
         }
+    };
 
-        return nullptr;
-    }
+    class Solution {
+    public:
+        // O(1) space
+        ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+            ListNode *cur1 = headA;
+            ListNode *cur2 = headB;
 
-    // O(1) space
-    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        ListNode *cur1 = headA;
-        ListNode *cur2 = headB;
-
-        while (cur1 != cur2) {
-            cur1=cur1?cur1->next:headB;
-            cur2=cur2?cur2->next:headA;
+            while (cur1 != cur2) {
+                cur1=cur1?cur1->next:headB;
+                cur2=cur2?cur2->next:headA;
+            }
+            return cur1;
         }
-        return cur1;
-    }
-};
+    };
+
+}
 
 
 DEFINE_CODE_TEST(160_intersection_linkedlist)
