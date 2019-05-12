@@ -21,32 +21,34 @@ namespace {
         // ["aa", "aaa"] => true
         // ["aaa", "aa"] => false
 
-        unordered_map<char,int> map;
-        int order=1;
-        for (auto &ch:order) {
-            map[ch] =order++;
-        }
-        //assume arr is not empty
-        auto prev = arr[0];
-        auto comp = [](string &a,string &b) {
-            int l=min(a.length(),b.length())
-            for (int i=0;i<l;i++) {
-                if (map[a[i]]<map[b[i]])
-                    return true;
-                else if (map[a[i]]>map[b[i]])
-                    return false;
-            }
+//        unordered_map<char,int> map;
+//        int order=1;
+//        for (auto &ch:order) {
+//            map[ch] =order++;
+//        }
+//        //assume arr is not empty
+//        auto prev = arr[0];
+//        auto comp = [](string &a,string &b) {
+//            int l=min(a.length(),b.length())
+//            for (int i=0;i<l;i++) {
+//                if (map[a[i]]<map[b[i]])
+//                    return true;
+//                else if (map[a[i]]>map[b[i]])
+//                    return false;
+//            }
+//
+//            if (b.length()<a.length())
+//                return false;
+//            else
+//                return true;
+//        }
+//
+//        for (int i=1;i<arr.size();i++) {
+//            if (!comp(prev,arr[i]))
+//                return false;
+//        }
+//        return true;
 
-            if (b.length()<a.length())
-                return false;
-            else
-                return true;
-        }
-
-        for (int i=1;i<arr.size();i++) {
-            if (!comp(prev,arr[i]))
-                return false;
-        }
         return true;
     }
 }
