@@ -4,6 +4,8 @@
 
 //可变模版参数
 #include <codech/codech_def.h>
+#include <bitset>
+
 using namespace std;
 
 namespace {
@@ -34,11 +36,11 @@ namespace {
         }
     }
 
-
+    void print() {} // 必须需要这个空参数
     template <typename T, typename...Args>
     void print(const T& firstArg, const Args& ...args) {// 用于萃取第一个参数出来
         cout << firstArg << endl;
-        print(args);
+        print(args...);
     };
 
     void test_print() {
