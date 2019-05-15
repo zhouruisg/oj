@@ -50,6 +50,8 @@ namespace {
         }
     }
 
+    // -------------------------------------------------
+    //TODO function try block 还不是很明白机制
     // --absorb exception inside ctor -----------------
     struct C {
         C(){
@@ -73,11 +75,13 @@ namespace {
         int x;
     };
     void test_function_try_block() {
-        D ddd;
+        C objc;
+        D objd;  /// call abort, must throw outside function block
     }
 
 
-    // exception in dtor
+    //---------------------------------------------------
+    // exception in dtor, 不允许，调用terminate 结束
     class ExceptionDtor  {
     public:
         ~ExceptionDtor() {
@@ -136,6 +140,27 @@ namespace {
             std::cout<<"catch exp"<<std::endl;
         }
     }
+    // ----------------------------------------------------------------
+    // example
+    #include <stdexcept>
+    class MyException : public std::runtime_error {
+    public:
+        MyException() : std::runtime_error("MyException") { }
+    };
+
+    void do_some_work() {
+        // ...
+        throw MyException();
+    }
+
+    void test_use_exception()
+    {
+        try {
+            do_some_work();
+        } catch (std::exception &e) {
+            cout << e.what() << endl;
+        }
+    }
 }
 
 DEFINE_CODE_TEST(007_exception)
@@ -144,6 +169,8 @@ DEFINE_CODE_TEST(007_exception)
 //    partial_ctor();
     //test_function_try_block();
     //exception_in_dtor();
-    test_execption_dtor2();
+    //test_execption_dtor2();
+
+    test_use_exception();
 }
 
