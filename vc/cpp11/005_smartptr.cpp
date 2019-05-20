@@ -39,6 +39,7 @@ using namespace std;
 //    }
 //}
 
+// unique_ptr
 namespace {
     struct B {
         virtual void bar() { std::cout << "B::bar\n"; }
@@ -136,8 +137,9 @@ namespace sharedptr {
         std::this_thread::sleep_for(5s);
     }
 
-    // enable shared
+
     // enable shared -------------------------------------
+    // 前提，该对象必须已经存在一个被shared_ptr管理的指针，并且要从enabled_shared_from_this继承
     struct Good:std::enable_shared_from_this<Good>
     {
         std::shared_ptr<Good> getSharedptr() {
@@ -151,8 +153,8 @@ namespace sharedptr {
             cout << "in enable shared from this ctor" << endl;
         }
     };
-    void enable_shared_test()
-    {
+
+    void test_enabled_bad() {
         Good *pBad = new Good();
         // Bad: shared_from_this is called without having std::shared_ptr owning the caller
         try {
@@ -161,7 +163,10 @@ namespace sharedptr {
             // undefined behavior (until C++17) and std::bad_weak_ptr thrown (since C++17)
             std::cout << e.what() << '\n';
         }
+    }
 
+    void test_enable_good()
+    {
         //Good
         std::shared_ptr<Good> p1(new Good());
         try {
@@ -171,19 +176,32 @@ namespace sharedptr {
             // undefined behavior (until C++17) and std::bad_weak_ptr thrown (since C++17)
             std::cout << e.what() << '\n';
         }
-        //bad 2
-//        Good *pBad2 = new Good();
-//        try {
-//            std::shared_ptr<Good> p1(pBad2->getSharedptr());
-//            //std::make_shared<Good> 不可以接受smartptr?
-//        } catch(std::bad_weak_ptr& e) {
-//            // undefined behavior (until C++17) and std::bad_weak_ptr thrown (since C++17)
-//            std::cout << e.what() << '\n';
-//        }
-
-
-
     }
+
+    void test_enabled_shared() {
+        test_enabled_bad();
+        test_enable_good();
+    }
+
+    // 对数组的支持
+    void test_shared_arr() {
+        //std::shared_ptr<int[]> p2(new int[10]); //C++ 17 good
+        //p1[0]=1;
+        std::shared_ptr<int> p1(new int[10],[](int*ptr){delete []ptr;});
+        p1.get()[1]=0;
+    }
+
+    // ---------------------------------------------
+    // atomic 支持
+    struct A {};
+    struct B :public A { int x=1;};
+    void test_shared_atomic() {
+        shared_ptr<A> a = std::make_shared<B>();
+        shared_ptr<A> b;
+        std::atomic_store(&b,a); // Error here
+    }
+
+
 }
 
 namespace weakptr{
@@ -211,15 +229,19 @@ namespace weakptr{
 
         std::weak_ptr<Resource> wp1(p1);
         std::cout << "use count : " << wp1.use_count() << "\n";
-        p1.reset();
+        //p1.reset();
 
         //weak ptr->shared ptr
-        std::shared_ptr<Resource> spw1 = wp1.lock();
+        //std::shared_ptr<Resource> spw1 = wp1.lock();  //good
+        std::shared_ptr<Resource> spw1(wp1);  //good
         if (spw1)
         {
             std::cout << "create a shared ptr from the resource" << std::endl;
             std::cout << "use count after a new shared_ptr: " << wp1.use_count() << "\n";
+        } else {
+            cout << "unable to get shared_ptr from weak_ptr" << endl;
         }
+
         // std::shared_ptr<Resource> spw2 = wpw1;  // compiler error
         p1.reset();
         p1 = nullptr;
@@ -234,9 +256,14 @@ namespace weakptr{
 
 DEFINE_CODE_TEST(005_smartptr)
 {
-    sharedptr::enable_shared_test();
+    //sharedptr::test_enabled_shared();
+    //sharedptr::test_shared_arr();
+
+    sharedptr::test_shared_atomic();
+
     //sharedptr::sharedptr_ref_test();
     //unique_ptr_test();
+
     //weakptr::weak_ptr_test();
 }
 
