@@ -67,7 +67,7 @@ namespace {
                 delete ptr;
         }
     };
-
+#include <memory>
     void unique_ptr_test()
     {
         {
@@ -130,11 +130,11 @@ namespace sharedptr {
         {
             std::shared_ptr<Resource> ptr(new Resource(5));
             std::thread t(reader, std::ref(ptr));
-            std::this_thread::sleep_for(2s);
+            std::this_thread::sleep_for(chrono::seconds(2));
             std::cout << "main thread exit.." << std::endl;
             t.detach(); // otherwise thread will be terminated
         }
-        std::this_thread::sleep_for(5s);
+        std::this_thread::sleep_for(chrono::seconds(5));
     }
 
 

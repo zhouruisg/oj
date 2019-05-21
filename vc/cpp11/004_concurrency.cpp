@@ -102,7 +102,7 @@ namespace {
     {
         // random-number generator (use c as seed to get different sequences)
         cout << "thread ID " << this_thread::get_id() << endl;
-        this_thread::sleep_for(2s);
+        this_thread::sleep_for(chrono::seconds(2));  // C++14 support 2s
 
         default_random_engine dre(c);
         uniform_int_distribution<int> id(10, 1000);
@@ -190,7 +190,7 @@ namespace {
             cout << ready_fut.get() << endl;
         };
 
-        std::thread t([](auto sf) {
+        std::thread t([](auto sf) {  // only c++14 support
             while (true) {
                 cout << "running " << endl;
                 this_thread::sleep_for(chrono::seconds(1));
@@ -326,7 +326,7 @@ namespace {
         A() {
             std::atomic<bool> go(false);
             readyFlag = true;
-            readyFlag=ATOMIC_FLAG_INIT;
+            readyFlag = ATOMIC_FLAG_INIT;  //false
             // std::atomic<bool> go2(readyFlag); // error
             std::atomic<bool> *go2 = new std::atomic<bool>(true); // good
             delete go2;
