@@ -177,6 +177,7 @@ namespace {
         throw "foo 98";  // no compiler warning
     }
 
+    // disable in C++14
     void foo98_throw() throw(int) {
         throw "foo 98";
     }

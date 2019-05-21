@@ -39,7 +39,7 @@ namespace {
         static const std::size_t MinVals = 28;
     };
     void test_static_member() {
-        fwd2(Widget::MinVals);
+        //fwd2(Widget::MinVals);
         //f2(Widget::MinVals);
     }
 

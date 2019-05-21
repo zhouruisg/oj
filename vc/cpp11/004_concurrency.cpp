@@ -319,6 +319,32 @@ namespace {
         }
     }
 
+    // --------------------------------------------
+    // atomic
+    class A {
+    public:
+        A() {
+            std::atomic<bool> go(false);
+            readyFlag = true;
+            readyFlag=ATOMIC_FLAG_INIT;
+            // std::atomic<bool> go2(readyFlag); // error
+            std::atomic<bool> *go2 = new std::atomic<bool>(true); // good
+            delete go2;
+            bool val = readyFlag.load(std::memory_order_relaxed);
+            readyFlag.store(false,std::memory_order_relaxed);
+            cout << atomic_load(&readyFlag) << endl; // c-style
+        }
+        A(const A &rhs) {} //must have copy ctor
+        std::atomic<bool> readyFlag;
+    };
+
+    void test_atomic() {
+//        A *obja = new A();
+//        delete obja;
+        A obja;
+        A objb = obja;
+    }
+
 
 
 }
@@ -344,9 +370,12 @@ DEFINE_CODE_TEST(004_concurrency)
     //test_future1();
     //test_future2();
     //test_future3();
-    test_future4();
-    cout << "return to outer" << endl;
-    this_thread::sleep_for(chrono::seconds(30));
+
+//    test_future4();
+//    cout << "return to outer" << endl;
+//    this_thread::sleep_for(chrono::seconds(30));
+
+    test_atomic();
 
     //task_lambda();
 }
