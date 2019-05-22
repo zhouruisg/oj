@@ -78,7 +78,8 @@ namespace {
             cout << "B ctor" << endl;
         }
     private:
-        int buf[1000*1000*1000]; // 1G
+        //int buf[1000*1000*1000]; // 1G -> vc error
+		int buf[1000 * 1000]; //  
     };
 
     void test_crtp() {

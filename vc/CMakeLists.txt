@@ -8,8 +8,9 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 
 if (LINUX)
+    message("use linux")
     set(CXX_FLAGS
-            -std=c++0x
+            -std=c++1z
         )
 elseif(APPLE)
     set(CXX_FLAGS

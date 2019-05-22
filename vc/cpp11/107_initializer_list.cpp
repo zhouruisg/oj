@@ -3,6 +3,7 @@
 //
 
 #include <codech/codech_def.h>
+#include <atomic>
 using namespace std;
 
 namespace {
@@ -20,10 +21,11 @@ namespace {
         Widget(std::initializer_list<long double> il) {
             std::cout << "Widget(std::initializer_list<long double> il)" << std::endl;
         }
-
+        //member initialization
         std::vector<int> m_vec{ 0,1,2,3,4 };
         int x{ 20 };
-        std::atomic<int> m_ai1{ 0 };  // no assignment
+        std::atomic<int> m_ai1{ 0 };  // ctor
+
         // std::vector<int> m_vec2{ 1.0,2,3 };   error
     };
 

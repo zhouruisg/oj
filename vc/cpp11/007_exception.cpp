@@ -280,6 +280,7 @@ namespace {
             myfunction2();  // 没有违反异常规范，但是不在catch 列表里，属于uncaught exception
         }
         catch (int) { std::cerr << "caught int\n"; }
+		return 0;
     }
 
     // ---------------------------------------------
