@@ -10,12 +10,12 @@ namespace c11
         {
             m_data[0]='\0';
         }
-        String(const String &rhs)
+        String(const String &rhs)  // copy ctor
         {
             m_data = new char[rhs.size() + 1];
             strcpy(m_data, rhs.c_str());
         }
-        String(const char* raw) // 需要判断是否为null?
+        String(const char* raw) // ctor 需要判断是否为null?
         {
             m_data = new char[strlen(raw)+1];
             strcpy(m_data, raw);
@@ -28,7 +28,7 @@ namespace c11
 
         // why not copy rhs.data to this?
         // = itself?
-        String& operator=(const String& rhs)
+        String& operator=(const String& rhs) // use by value
         {
             String tmp(rhs);
             swap(tmp);
@@ -42,7 +42,7 @@ namespace c11
             rhs.m_data = nullptr;
         }
 
-        String& operator=(String&& rhs)
+        String& operator=(String&& rhs)  //copy assignment
         {
             swap(rhs);
             return *this;
