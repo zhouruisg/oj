@@ -188,11 +188,12 @@ namespace sharedptr {
         //std::shared_ptr<int[]> p2(new int[10]); //C++ 17 good
         //p1[0]=1;
         std::shared_ptr<int> p1(new int[10],[](int*ptr){delete []ptr;});
+        cout << "shared_ptr sie " << sizeof(p1) << endl;  // 16bytes on 64bit platform
         p1.get()[1]=0;
     }
 
     // ---------------------------------------------
-    // atomic 支持
+    // atomic 支持 shared_ptr
     struct A {};
     struct B :public A { int x=1;};
     void test_shared_atomic() {
@@ -257,9 +258,9 @@ namespace weakptr{
 DEFINE_CODE_TEST(005_smartptr)
 {
     //sharedptr::test_enabled_shared();
-    //sharedptr::test_shared_arr();
+    sharedptr::test_shared_arr();
 
-    sharedptr::test_shared_atomic();
+    //sharedptr::test_shared_atomic();
 
     //sharedptr::sharedptr_ref_test();
     //unique_ptr_test();
