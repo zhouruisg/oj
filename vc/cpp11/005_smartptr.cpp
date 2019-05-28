@@ -188,7 +188,21 @@ namespace sharedptr {
         //std::shared_ptr<int[]> p2(new int[10]); //C++ 17 good
         //p1[0]=1;
         std::shared_ptr<int> p1(new int[10],[](int*ptr){delete []ptr;});
+        // p1[0] = 0; no support
         p1.get()[1]=0;
+    }
+
+    // deleter
+    class Widget {};
+    auto widgetDeleter1 = [](Widget*pw) {delete pw;};
+    auto widgetDeleter2 = [](Widget*pw) {delete pw;};
+
+    void test_deleter() {
+        // shared_ptr<Widget,widgetDeleter1> ptr1(new Widget);  bad
+        shared_ptr<Widget> ptr1(new Widget,widgetDeleter1);
+        shared_ptr<Widget> ptr2(new Widget,widgetDeleter2);
+        //shared_ptr<Widget> ptr3(ptr2,widgetDeleter1);  //bad
+        vector<shared_ptr<Widget>> vec{ptr1,ptr2};
     }
 
     // ---------------------------------------------
@@ -259,7 +273,8 @@ DEFINE_CODE_TEST(005_smartptr)
     //sharedptr::test_enabled_shared();
     //sharedptr::test_shared_arr();
 
-    sharedptr::test_shared_atomic();
+    //sharedptr::test_shared_atomic();
+    sharedptr::test_deleter();
 
     //sharedptr::sharedptr_ref_test();
     //unique_ptr_test();
