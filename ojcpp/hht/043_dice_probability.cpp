@@ -5,6 +5,7 @@
 // n个骰子，所有朝上一面的点数之和为s，求s的各种取值的概率
 
 #include <codech/codech_def.h>
+#include <cmath>
 using namespace std;
 
 namespace {
