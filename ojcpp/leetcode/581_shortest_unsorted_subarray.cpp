@@ -16,33 +16,74 @@ Explanation: You need to sort [6, 4, 8, 10, 9] in ascending order to make the wh
 Note:
 Then length of the input array is in range [1, 10,000].
 The input array may contain duplicates, so ascending order here means <=.
+最小需要调整多少个元素，使整个数组有序
+ 1。sort之后比较  O(nlogN)
  */
 #include <codech/codech_def.h>
 using namespace std;
 
 namespace {
 
+    class Solution0 {
+    public:
+        int findUnsortedSubarray(vector<int> &nums) {
+            vector<int> clone = nums;
+            sort(clone.begin(),clone.end());
+            int start =clone.size(),end=0;
+            for (int i=0;i<clone.size();i++) {
+                if (clone[i]!=nums[i]) {
+                    end = i;
+                    start = min(start,i);
+                }
+            }
+            return end>start?(end-start+1):0;
+        }
+    };
+
     class Solution {
     public:
         int findUnsortedSubarray(vector<int> &nums) {
-            if (nums.empty()) return 0;
-            int start = INT_MIN, end = -1;
-            int maxNum = nums[0];
-            for (int i=1;i<nums.size();i++) {
-                if (nums[i]<=maxNum) {
-                    if (start==INT_MIN)
-                        start = i-1;
-                    //start = (start==INT_MIN?i-1:start);
-                    end = i;
-                } else {
-                    maxNum = nums[i];
+            stack<int> st;
+            int left = nums.size(),right = 0;
+            for (int i=0;i<nums.size();i++) {
+                while (!st.empty() && nums[st.top()]> nums[i]) {
+                    left = min(left, st.top());
+                    st.pop();
                 }
+                st.push(i);
             }
-            if (start==INT_MIN) return 0;
-            return end-start+1;
+            stack<int> tmp;
+            st.swap(tmp);
+            for (int i=nums.size()-1;i>=0;i--) {
+                while (!st.empty() && nums[st.top()] < nums[i]) {
+                    right = max(right, st.top());
+                    st.pop();
+                }
+                st.push(i);
+            }
+
+            return right>left?(right-left+1):0;
         }
     };
 }
+
+/*
+if (nums.empty()) return 0;
+int start = INT_MIN, end = -1;
+int maxNum = nums[0];
+for (int i=1;i<nums.size();i++) {
+if (nums[i]<=maxNum) {
+if (start==INT_MIN)
+start = i-1;
+//start = (start==INT_MIN?i-1:start);
+end = i;
+} else {
+maxNum = nums[i];
+}
+}
+if (start==INT_MIN) return 0;
+return end-start+1;
+*/
 
 DEFINE_CODE_TEST(581_shortest_unsorted_array)
 {
