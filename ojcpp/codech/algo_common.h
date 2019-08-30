@@ -18,18 +18,18 @@ namespace CODECH
     //const double null = std::numeric_limits<double>::infinity();
 
     struct TreeNode {        
-        int data;
+        //int data;
         int val;
         TreeNode *left;
         TreeNode *right;
-        TreeNode(int x) : data(x), val(x), left(NULL), right(NULL) {}
+        TreeNode(int x) : val(x), left(NULL), right(NULL) {}
     };
 
     // create tree per layer
     //TreeNode* CREATE_TREENODE(int idx, const std::vector<int> &list);
     TreeNode* CREATE_TREENODE(const std::vector<int> &list);
 
-
+    // deprecated
     TreeNode* LCREATE_TREENODE(const std::vector<int> &list);
 
     // node data first

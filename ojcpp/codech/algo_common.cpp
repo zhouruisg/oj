@@ -28,6 +28,7 @@ namespace CODECH {
             return nullptr;
         }
     }*/
+    //create tree from a list
     TreeNode* CREATE_TREENODE(const std::vector<int> &list)
     {
         TreeNode *root = new TreeNode(list[0]);
@@ -139,7 +140,7 @@ namespace CODECH {
     {
         if (root)
         {
-            ss  << root->data << " ";
+            ss  << root->val << " ";
             DO_TREE_PREORDER(root->left,ss);
             DO_TREE_PREORDER(root->right,ss);
         } else {
