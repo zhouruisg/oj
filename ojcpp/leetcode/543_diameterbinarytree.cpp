@@ -31,7 +31,34 @@ using namespace CODECH;
  */
 class Solution {
 public:
+    int ans = 0;
     int diameterOfBinaryTree(TreeNode* root) {
+         dfs(root);
+         return ans>0?ans-1:0;
+    }
 
+
+    int dfs(TreeNode *node) {
+        if (!node)
+            return 0;
+        int left = dfs(node->left);
+        int right = dfs(node->right);
+        ans = max(ans,left+right+1);
+        return max(left,right)+1;
     }
 };
+
+
+DEFINE_CODE_TEST(543_diameterbst) {
+    {
+        Solution obj;
+        TreeNode *root= CREATE_TREENODE({1,2,3,4,5});
+        VERIFY_CASE(obj.diameterOfBinaryTree(root),3);
+    }
+    {
+        Solution obj;
+
+        VERIFY_CASE(obj.diameterOfBinaryTree(nullptr),0);
+    }
+
+}
