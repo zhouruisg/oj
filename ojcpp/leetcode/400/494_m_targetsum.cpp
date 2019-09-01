@@ -30,6 +30,7 @@ using namespace std;
 using namespace CODECH;
 
 namespace {
+    // brute force
     class Solution0 {
     public:
         int target = 0;
@@ -62,7 +63,7 @@ namespace {
     };
 
     // 记忆法更好,只要index和sum相同，后面的结果也相同
-    class Solution {
+    class Solution1 {
     public:
         int findTargetSumWays(vector<int>& nums, int S) {
             vector<vector<int>> memo(nums.size(),vector<int>(2000,INT_MAX));
@@ -85,6 +86,43 @@ namespace {
                 memo[start][sum+1000] = add+sub;
                 return memo[start][sum+1000];
             }
+
+        }
+    };
+    /*
+     * public class Solution {
+    public int findTargetSumWays(int[] nums, int S) {
+        int[][] dp = new int[nums.length][2001];
+        dp[0][nums[0] + 1000] = 1;
+        dp[0][-nums[0] + 1000] += 1;
+        for (int i = 1; i < nums.length; i++) {
+            for (int sum = -1000; sum <= 1000; sum++) {
+                if (dp[i - 1][sum + 1000] > 0) {
+                    dp[i][sum + nums[i] + 1000] += dp[i - 1][sum + 1000];
+                    dp[i][sum - nums[i] + 1000] += dp[i - 1][sum + 1000];
+                }
+            }
+        }
+        return S > 1000 ? 0 : dp[nums.length - 1][S + 1000];
+    }
+}
+     */
+    // DP
+    class Solution {
+    public:
+        int findTargetSumWays(vector<int>& nums, int S) {
+            vector<vector<int>> dp(nums.size(),vector<int>(2001,0));
+            dp[0][nums[0] + 1000] = 1;
+            dp[0][-nums[0] + 1000] += 1;
+            for (size_t i=1;i<nums.size();i++) {
+                for (int sum=-1000;sum<=1000;sum++) {
+                    if (dp[i-1][sum+1000] > 0 ) {
+                        dp[i][sum+nums[i]+1000] = dp[i-1][sum+1000];
+                        dp[i][sum-nums[i]+1000] += dp[i-1][sum+1000];
+                    }
+                }
+            }
+            return S>1000?0:dp[nums.size()-1][S+1000];
 
         }
     };
