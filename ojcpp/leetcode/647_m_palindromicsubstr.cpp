@@ -34,7 +34,22 @@ namespace {
     class Solution {
     public:
         int countSubstrings(string s) {
-
+            int ans = 0;
+            bool dp[1000][1000]= {false};
+            for (size_t i=0;i<s.length();i++) {
+                dp[i][i] = true;
+                for (size_t j=0;j<i;j++) {
+                    dp[j][i] = (i-j==1 && s[i]==s[j]) || (dp[j+1][i-1] == true && s[j]==s[i]);
+                }
+            }
+            for (size_t i=0;i<s.length();i++) {
+                for (size_t j=i;j<s.length();j++) {
+                    if (dp[i][j]) {
+                        ans++;
+                    }
+                }
+            }
+            return ans;
         }
     };
 }
