@@ -55,84 +55,120 @@ Another valid answer is [5,2,6,null,4,null,7].
 
 using namespace CODECH;
 
-class Solution {
-public:
-    // from introduction to algo, slow....
-    TreeNode * root_;
-    TreeNode* deleteNode0(TreeNode* root, int key) {
-        root_ = root;
-        TreeNode *cur = root;
-        TreeNode *pre = nullptr;
-        while (cur!=nullptr && cur->val!=key) {
-            pre = cur;
-            if (key < cur->val) {
-                cur = cur->left;
-            } else if (key > cur->val) {
-                cur = cur->right;
-            }
-        }
-        deleteTreeNode(pre, cur);
-        return root_;
-    }
-
-    void transplant(TreeNode *parent, TreeNode*delNode,TreeNode *newNode) {
-        if (parent == nullptr) {
-            root_ = newNode;
-        } else if (parent->left == delNode) {
-            parent->left = newNode;
-        } else {
-            parent->right = newNode;
-        }
-    }
-
-    void deleteTreeNode(TreeNode *parent, TreeNode *delNode) {
-        if (delNode == nullptr)
-            return;
-        if (delNode->left == nullptr) {
-            transplant(parent, delNode, delNode->right);
-        } else if (delNode->right == nullptr) {
-            transplant(parent, delNode, delNode->left);
-        } else {
-            // find minimum in right subtree
-            TreeNode* next = delNode->right;
-            TreeNode* pre = delNode;
-            for(; next->left != nullptr; pre = next, next = next->left);
-
-            if (pre != delNode) {
-                transplant(pre, next, next->right);
-                next->right = delNode->right;
-            }
-            transplant(parent, delNode, next);
-            next->left = delNode->left;
-        }
-    }
-
-    // -----------------------------
-    TreeNode* deleteNode(TreeNode* root, int key) {
-        if (!root)
-            return nullptr;
-        if (key < root->val) {
-            root->left = deleteNode(root->left, key);
-        } else if (key > root->val) {
-            root->right = deleteNode(root->right, key);
-        } else { // find the node
-            if (!root->left) {
-                return root->right;
-            } else if (!root->right) {
-                return root->left;
-            } else {
-                // find the minimum successor in right tree
-                TreeNode *next = root->right;
-                while (next->left) {
-                    next = next->left;
+namespace {
+    class Solution0 {
+    public:
+        // from introduction to algo, slow....
+        TreeNode * root_;
+        TreeNode* deleteNode0(TreeNode* root, int key) {
+            root_ = root;
+            TreeNode *cur = root;
+            TreeNode *pre = nullptr;
+            while (cur!=nullptr && cur->val!=key) {
+                pre = cur;
+                if (key < cur->val) {
+                    cur = cur->left;
+                } else if (key > cur->val) {
+                    cur = cur->right;
                 }
-                root->val = next->val;
-                root->right = deleteNode(root->right, root->val);
+            }
+            deleteTreeNode(pre, cur);
+            return root_;
+        }
+
+        void transplant(TreeNode *parent, TreeNode*delNode,TreeNode *newNode) {
+            if (parent == nullptr) {
+                root_ = newNode;
+            } else if (parent->left == delNode) {
+                parent->left = newNode;
+            } else {
+                parent->right = newNode;
             }
         }
-        return root;
-    }
-};
+
+        void deleteTreeNode(TreeNode *parent, TreeNode *delNode) {
+            if (delNode == nullptr)
+                return;
+            if (delNode->left == nullptr) {
+                transplant(parent, delNode, delNode->right);
+            } else if (delNode->right == nullptr) {
+                transplant(parent, delNode, delNode->left);
+            } else {
+                // find minimum in right subtree
+                TreeNode* next = delNode->right;
+                TreeNode* pre = delNode;
+                for(; next->left != nullptr; pre = next, next = next->left);
+
+                if (pre != delNode) {
+                    transplant(pre, next, next->right);
+                    next->right = delNode->right;
+                }
+                transplant(parent, delNode, next);
+                next->left = delNode->left;
+            }
+        }
+
+        // -----------------------------
+        TreeNode* deleteNode(TreeNode* root, int key) {
+            if (!root)
+                return nullptr;
+            if (key < root->val) {
+                root->left = deleteNode(root->left, key);
+            } else if (key > root->val) {
+                root->right = deleteNode(root->right, key);
+            } else { // find the node
+                if (!root->left) {
+                    return root->right;
+                } else if (!root->right) {
+                    return root->left;
+                } else {
+                    // find the minimum successor in right tree
+                    TreeNode *next = root->right;
+                    while (next->left) {
+                        next = next->left;
+                    }
+                    root->val = next->val;
+                    root->right = deleteNode(root->right, root->val);
+                }
+            }
+            return root;
+        }
+    };
+
+    class Solution {
+    public:
+        TreeNode* deleteNode(TreeNode* root, int key) {
+            if (root== nullptr) {
+                return nullptr;
+            }
+            if (root->val == key) {
+                TreeNode *left = root->left;
+                TreeNode *right = root->right;
+
+                if (left==nullptr) {
+                    return right;
+                } else if (right == nullptr) {
+                    return left;
+                }
+                TreeNode *p=root->right;
+
+                while (p->left) {
+                    p = p->left;
+                }
+                p->left = left;
+                return right;
+            } else {
+                if (root->val > key) {
+                    root->left = deleteNode(root->left, key);
+                } else if (root->val < key) {
+                    root->right = deleteNode(root->right, key);
+                }
+                return root;
+            }
+        }
+    };
+}
+
 
 DEFINE_CODE_TEST(450_delnodeinbst)
 {
