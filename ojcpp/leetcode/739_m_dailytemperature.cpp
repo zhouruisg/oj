@@ -13,6 +13,7 @@ Note: The length of temperatures will be in the range [1, 30000]. Each temperatu
 #include <codech/codech_def.h>
 
 using namespace std;
+using namespace CODECH;
 
 namespace {
     class Solution0 {
@@ -39,20 +40,24 @@ namespace {
     class Solution {
     public:
         vector<int> dailyTemperatures(vector<int>& T) {
-            vector<int> ret;
-            for (size_t i=0;i<T.size();i++) {
-                bool found = false;
-                for (size_t j=i+1;j<T.size();j++) {
-                    if (T[j]>T[i]) {
-                        ret.emplace_back(j-i);
-                        found = true;
+            vector<int> ret(T.size(),0);
+            stack<pair<int,int>> st;
+            st.emplace(make_pair(T[0],0));
+
+            for (size_t i=1;i<T.size();i++) {
+                while (!st.empty()) {
+                    auto prev = st.top();
+                    if ( T[i] > prev.first ) {
+                        int days = i - prev.second;
+                        ret[prev.second] = days;
+                        st.pop();
+                    } else {
                         break;
                     }
                 }
-                if (!found) {
-                    ret.emplace_back(0);
-                }
+                st.emplace(make_pair(T[i],i));
             }
+
             return ret;
         }
     };
@@ -62,8 +67,11 @@ DEFINE_CODE_TEST(739_daily_temperature)
 {
     Solution obj;
     {
-
-
+        vector<int> temps{73, 74, 75, 71, 69, 72, 76, 73};
+        vector<int> exp = {1, 1, 4, 2, 1, 1, 0, 0};
+        auto actual = obj.dailyTemperatures(temps);
+        cout << PRINT_VEC(move(actual)) << endl;
+        VERIFY_CASE(actual == exp,true);
 
     }
 }
