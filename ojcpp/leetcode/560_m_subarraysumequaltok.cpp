@@ -16,13 +16,49 @@ The range of numbers in the array is [-1000, 1000] and the range of the integer 
 #include <codech/codech_def.h>
 
 using namespace std;
+using namespace CODECH;
 
 namespace {
+    //brute force
+    class Solution0 {
+    public:
+        int subarraySum(vector<int>& nums, int k) {
+            int ans = 0;
+            for (size_t i=0;i < nums.size();i++) {
+                int sum = 0;
+                for (size_t j=i;j < nums.size();j++) {
+                    sum+=nums[j];
+                    if (sum==k)
+                        ans++;
+                }
+            }
+            return ans;
+        }
+    };
+
     class Solution {
     public:
         int subarraySum(vector<int>& nums, int k) {
             int ans = 0;
-            for (size_t)
+            for (size_t i=0;i < nums.size();i++) {
+                int sum = 0;
+                for (size_t j=i;j < nums.size();j++) {
+                    sum+=nums[j];
+                    if (sum==k)
+                        ans++;
+                }
+            }
+            return ans;
         }
     };
+}
+
+DEFINE_CODE_TEST(560_subarray_sum_equal_k)
+{
+    Solution obj;
+    {
+        vector<int> nums {1,1,1};
+        VERIFY_CASE(obj.subarraySum(nums,2),2);
+
+    }
 }
