@@ -16,8 +16,7 @@ return 2.
 Note: You may assume the string contain only lowercase letters.
 
  5:30pm->
- use
-
+amazon
  */
 
 #include <codech/codech_def.h>

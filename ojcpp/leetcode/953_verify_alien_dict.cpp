@@ -34,7 +34,8 @@ Note:
 order.length == 26
 All characters in words[i] and order are english lowercase letters.
 
- FB interview
+ facebook interview
+ 给出一个words列表，判断是不是所有的词都按顺序排列
  */
 
 #include <codech/codech_def.h>
