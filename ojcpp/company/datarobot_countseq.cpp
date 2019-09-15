@@ -11,7 +11,7 @@
 using namespace std;
 
 namespace {
-    bool count_seq(string txt, ) {
+    void count_seq(string txt) {
 
     }
 }
