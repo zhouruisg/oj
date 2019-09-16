@@ -26,15 +26,15 @@ namespace {
             int maxLen = max(a.length(),b.length());
             int idx = 0;
             string ans;
-            while (idx<maxLen) {
-                int ida = a.length() - idx - 1;
-                int v = ida<a.length()?a[]:0 + idx<b.length()?b[idx]:0;
-                int carry = v>1?1:0;
-                if (v==2) v = 0;
-                ans += to_string(v);
-                idx--;
-            }
-            std::reverse(ans.begin(),ans.end());
+//            while (idx<maxLen) {
+//                int ida = a.length() - idx - 1;
+//                int v = ida<a.length()?a[]:0 + idx<b.length()?b[idx]:0;
+//                int carry = v>1?1:0;
+//                if (v==2) v = 0;
+//                ans += to_string(v);
+//                idx--;
+//            }
+//            std::reverse(ans.begin(),ans.end());
             return ans;
         }
     };

@@ -26,6 +26,8 @@ The above output corresponds to the 5 unique BST's shown below:
    2     1         2                 3
 
    这个简直没有思路，睡觉去了
+利用1..n产生 所有独特的树
+
 
 17:00
 目前打算采用的方法太笨，但是思路可能是对的，一个新的节点，可以作为之前tree的parent,也可以作为其右树，
