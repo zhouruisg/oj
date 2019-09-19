@@ -29,9 +29,12 @@ The integer n is in the range [0, 100].
 using namespace std;
 
 namespace {
+    // 数学解法
     class Solution {
     public:
         int leastInterval(vector<char>& tasks, int n) {
+
+
 
         }
     };
