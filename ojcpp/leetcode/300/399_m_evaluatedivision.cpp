@@ -21,3 +21,17 @@ queries = [ ["a", "c"], ["b", "a"], ["a", "e"], ["a", "a"], ["x", "x"] ].
 
 The input is always valid. You may assume that evaluating the queries will result in no division by zero and there is no contradiction.
  */
+
+#include <codech/codech_def.h>
+
+using namespace std;
+
+namespace {
+    class Solution {
+    public:
+        vector<double> calcEquation(vector<vector<string>>& equations, vector<double>& values, vector<vector<string>>& queries) {
+
+        }
+    };
+}
+
