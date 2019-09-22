@@ -95,9 +95,23 @@ namespace CODECH
     }
 
     template<typename T>
-    bool VERIFY_VEC(std::vector<T> &&m,std::vector<T> &n){
+    bool VERIFY_VEC0(std::vector<T> &&m,std::vector<T> &n){
         sort(m.begin(),m.end());
         sort(n.begin(),n.end());
+        if (m!=n) {
+            for (auto &v : m){
+                std::cout << v << " ";
+            }
+            std::cout<<std::endl;
+            return false;
+        }
+        return true;
+    }
+
+    template<typename T>
+    bool VERIFY_VEC(std::vector<T> &&m,std::vector<T> &&n){
+        //sort(m.begin(),m.end());
+        //sort(n.begin(),n.end());
         if (m!=n) {
             for (auto &v : m){
                 std::cout << v << " ";

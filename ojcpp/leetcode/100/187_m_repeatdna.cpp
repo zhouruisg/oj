@@ -45,13 +45,13 @@ DEFINE_CODE_TEST(187_findrepeatdna)
 {
     lc187::Solution obj;
     {
-        vector<string> exp0{};
-        VERIFY_CASE(VERIFY_VEC(obj.findRepeatedDnaSequences(""),exp0),true);
+        //vector<string> exp0{};
+        VERIFY_CASE(VERIFY_VEC(obj.findRepeatedDnaSequences(""),{}),true);
 
         VERIFY_CASE(trim(PRINT_STRVEC(obj.findRepeatedDnaSequences("AAAAAAAAAAAA"))),
                     "AAAAAAAAAA");
-        vector<string> exp{"AAAAACCCCC","CCCCCAAAAA"};
+        //vector<string> exp{"AAAAACCCCC","CCCCCAAAAA"};
         VERIFY_CASE(VERIFY_VEC(obj.findRepeatedDnaSequences("AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT"),
-                    exp),true);
+                               {"AAAAACCCCC","CCCCCAAAAA"}),true);
     }
 }

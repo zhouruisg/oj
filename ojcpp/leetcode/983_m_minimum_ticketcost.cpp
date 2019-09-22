@@ -45,6 +45,7 @@ days is in strictly increasing order.
 costs.length == 3
 1 <= costs[i] <= 1000
  10:49
+ jump trading
  */
 
 

@@ -34,7 +34,12 @@ Constraints:
 1 <= text1.length <= 1000
 1 <= text2.length <= 1000
 The input strings consist of lowercase English characters only.
-参见datarobot
+
+ 参见datarobot
+最长公共字串，中间可以不连续
+问题转化为dp[0...i][0..j]是否存在公共字串
+text1[i]==text2[j] && dp[i-1][j-1]存在公共字串
+
  */
 
 #include <codech/codech_def.h>
@@ -44,6 +49,7 @@ namespace {
     class Solution {
     public:
         int longestCommonSubsequence(string text1, string text2) {
+
 //            int dp[1001][1001] = {0};
 //            for (int i=1; i <text1.length();i++) {
 //                for (int j=1;j<text2.length();j++) {

@@ -68,12 +68,12 @@ DEFINE_CODE_TEST(199_tree_rightview)
     Solution obj;
     {
         TreeNode*root=LCREATE_TREENODE({1,2,3,null,5,null,4,null,null,null,null});
-        vector<int> exp{1,3,4};
-        VERIFY_CASE(VERIFY_VEC(obj.rightSideView(root),exp),true);
+        //vector<int> exp{1,3,4};
+        VERIFY_CASE(VERIFY_VEC(obj.rightSideView(root),{1,3,4}),true);
     }
     {
         //TreeNode*root=LCREATE_TREENODE({1,2,3,null,5,null,4,null,null,null,null});
-        vector<int> exp{};
-        VERIFY_CASE(VERIFY_VEC(obj.rightSideView(nullptr),exp),true);
+        //vector<int> exp{};
+        VERIFY_CASE(VERIFY_VEC(obj.rightSideView(nullptr),{}),true);
     }
 }

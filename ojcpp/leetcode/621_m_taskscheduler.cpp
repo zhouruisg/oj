@@ -51,7 +51,7 @@ namespace {
                 if (c==maxCount) count2++;
             }
 
-            return max(tasks.size(),(maxCount-1)*(n+1) + count2);
+            return max(int(tasks.size()),(maxCount-1)*(n+1) + count2);
 
         }
     };

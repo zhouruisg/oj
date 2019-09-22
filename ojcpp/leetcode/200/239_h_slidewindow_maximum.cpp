@@ -65,17 +65,17 @@ DEFINE_CODE_TEST(239_slidingwindowmaximum)
     lc239::Solution obj;
     {
         vector<int> nums{1,3,-1,-3,5,3,6,7};
-        vector<int> exp{1,3,-1,-3,5,3,6,7};
-        VERIFY_CASE(VERIFY_VEC(obj.maxSlidingWindow(nums,1),exp),true);
+        //vector<int> exp{1,3,-1,-3,5,3,6,7};
+        VERIFY_CASE(VERIFY_VEC(obj.maxSlidingWindow(nums,1),{1,3,-1,-3,5,3,6,7}),true);
     }
     {
         vector<int> nums{};
         vector<int> exp{};
-        VERIFY_CASE(VERIFY_VEC(obj.maxSlidingWindow(nums,3),exp),true);
+        VERIFY_CASE(VERIFY_VEC(obj.maxSlidingWindow(nums,3),{}),true);
     }
     {
         vector<int> nums{1,3,-1,-3,5,3,6,7};
-        vector<int> exp{1,3,-1,-3,5,3,6,7};
-        VERIFY_CASE(VERIFY_VEC(obj.maxSlidingWindow(nums,1),exp),true);
+        //vector<int> exp{1,3,-1,-3,5,3,6,7};
+        VERIFY_CASE(VERIFY_VEC(obj.maxSlidingWindow(nums,1),{1,3,-1,-3,5,3,6,7}),true);
     }
 }
