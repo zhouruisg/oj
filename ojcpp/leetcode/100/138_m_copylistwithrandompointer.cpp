@@ -53,7 +53,7 @@ public:
     };
 }
 
-DEFINE_CODE_TEST(129_sum_root_leaf)
+DEFINE_CODE_TEST(138_copylistrandompointer_sum_root_leaf)
 {
     Solution obj;
     {

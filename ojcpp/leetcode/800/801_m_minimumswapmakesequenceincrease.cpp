@@ -67,22 +67,37 @@ namespace {
 //    nswap = swap + 1
 //    swap, keep = nswap, nkeep
 //    return min(swap, keep)
+
+    // 由于能保证有结果，所以可以可以swap
+    // nswap - 该位置是换的最小次数，nkeep，该位置不换的最小次数
+    // 必须换
+    // 可以换也可以不换
+    // 不能够换
     class Solution {
     public:
         int minSwap(vector<int>& A, vector<int>& B) {
-            int ans=0;
-            int sw = 0, keep = 0;
-            for (int i=1;i<A.size()-1;i++) {
-                if (A[i]>A[i-1] && B[i]>B[i-1]) {
-                    keep = keep;
-                    sw = sw +1;
-                }
-                if (A[i]>B[i-1] && B[i]>A[i-1]) {
+            vector<int> nkeep(A.size(),0);
+            vector<int> nswap(A.size(),0);
+            nswap[0] = 1;  //第一个元素swap,所以次数为1
 
+            for (int i=1;i<A.size();i++) {
+                if (A[i] <= A[i-1] || B[i] <=B[i-1]) {
+                    // must swap
+                    nswap[i] = nkeep[i-1] +1; // 因为本元素swap，所以前一个必须keep,否则本条件不成立
+                    nkeep[i] = nswap[i-1];  // 因为必须要swap了，如果还想keep本元素，就要前一个元素swap,
+                } else if (A[i]>B[i-1] && B[i]>A[i-1]) {
+                    // 前提，比前一个元素大，所以可swap 可keep
+                    // swap
+                    nswap[i] = min(nswap[i-1], nkeep[i-1]) +1;
+                    // keep
+                    nkeep[i] = min(nswap[i-1], nkeep[i-1]);
+                } else {
+                    // must keep
+                    nkeep[i] = nkeep[i-1];
+                    nswap[i] = nswap[i-1]+1; //如果本元素swap，那么前一个也要swap
                 }
-
             }
-            return ans;
+            return min(nswap[A.size()-1],nkeep[A.size()-1]);
         }
     };
 }
