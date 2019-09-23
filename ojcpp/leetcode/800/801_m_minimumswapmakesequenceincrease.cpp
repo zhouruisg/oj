@@ -3,7 +3,7 @@
 //
 
 
-/*
+/*https://leetcode.com/problems/minimum-swaps-to-make-sequences-increasing/
  * https://leetcode.com/contest/weekly-contest-76/problems/minimum-swaps-to-make-sequences-increasing/
  * We have two integer sequences A and B of the same non-zero length.
 
@@ -24,34 +24,76 @@ Note:
 
 A, B are arrays with the same length, and that length will be in the range [1, 1000].
 A[i], B[i] are integer values in the range [0, 2000].
+初步想法 使用greedy,
+但是 https://www.cnblogs.com/grandyang/p/9311385.html，
+如果当前数字小于等于前面一个数字，那么就交换一下，但是问题就来了，到底是交换当前位置的数字，还是前一个位置的数字呢，
+像这种求极值的题目，不是Greedy就是DP啊，一般难题偏DP的比较多。
  */
 
 #include <codech/codech_def.h>
-#include <vector>
 
 using namespace std;
-
-class Solution {
-public:
-    int minSwap(vector<int>& A, vector<int>& B) {
-        int l = A.size();
-        int cur1=0,cur2=0;
-        int step = 0;
-        while (cur1!=l) {
-            if (A[cur1] <= A[cur1+1]) {
-                
+namespace {
+    // greedy not work
+    class Solution0 {
+    public:
+        int minSwap(vector<int>& A, vector<int>& B) {
+            int ans=0;
+            for (int i=1;i<A.size()-1;i++) {
+                if (A[i]>A[i-1] and A[i]<A[i+1] and B[i]>B[i-1] and B[i]<B[i+1] ) {
+                } else if (A[i]!=B[i]){
+                    swap(A[i],B[i]);
+                    ans++;
+                }
             }
+            return ans;
         }
-        return 0;
-    }
-};
+    };
+    // DP
+    //
+//    swap, keep = 1, 0
+//    for i in range(1, len(A)):
+//    if A[i] <= A[i - 1] or B[i] <= B[i - 1]:
+//# swap
+//    nswap = keep + 1
+//    nkeep = swap
+//    elif A[i] > B[i - 1] and B[i] > A[i - 1]:
+//# swap or keep
+//    nkeep = min(keep, swap)
+//    nswap = nkeep + 1
+//    else:
+//# keep
+//    nkeep = keep
+//    nswap = swap + 1
+//    swap, keep = nswap, nkeep
+//    return min(swap, keep)
+    class Solution {
+    public:
+        int minSwap(vector<int>& A, vector<int>& B) {
+            int ans=0;
+            int sw = 0, keep = 0;
+            for (int i=1;i<A.size()-1;i++) {
+                if (A[i]>A[i-1] && B[i]>B[i-1]) {
+                    keep = keep;
+                    sw = sw +1;
+                }
+                if (A[i]>B[i-1] && B[i]>A[i-1]) {
+
+                }
+
+            }
+            return ans;
+        }
+    };
+}
+
 
 DEFINE_CODE_TEST(801_minimum_swap_make_sequence_increase)
 {
     Solution obj;
     {
-        vector<int> a{1,3,5,4};
-        vector<int> b{1,2,3,7};
+        vector<int> a{0,4,4,5,9};
+        vector<int> b{0,1,6,8,10};
         VERIFY_CASE(obj.minSwap(a,b),1);
     }
 
@@ -59,6 +101,12 @@ DEFINE_CODE_TEST(801_minimum_swap_make_sequence_increase)
         vector<int> a{1,3,5,4};
         vector<int> b{1,2,3,7};
         VERIFY_CASE(obj.minSwap(a,b),1);
+    }
+
+    {
+        vector<int> a{2,2,5,4};
+        vector<int> b{1,3,3,7};
+        VERIFY_CASE(obj.minSwap(a,b),2);
     }
 
 }

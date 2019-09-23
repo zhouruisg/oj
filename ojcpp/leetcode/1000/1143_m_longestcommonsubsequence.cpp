@@ -38,7 +38,8 @@ The input strings consist of lowercase English characters only.
  参见datarobot
 最长公共字串，中间可以不连续
 问题转化为dp[0...i][0..j]是否存在公共字串
-text1[i]==text2[j] && dp[i-1][j-1]存在公共字串
+1.text1[i]==text2[j] && dp[i-1][j-1]存在公共字串
+2.max(dp[i-1][j], dp[i][j-1]);
 
  */
 
@@ -49,15 +50,22 @@ namespace {
     class Solution {
     public:
         int longestCommonSubsequence(string text1, string text2) {
-
-//            int dp[1001][1001] = {0};
-//            for (int i=1; i <text1.length();i++) {
-//                for (int j=1;j<text2.length();j++) {
-//                    dp[i][j] = text1[i]==text2[j]?dp[i-1][j-1]+1:max(dp[i-1][j], dp[i][j-1]);
-//                }
-//            }
-//            return dp[text1.length()-1][]
-return 0;
+           int dp[1001][1001] = {0};
+           for (int i=1; i <=text1.length();i++) {
+               for (int j=1;j<=text2.length();j++) {
+                   dp[i][j] = text1[i-1]==text2[j-1]?dp[i-1][j-1]+1:max(dp[i-1][j], dp[i][j-1]);
+               }
+           }
+           return dp[text1.length()][text2.length()];
         }
     };
+}
+
+DEFINE_CODE_TEST(1143_longest_common_subsequence) {
+    Solution obj;
+    {
+        VERIFY_CASE(obj.longestCommonSubsequence("abcde","ace"), 3);
+        VERIFY_CASE(obj.longestCommonSubsequence("abc","abc"), 3);
+        VERIFY_CASE(obj.longestCommonSubsequence("abc","def"), 0);
+    }
 }

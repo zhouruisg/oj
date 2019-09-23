@@ -44,7 +44,7 @@ namespace c127bst {
     };
 }
 
-DEFINE_CODE_TEST(c127_maketreefrompreorder) {
+DEFINE_CODE_TEST(1008_maketreefrompreorder) {
     c127bst::Solution obj;
     {
         vector<int> p{4,2};
