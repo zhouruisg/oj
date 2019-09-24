@@ -27,6 +27,8 @@ You must return the copy of the given head as a reference to the cloned list.
  */
 
 #include <codech/codech_def.h>
+using namespace std;
+
 namespace {
 
 // Definition for a Node.
@@ -48,7 +50,51 @@ public:
     class Solution {
     public:
         Node* copyRandomList(Node* head) {
+            if (!head) return nullptr;
+            std::deque<tuple<Node*,Node*,Node*>> todo{{head,nullptr,nullptr}};
+            unordered_set<Node*> visited;
+            
+            Node*newHead = nullptr;
+            while (!todo.empty()) {
+                Node*node,*nextP,*randomP;
+                std::tie(node,nextP,randomP) = todo.front();
+                todo.pop_front();
 
+                if (visited.find(node)!=visited.end()) {
+                    continue;
+                } else {
+                    visited.insert(node);
+                }
+
+
+
+                Node *cloneNode= new Node(node->val,nullptr, nullptr);
+                if (!newHead)
+                    newHead = cloneNode;
+                if (nextP) {
+                    nextP->next = cloneNode;
+                }
+                if (randomP) {
+                    randomP->random = cloneNode;
+                }
+
+
+                if (node->next) {
+                    if (node->next == node) {
+                        cloneNode->next = cloneNode;
+                    } else {
+                        todo.emplace_back(node->next,cloneNode,nullptr);
+                    }
+                }
+                if (node->random) {
+                    if (node->random == node) {
+                        cloneNode->random = cloneNode;
+                    } else {
+                        todo.emplace_back(node->random, nullptr, cloneNode);
+                    }
+                }
+            }
+            return newHead;
         }
     };
 }
