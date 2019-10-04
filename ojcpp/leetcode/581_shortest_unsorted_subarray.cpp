@@ -14,7 +14,7 @@ Input: [2, 6, 4, 8, 10, 9, 15]
 Output: 5
 Explanation: You need to sort [6, 4, 8, 10, 9] in ascending order to make the whole array sorted in ascending order.
 Note:
-Then length of the input array is in range [1, 10,000].
+Then length of the input array is in range [1, 10,0000].
 The input array may contain duplicates, so ascending order here means <=.
 最小需要调整多少个元素，使整个数组有序
  1。sort之后比较  O(nlogN)

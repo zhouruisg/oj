@@ -67,7 +67,7 @@ namespace CODECH
     std::string PRINT_MATRIX(std::vector<std::vector<int>> &m);
 
     template<typename T>
-    bool VERIFY_VV(std::vector<std::vector<T>> &&m,std::vector<std::vector<T>> &n){
+    bool VERIFY_VV(std::vector<std::vector<T>> &&m,std::vector<std::vector<T>> &n, bool sort_flag=true){
             std::vector<T> a,b;
             for (auto &row : m){
                 for (auto &v : row) {
@@ -79,8 +79,11 @@ namespace CODECH
                     b.emplace_back(v);
                 }
             }
-            sort(a.begin(),a.end());
-            sort(b.begin(),b.end());
+            if (sort_flag) {
+                sort(a.begin(),a.end());
+                sort(b.begin(),b.end());
+            }
+
             if (a!=b) {
                 for (auto &row : m){
                     for (auto &v : row) {

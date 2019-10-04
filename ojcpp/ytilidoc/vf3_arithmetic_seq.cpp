@@ -18,7 +18,7 @@
  * write a function:
  * int solution(int A[],int N)
  * that,given array A consisting of N numbers, return the number of arithmetic slice in A
- * the function should return -1 if the result exceeds 1,000,000,000
+ * the function should return -1 if the result exceeds 1,0000,0000,0000
  *[-1,1,3,3,3,2,1,0]
  *the function should return 5 because there are five arithmetic slices of that array, namely:
  *(0,2),(2,4),(4,6),(4,7),(5,7)

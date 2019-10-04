@@ -12,7 +12,7 @@ We are given a list cpdomains of count-paired domains. We would like a list of c
 
 Example 1:
 Input:
-["900 google.mail.com", "50 yahoo.com", "1 intel.mail.com", "5 wiki.org"]
+["9001 discuss.leetcode.com"]
 Output:
 ["9001 discuss.leetcode.com", "9001 leetcode.com", "9001 com"]
 Explanation:
@@ -32,6 +32,8 @@ The length of cpdomains will not exceed 100.
 The length of each domain name will not exceed 100.
 Each address will have either 1 or 2 "." characters.
 The input count in any count-paired domain will not exceed 10000.
+
+问题，就是将域名分解,计算各有多少访问次数
  */
 
 

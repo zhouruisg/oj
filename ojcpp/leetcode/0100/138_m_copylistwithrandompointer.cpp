@@ -53,12 +53,32 @@ public:
             if (!head) return nullptr;
             std::deque<tuple<Node*,Node*,Node*>> todo{{head,nullptr,nullptr}};
             unordered_set<Node*> visited;
-            
+            unordered_map<Node*,Node*> map;
+
             Node*newHead = nullptr;
             while (!todo.empty()) {
                 Node*node,*nextP,*randomP;
                 std::tie(node,nextP,randomP) = todo.front();
                 todo.pop_front();
+
+                const auto &found = map.find(node);
+                Node *cloneNode = nullptr;
+                if (found==map.end()) {
+                    cloneNode= new Node(node->val,nullptr, nullptr);
+                    map[node]=cloneNode;
+                } else {
+                    cloneNode = found->second;
+                }
+
+                if (!newHead)
+                    newHead = cloneNode;
+
+                if (nextP) {
+                    nextP->next = cloneNode;
+                }
+                if (randomP) {
+                    randomP->random = cloneNode;
+                }
 
                 if (visited.find(node)!=visited.end()) {
                     continue;
@@ -67,31 +87,11 @@ public:
                 }
 
 
-
-                Node *cloneNode= new Node(node->val,nullptr, nullptr);
-                if (!newHead)
-                    newHead = cloneNode;
-                if (nextP) {
-                    nextP->next = cloneNode;
-                }
-                if (randomP) {
-                    randomP->random = cloneNode;
-                }
-
-
                 if (node->next) {
-                    if (node->next == node) {
-                        cloneNode->next = cloneNode;
-                    } else {
-                        todo.emplace_back(node->next,cloneNode,nullptr);
-                    }
+                    todo.emplace_back(node->next,cloneNode,nullptr);
                 }
                 if (node->random) {
-                    if (node->random == node) {
-                        cloneNode->random = cloneNode;
-                    } else {
-                        todo.emplace_back(node->random, nullptr, cloneNode);
-                    }
+                    todo.emplace_back(node->random, nullptr, cloneNode);
                 }
             }
             return newHead;
@@ -101,9 +101,5 @@ public:
 
 DEFINE_CODE_TEST(138_copylistrandompointer_sum_root_leaf)
 {
-    Solution obj;
-    {
-
-
-    }
+    cout << "it is passed (no test code)\n";
 }

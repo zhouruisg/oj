@@ -8,7 +8,7 @@
 
 * int solution(int N):
  * given a non-negative integer N,returns the number of lattice points lying inside or on the edge of a disc of
- * radius N which is centered at (0,0) the function should return -1 if this number exceeds 1,000,000,000
+ * radius N which is centered at (0,0) the function should return -1 if this number exceeds 1,0000,0000,0000
  * for example, given N=2, the function should return 13, because there are thirteen points
  * lying inside or on the edge of disc of radius 2centered at (0,), as indicated in the following image
  *

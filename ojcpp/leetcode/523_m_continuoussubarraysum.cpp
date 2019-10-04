@@ -17,7 +17,7 @@ Input: [23, 2, 6, 4, 7],  k=6
 Output: True
 Explanation: Because [23, 2, 6, 4, 7] is an continuous subarray of size 5 and sums up to 42.
 Note:
-The length of the array won't exceed 10,000.
+The length of the array won't exceed 10,0000.
 
 You may assume the sum of all the numbers is in the range of a signed 32-bit integer.
 
