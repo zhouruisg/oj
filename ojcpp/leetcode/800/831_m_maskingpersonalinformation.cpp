@@ -65,6 +65,7 @@ Notes:
 S.length <= 40.
 Emails have length at least 8.
 Phone numbers have length at least 10.
+ 一道无聊的题目，来自国内，主要是对规则的判断
  */
 #include <codech/codech_def.h>
 #include <numeric>
@@ -75,18 +76,31 @@ namespace {
         string maskPII(string S) {
             size_t pos = S.find_first_of("@");
             std::transform(S.begin(),S.end(),S.begin(),::tolower);
-
+            unordered_set<char> ignore{'+', '-', '(', ')', ' '};
             if (pos!=string::npos) { // email
                 string name = S.substr(0,pos);
                 string domain = S.substr(pos);
-                string ret = tolower(name[0])+"*****"+tolower(name[name.size()-1])+domain;
-                return ret;
+                string ret1 = string(1,tolower(name[0]));
+                string ret2 = string(1,tolower(name[name.size()-1]));
+                string ret3 = ret1+"*****"+ret2+domain;
+                return ret3;
             } else {
                 size_t count = std::accumulate(S.begin(),S.end(),0,[](int sum, char b){
                     sum+=isdigit(b)?1:0;
                     return sum;
                 });
-                string number = "***-***-"+S.substr(S.size()-4);
+                int last4 = 0;
+                string number = "";
+                for (auto riter=S.rbegin();riter!=S.rend();++riter) {
+                    if (ignore.count(*riter)==0) {
+                        number.push_back(*riter);
+                        if (++last4 == 4)
+                            break;
+                    }
+                }
+                reverse(number.begin(),number.end());
+                number =  "***-***-" + number;
+
                 if (count==10) return number;
                 else if (count==11) return "+*-"+number;
                 else if (count==12) return "+**-"+number;
@@ -100,8 +114,10 @@ namespace {
 DEFINE_CODE_TEST(831_maskpersonalinfo) {
     Solution obj;
     {
+        VERIFY_CASE(obj.maskPII("1(234)567-890"),"***-***-7890");
         VERIFY_CASE(obj.maskPII("LeetCode@LeetCode.com"),"l*****e@leetcode.com");
         VERIFY_CASE(obj.maskPII("86-(10)12345678"),"+**-***-***-5678");
+
 
     }
 }
