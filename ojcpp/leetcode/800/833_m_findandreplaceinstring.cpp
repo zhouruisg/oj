@@ -30,6 +30,9 @@ Notes:
 0 <= indexes.length = sources.length = targets.length <= 100
 0 < indexes[i] < S.length <= 1000
 All characters in given inputs are lowercase letters.
+
+ 使用新内存空间
+
  */
 #include <codech/codech_def.h>
 using namespace std;
