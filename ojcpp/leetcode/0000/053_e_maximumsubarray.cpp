@@ -9,7 +9,7 @@
 
 For example, given the array [-2,1,-3,4,-1,2,1,-5,4],
 the contiguous subarray [4,-1,2,1] has the largest sum = 6.
-
+max sum subarray
 click to show more practice.
 
 More practice:
@@ -43,6 +43,7 @@ namespace {
             return maxsum;
         }
     };
+
     class Solution1 {
     public:
         // dp 记住当前最大值,实际上我们只需要上一个dp[i-1]，所以用变量取代
